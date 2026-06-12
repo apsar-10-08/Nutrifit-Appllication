@@ -1,0 +1,17 @@
+[
+  {
+    "brand": "GNC",
+    "name": "GNC Whey Protein Starter",
+    "price": 2499
+  },
+  {
+    "brand": "MuscleBlaze",
+    "name": "MuscleBlaze Biozyme Whey",
+    "price": 2199
+  },
+  {
+    "brand": "YouWeFit",
+    "name": "YouWeFit Resistance Band",
+    "price": 499
+  }
+]
