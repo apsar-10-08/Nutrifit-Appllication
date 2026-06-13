@@ -352,7 +352,7 @@ def main():
         ws.page_setup.fitToWidth = 1
         ws.page_setup.fitToHeight = 0
 
-    output_path = os.path.join(script_dir, "NutriFit_Appium_Test_Report_100_Pass.xlsx")
+    output_path = os.path.join(script_dir, "NutriFit_Appium_Test_Report.xlsx")
     wb.save(output_path)
     print(f"\n{'='*60}")
     print(f"  Excel report generated successfully!")
