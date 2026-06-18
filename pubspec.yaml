@@ -24,4 +24,7 @@ flutter:
   assets:
     - .env
     - assets/images/
+    - assets/images/product_gnc.png
+    - assets/images/product_mb.png
+    - assets/images/product_ywf.png
     - assets/data/

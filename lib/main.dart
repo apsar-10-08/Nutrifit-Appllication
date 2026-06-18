@@ -79,20 +79,37 @@ class NutriFitApp extends StatelessWidget {
           elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(backgroundColor: green, foregroundColor: Colors.white, minimumSize: const Size.fromHeight(54), elevation: 0, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)))),
           textTheme: const TextTheme(headlineLarge: TextStyle(fontSize: 34, fontWeight: FontWeight.w900, color: textDark), headlineMedium: TextStyle(fontSize: 26, fontWeight: FontWeight.w900, color: textDark), titleLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: textDark), titleMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: textDark)),
         ),
-        routes: {
-          '/': (_) => const SplashScreen(),
-          '/login': (_) => const LoginScreen(),
-          '/signup': (_) => const SignUpScreen(),
-          '/forgot': (_) => const ForgotScreen(),
-          '/goal': (_) => const GoalScreen(),
-          '/gender': (_) => const GenderScreen(),
-          '/age': (_) => const NumberScreen(kind: 'age'),
-          '/height': (_) => const NumberScreen(kind: 'height'),
-          '/weight': (_) => const NumberScreen(kind: 'weight'),
-          '/food': (_) => const FoodScreen(),
-          '/location': (_) => const LocationScreen(),
-          '/dashboard': (_) => const DashboardScreen(),
-          '/cart': (_) => const CartScreen(),
+        onGenerateRoute: (settings) {
+          final isAuthRoute = ['/', '/login', '/signup', '/forgot'].contains(settings.name);
+          String targetRoute = settings.name ?? '/';
+
+          if (!isAuthRoute && !controller.signedIn) {
+            targetRoute = '/login';
+          } else if (controller.signedIn && controller.profile?.complete != true && targetRoute == '/dashboard') {
+            targetRoute = '/goal';
+          } else if (controller.signedIn && controller.profile?.complete == true && (targetRoute == '/login' || targetRoute == '/signup')) {
+            targetRoute = '/dashboard';
+          }
+
+          Widget page;
+          switch (targetRoute) {
+            case '/': page = const SplashScreen(); break;
+            case '/login': page = const LoginScreen(); break;
+            case '/signup': page = const SignUpScreen(); break;
+            case '/forgot': page = const ForgotScreen(); break;
+            case '/goal': page = const GoalScreen(); break;
+            case '/gender': page = const GenderScreen(); break;
+            case '/age': page = const NumberScreen(kind: 'age'); break;
+            case '/height': page = const NumberScreen(kind: 'height'); break;
+            case '/weight': page = const NumberScreen(kind: 'weight'); break;
+            case '/food': page = const FoodScreen(); break;
+            case '/location': page = const LocationScreen(); break;
+            case '/dashboard': page = const DashboardScreen(); break;
+            case '/cart': page = const CartScreen(); break;
+            default: page = const SplashScreen(); break;
+          }
+
+          return MaterialPageRoute(builder: (_) => page, settings: RouteSettings(name: targetRoute));
         },
       ),
     );
@@ -100,16 +117,17 @@ class NutriFitApp extends StatelessWidget {
 }
 
 class Profile {
-  Profile({this.id='demo-user', this.name='', this.email='', this.goal='', this.gender='', this.age, this.height, this.weight, this.food='', this.location='', this.lang='en'});
+  Profile({this.id='demo-user', this.name='', this.email='', this.goal='', this.gender='', this.age, this.height, this.weight, this.food='', this.location='', this.lang='en', this.onboardingCompleted=false});
   String id, name, email, goal, gender, food, location, lang;
   int? age; double? height, weight;
-  bool get complete => goal.isNotEmpty && gender.isNotEmpty && age != null && height != null && weight != null && food.isNotEmpty && location.isNotEmpty;
-  Profile copy({String? id, name, email, goal, gender, food, location, lang, int? age, double? height, weight}) => Profile(
+  bool onboardingCompleted;
+  bool get complete => onboardingCompleted;
+  Profile copy({String? id, name, email, goal, gender, food, location, lang, int? age, double? height, weight, bool? onboardingCompleted}) => Profile(
     id: id ?? this.id, name: name ?? this.name, email: email ?? this.email, goal: goal ?? this.goal, gender: gender ?? this.gender,
-    age: age ?? this.age, height: height ?? this.height, weight: weight ?? this.weight, food: food ?? this.food, location: location ?? this.location, lang: lang ?? this.lang);
-  Map<String,dynamic> toJson() => {'id': id, 'full_name': name, 'email': email, 'goal': goal, 'gender': gender, 'age': age, 'height_cm': height, 'weight_kg': weight, 'food_preference': food, 'workout_location': location, 'preferred_language': lang};
-  Map<String,dynamic> profileJson(String uid) => {'id': uid, 'full_name': name, 'email': email, 'gender': gender, 'age': age, 'height_cm': height, 'weight_kg': weight, 'food_preference': food, 'workout_location': location, 'preferred_language': lang};
-  factory Profile.from(Map<String,dynamic> j) => Profile(id:(j['id']??'demo-user').toString(), name:(j['full_name']??'').toString(), email:(j['email']??'').toString(), goal:(j['goal']??'').toString(), gender:(j['gender']??'').toString(), age:int.tryParse('${j['age']??''}'), height:double.tryParse('${j['height_cm']??''}'), weight:double.tryParse('${j['weight_kg']??''}'), food:(j['food_preference']??'').toString(), location:(j['workout_location']??'').toString(), lang:(j['preferred_language']??'en').toString());
+    age: age ?? this.age, height: height ?? this.height, weight: weight ?? this.weight, food: food ?? this.food, location: location ?? this.location, lang: lang ?? this.lang, onboardingCompleted: onboardingCompleted ?? this.onboardingCompleted);
+  Map<String,dynamic> toJson() => {'id': id, 'full_name': name, 'email': email, 'goal': goal, 'gender': gender, 'age': age, 'height_cm': height, 'weight_kg': weight, 'food_preference': food, 'workout_location': location, 'preferred_language': lang, 'onboarding_completed': onboardingCompleted};
+  Map<String,dynamic> profileJson(String uid) => {'id': uid, 'full_name': name, 'email': email, 'gender': gender, 'age': age, 'height_cm': height, 'weight_kg': weight, 'food_preference': food, 'workout_location': location, 'preferred_language': lang, 'onboarding_completed': onboardingCompleted};
+  factory Profile.from(Map<String,dynamic> j) => Profile(id:(j['id']??'demo-user').toString(), name:(j['full_name']??'').toString(), email:(j['email']??'').toString(), goal:(j['goal']??'').toString(), gender:(j['gender']??'').toString(), age:int.tryParse('${j['age']??''}'), height:double.tryParse('${j['height_cm']??''}'), weight:double.tryParse('${j['weight_kg']??''}'), food:(j['food_preference']??'').toString(), location:(j['workout_location']??'').toString(), lang:(j['preferred_language']??'en').toString(), onboardingCompleted: j['onboarding_completed'] == true);
 }
 
 class Product {
@@ -120,11 +138,13 @@ class Product {
 
 class AppController extends ChangeNotifier {
   Profile? profile; bool busy=false; bool demo=false; String lang='en';
-  int water=0, steps=0, tab=0, timerSeconds=0; double sleep=7;
+  int water=0, steps=0, tab=0, timerSeconds=0; double sleep=0;
   final wishlist=<String>{}; final cart=<String,int>{}; final habits=<String,bool>{};
   final completedWorkouts=<String>{};
   final localToDbProductId = <String, String>{};
   final dbToLocalProductId = <String, String>{};
+
+  String get _today => DateTime.now().toIso8601String().substring(0, 10);
 
   bool get signedIn => Supa.ready ? Supa.client.auth.currentSession != null : (demo || profile != null);
   String t(String key) => strings[lang]?[key] ?? strings['en']?[key] ?? key;
@@ -133,7 +153,7 @@ class AppController extends ChangeNotifier {
     final p = await SharedPreferences.getInstance();
     lang = p.getString('lang') ?? 'en';
     final raw = p.getString('profile'); if (raw != null) profile = Profile.from(jsonDecode(raw));
-    water = p.getInt('water') ?? 0; steps = p.getInt('steps') ?? 0; sleep = p.getDouble('sleep') ?? 7;
+    water = p.getInt('water') ?? 0; steps = p.getInt('steps') ?? 0; sleep = p.getDouble('sleep') ?? 0;
     wishlist.addAll(p.getStringList('wishlist') ?? []);
     completedWorkouts.addAll(p.getStringList('completedWorkouts') ?? []);
     final rawCart = p.getString('cart'); if (rawCart != null) cart.addAll((jsonDecode(rawCart) as Map<String,dynamic>).map((k,v)=>MapEntry(k, v as int)));
@@ -141,11 +161,13 @@ class AppController extends ChangeNotifier {
       Supa.client.auth.onAuthStateChange.listen((event) async {
         if (event.session != null) {
           await loadRemoteProfile();
+          await loadRemoteActivity();
           await syncProductsAndCart();
         }
         notifyListeners();
       });
       await loadRemoteProfile();
+      await loadRemoteActivity();
       await syncProductsAndCart();
     }
   }
@@ -157,6 +179,111 @@ class AppController extends ChangeNotifier {
     await p.setStringList('wishlist', wishlist.toList());
     await p.setStringList('completedWorkouts', completedWorkouts.toList());
     await p.setString('cart', jsonEncode(cart));
+  }
+
+  // ── Load today's activity from Supabase ──
+  Future<void> loadRemoteActivity() async {
+    if (!Supa.ready) return;
+    final u = Supa.client.auth.currentUser;
+    if (u == null) return;
+    try {
+      // Hydration
+      final hydRow = await Supa.client.from('hydration_logs').select()
+          .eq('user_id', u.id).eq('log_date', _today).maybeSingle();
+      water = (hydRow != null) ? (hydRow['water_ml'] as int? ?? 0) : 0;
+
+      // Sleep
+      final sleepRow = await Supa.client.from('sleep_logs').select()
+          .eq('user_id', u.id).eq('log_date', _today).maybeSingle();
+      sleep = (sleepRow != null) ? (double.tryParse('${sleepRow['sleep_hours']}') ?? 0) : 0;
+
+      // Steps
+      final stepsRow = await Supa.client.from('progress_logs').select()
+          .eq('user_id', u.id).eq('log_date', _today).maybeSingle();
+      steps = (stepsRow != null) ? (stepsRow['steps'] as int? ?? 0) : 0;
+
+      // Habits
+      final habitRows = await Supa.client.from('habit_logs').select()
+          .eq('user_id', u.id).eq('log_date', _today);
+      habits.clear();
+      for (final row in List<Map<String, dynamic>>.from(habitRows)) {
+        final name = row['habit_name']?.toString() ?? '';
+        final done = row['is_done'] as bool? ?? false;
+        if (name.isNotEmpty) habits[name] = done;
+      }
+
+      // Wishlist
+      final wishRows = await Supa.client.from('wishlist_items').select()
+          .eq('user_id', u.id);
+      wishlist.clear();
+      for (final row in List<Map<String, dynamic>>.from(wishRows)) {
+        final dbProdId = row['product_id']?.toString() ?? '';
+        final localId = dbToLocalProductId[dbProdId];
+        if (localId != null) wishlist.add(localId);
+      }
+
+      await persist();
+      notifyListeners();
+    } catch (e) {
+      print('⚠️ Error loading remote activity: $e');
+    }
+  }
+
+  // ── Sync individual trackers to Supabase ──
+  Future<void> _syncHydration() async {
+    if (!Supa.ready) return;
+    final u = Supa.client.auth.currentUser; if (u == null) return;
+    try {
+      await Supa.client.from('hydration_logs').upsert({
+        'user_id': u.id, 'log_date': _today, 'water_ml': water, 'target_ml': 3000,
+      }, onConflict: 'user_id,log_date');
+    } catch (e) { print('⚠️ Hydration sync error: $e'); }
+  }
+
+  Future<void> _syncSleep() async {
+    if (!Supa.ready) return;
+    final u = Supa.client.auth.currentUser; if (u == null) return;
+    try {
+      await Supa.client.from('sleep_logs').upsert({
+        'user_id': u.id, 'log_date': _today, 'sleep_hours': sleep,
+      }, onConflict: 'user_id,log_date');
+    } catch (e) { print('⚠️ Sleep sync error: $e'); }
+  }
+
+  Future<void> _syncSteps() async {
+    if (!Supa.ready) return;
+    final u = Supa.client.auth.currentUser; if (u == null) return;
+    try {
+      await Supa.client.from('progress_logs').upsert({
+        'user_id': u.id, 'log_date': _today, 'steps': steps,
+      }, onConflict: 'user_id,log_date');
+    } catch (e) { print('⚠️ Steps sync error: $e'); }
+  }
+
+  Future<void> _syncHabit(String habit, bool done) async {
+    if (!Supa.ready) return;
+    final u = Supa.client.auth.currentUser; if (u == null) return;
+    try {
+      await Supa.client.from('habit_logs').upsert({
+        'user_id': u.id, 'habit_name': habit, 'log_date': _today, 'is_done': done,
+      }, onConflict: 'user_id,habit_name,log_date');
+    } catch (e) { print('⚠️ Habit sync error: $e'); }
+  }
+
+  Future<void> _syncWishlistItem(Product p, bool add) async {
+    if (!Supa.ready) return;
+    final u = Supa.client.auth.currentUser; if (u == null) return;
+    final dbId = localToDbProductId[p.id]; if (dbId == null) return;
+    try {
+      if (add) {
+        await Supa.client.from('wishlist_items').upsert({
+          'user_id': u.id, 'product_id': dbId,
+        }, onConflict: 'user_id,product_id');
+      } else {
+        await Supa.client.from('wishlist_items').delete()
+            .eq('user_id', u.id).eq('product_id', dbId);
+      }
+    } catch (e) { print('⚠️ Wishlist sync error: $e'); }
   }
 
   Future<void> syncProductsAndCart() async {
@@ -205,6 +332,7 @@ class AppController extends ChangeNotifier {
         email: email.trim(),
         name: profile?.name.isNotEmpty == true ? profile!.name : 'NutriFit User',
       );
+      water = 0; steps = 0; sleep = 0; habits.clear(); completedWorkouts.clear();
       await persist();
       return;
     }
@@ -219,14 +347,16 @@ class AppController extends ChangeNotifier {
       rethrow;
     }
     await loadRemoteProfile();
+    await loadRemoteActivity();
     await syncProductsAndCart();
   });
 
   Future<String?> signUp(String name, String email, String pass) async => run(() async {
     if (name.trim().isEmpty || email.trim().isEmpty || pass.length<6) throw 'Enter name, email, and 6 character password';
-    if (!Supa.ready) { demo=true; profile=Profile(name:name.trim(), email:email.trim(), lang:lang); await persist(); return; }
+    if (!Supa.ready) { demo=true; profile=Profile(name:name.trim(), email:email.trim(), lang:lang); water=0; steps=0; sleep=0; habits.clear(); await persist(); return; }
     final r = await Supa.client.auth.signUp(email: email.trim(), password: pass.trim(), data: {'full_name': name.trim()});
     profile=Profile(id:r.user?.id ?? 'demo-user', name:name.trim(), email:email.trim(), lang:lang); await saveProfile();
+    water=0; steps=0; sleep=0; habits.clear(); completedWorkouts.clear();
     await syncProductsAndCart();
   });
 
@@ -241,7 +371,7 @@ class AppController extends ChangeNotifier {
   });
 
   Future<String?> run(Future<void> Function() f) async { try { busy=true; notifyListeners(); await f(); return null; } on AuthException catch(e){ return e.message; } catch(e){ return e.toString(); } finally { busy=false; notifyListeners(); } }
-  void draft({String? goal, String? gender, String? food, String? location, int? age, double? height, double? weight}) { profile = (profile ?? Profile()).copy(goal: goal, gender: gender, food: food, location: location, age: age, height: height, weight: weight, lang: lang); notifyListeners(); }
+  void draft({String? goal, String? gender, String? food, String? location, int? age, double? height, double? weight, bool? onboardingCompleted}) { profile = (profile ?? Profile()).copy(goal: goal, gender: gender, food: food, location: location, age: age, height: height, weight: weight, lang: lang, onboardingCompleted: onboardingCompleted); notifyListeners(); }
   
   Future<void> saveProfile() async {
     if (profile==null) return; await persist();
@@ -260,20 +390,24 @@ class AppController extends ChangeNotifier {
   Future<void> logout() async {
     if (Supa.ready) await Supa.client.auth.signOut();
     profile=null; demo=false; cart.clear(); wishlist.clear(); completedWorkouts.clear();
+    water=0; steps=0; sleep=0; habits.clear();
     final p=await SharedPreferences.getInstance();
     await p.remove('profile');
     await p.remove('cart');
     await p.remove('wishlist');
     await p.remove('completedWorkouts');
+    await p.setInt('water', 0);
+    await p.setInt('steps', 0);
+    await p.setDouble('sleep', 0);
     notifyListeners();
   }
 
   void setLang(String v){ lang=v; profile=(profile??Profile()).copy(lang:v); persist(); notifyListeners(); }
-  void waterAdd(int v){ water=(water+v).clamp(0,6000); persist(); notifyListeners(); }
-  void stepsAdd(int v){ steps=(steps+v).clamp(0,50000); persist(); notifyListeners(); }
-  void sleepSet(double v){ sleep=v.clamp(0,14); persist(); notifyListeners(); }
-  void toggleHabit(String h){ habits[h]=!(habits[h]??false); notifyListeners(); }
-  void toggleWish(Product p){ wishlist.contains(p.id) ? wishlist.remove(p.id) : wishlist.add(p.id); persist(); notifyListeners(); }
+  void waterAdd(int v){ water=(water+v).clamp(0,6000); persist(); _syncHydration(); notifyListeners(); }
+  void stepsAdd(int v){ steps=(steps+v).clamp(0,50000); persist(); _syncSteps(); notifyListeners(); }
+  void sleepSet(double v){ sleep=v.clamp(0,14); persist(); _syncSleep(); notifyListeners(); }
+  void toggleHabit(String h){ habits[h]=!(habits[h]??false); _syncHabit(h, habits[h]!); notifyListeners(); }
+  void toggleWish(Product p){ final adding = !wishlist.contains(p.id); wishlist.contains(p.id) ? wishlist.remove(p.id) : wishlist.add(p.id); persist(); _syncWishlistItem(p, adding); notifyListeners(); }
   void toggleWorkoutCompleted(String day){ if(completedWorkouts.contains(day)) completedWorkouts.remove(day); else completedWorkouts.add(day); persist(); notifyListeners(); }
 
   Future<void> addCart(Product p) async {
@@ -869,7 +1003,7 @@ class SelectCard extends StatelessWidget{ const SelectCard({super.key,required t
 class GoalScreen extends StatelessWidget{ const GoalScreen({super.key}); @override Widget build(BuildContext context){final c=Scope.of(context);return SelectScreen(title:c.t('goal'),subtitle:'NutriFit will personalize your workout and diet.',items:goals,next:'/gender',icon:Icons.fitness_center,onSelect:(c,v)=>c.draft(goal:v));}}
 class GenderScreen extends StatelessWidget{ const GenderScreen({super.key}); @override Widget build(BuildContext context){final c=Scope.of(context);return SelectScreen(title:c.t('gender'),subtitle:'This helps calculate better recommendations.',items:genders,next:'/age',icon:Icons.person,onSelect:(c,v)=>c.draft(gender:v));}}
 class FoodScreen extends StatelessWidget{ const FoodScreen({super.key}); @override Widget build(BuildContext context){final c=Scope.of(context);return SelectScreen(title:c.t('food'),subtitle:'Your diet plan will match your preference.',items:foods,next:'/location',icon:Icons.restaurant,onSelect:(c,v)=>c.draft(food:v));}}
-class LocationScreen extends StatelessWidget{ const LocationScreen({super.key}); @override Widget build(BuildContext context){final c=Scope.of(context);return SelectScreen(title:c.t('location'),subtitle:'Choose gym or home workout.',items:locations,next:'/dashboard',icon:Icons.home,onSelect:(c,v){c.draft(location:v);c.saveProfile();});}}
+class LocationScreen extends StatelessWidget{ const LocationScreen({super.key}); @override Widget build(BuildContext context){final c=Scope.of(context);return SelectScreen(title:c.t('location'),subtitle:'Choose gym or home workout.',items:locations,next:'/dashboard',icon:Icons.home,onSelect:(c,v){c.draft(location:v, onboardingCompleted:true);c.saveProfile();});}}
 
 class NumberScreen extends StatefulWidget{ const NumberScreen({super.key,required this.kind}); final String kind; @override State<NumberScreen> createState()=>_NumberScreenState();}
 class _NumberScreenState extends State<NumberScreen>{
@@ -897,12 +1031,174 @@ class _NumberScreenState extends State<NumberScreen>{
 @override Widget build(BuildContext context){final c=Scope.of(context);final title=widget.kind=='age'?c.t('age'):widget.kind=='height'?c.t('height'):c.t('weight'); final unit=widget.kind=='age'?'years':widget.kind=='height'?'cm':'kg'; final next=widget.kind=='age'?'/height':widget.kind=='height'?'/weight':'/food'; return Scaffold(appBar:AppBar(),body:Padding(padding:const EdgeInsets.all(24),child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text(title,style:Theme.of(context).textTheme.headlineMedium),const SizedBox(height:8),Text('Enter value in $unit'),const SizedBox(height:24),field(ctrl,title,widget.kind=='age'?Icons.cake:widget.kind=='height'?Icons.height:Icons.monitor_weight,false,TextInputType.number),const SizedBox(height:20),button(c.t('continue'),(){final v=double.tryParse(ctrl.text.trim()); if(v==null){msg(context,'Enter valid value');return;} if(widget.kind=='age') c.draft(age:v.round()); if(widget.kind=='height') c.draft(height:v); if(widget.kind=='weight') c.draft(weight:v); go(context,next);},false)])));}}
 
 class DashboardScreen extends StatefulWidget{ const DashboardScreen({super.key}); @override State<DashboardScreen> createState()=>_DashboardScreenState(); }
-class _DashboardScreenState extends State<DashboardScreen>{ @override Widget build(BuildContext context){final c=Scope.of(context);final pages=[const HomeTab(),const PlansTab(),const TrackersTab(),const ShopTab(),const ProfileTab()];return Scaffold(body:SafeArea(child:pages[c.tab]),bottomNavigationBar:NavigationBar(selectedIndex:c.tab,indicatorColor:lightGreen,onDestinationSelected:(i){c.setTab(i);},destinations:[NavigationDestination(icon:const Icon(Icons.dashboard_outlined),selectedIcon:const Icon(Icons.dashboard),label:c.t('dashboard')),NavigationDestination(icon:const Icon(Icons.calendar_month_outlined),selectedIcon:const Icon(Icons.calendar_month),label:c.t('plans')),NavigationDestination(icon:const Icon(Icons.track_changes_outlined),selectedIcon:const Icon(Icons.track_changes),label:c.t('trackers')),NavigationDestination(icon:const Icon(Icons.shopping_bag_outlined),selectedIcon:const Icon(Icons.shopping_bag),label:c.t('shop')),NavigationDestination(icon:const Icon(Icons.person_outline),selectedIcon:const Icon(Icons.person),label:c.t('profile'))]));}}
+class _DashboardScreenState extends State<DashboardScreen>{
+  @override Widget build(BuildContext context){
+    final c=Scope.of(context);
+    final pages=[const HomeTab(),const PlansTab(),const TrackersTab(),const ShopTab(),const ProfileTab()];
+    return LayoutBuilder(builder: (context, constraints) {
+      final isWide = constraints.maxWidth > 700;
+      final body = AnimatedSwitcher(
+        duration: const Duration(milliseconds: 300),
+        switchInCurve: Curves.easeInOut,
+        switchOutCurve: Curves.easeInOut,
+        transitionBuilder: (child, animation) => FadeTransition(opacity: animation, child: child),
+        child: KeyedSubtree(key: ValueKey(c.tab), child: pages[c.tab]),
+      );
+      final nav = NavigationBar(
+        selectedIndex:c.tab,
+        indicatorColor:lightGreen,
+        onDestinationSelected:(i){c.setTab(i);},
+        destinations:[
+          NavigationDestination(icon:const Icon(Icons.dashboard_outlined),selectedIcon:const Icon(Icons.dashboard),label:c.t('dashboard')),
+          NavigationDestination(icon:const Icon(Icons.calendar_month_outlined),selectedIcon:const Icon(Icons.calendar_month),label:c.t('plans')),
+          NavigationDestination(icon:const Icon(Icons.track_changes_outlined),selectedIcon:const Icon(Icons.track_changes),label:c.t('trackers')),
+          NavigationDestination(icon:const Icon(Icons.shopping_bag_outlined),selectedIcon:const Icon(Icons.shopping_bag),label:c.t('shop')),
+          NavigationDestination(icon:const Icon(Icons.person_outline),selectedIcon:const Icon(Icons.person),label:c.t('profile')),
+        ],
+      );
 
-class HomeTab extends StatelessWidget{ const HomeTab({super.key}); @override Widget build(BuildContext context){final c=Scope.of(context);final p=c.profile;final g=p?.goal.isNotEmpty==true?p!.goal:'General Fitness';final f=p?.food.isNotEmpty==true?p!.food:'Eggetarian';final l=p?.location.isNotEmpty==true?p!.location:'Home Workout';final w=workout(g,l);final d=diet(g,f);return ListView(padding:const EdgeInsets.all(20),children:[Row(children:[Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text('Hi, ${p?.name.isNotEmpty==true?p!.name:'Apsar'}',style:Theme.of(context).textTheme.headlineMedium),Text('Ready for ${g.toLowerCase()}?')])),CircleAvatar(radius:28,backgroundColor:lightGreen,child:Text((p?.name.isNotEmpty==true?p!.name[0]:'N').toUpperCase(),style:const TextStyle(color:green,fontWeight:FontWeight.w900,fontSize:22)))]),const SizedBox(height:20),HeroCard(title:w.first,subtitle:d.first),grid([Info('Hydration','${c.water} ml','Target 3000',Icons.water_drop),Info('Sleep','${c.sleep.toStringAsFixed(1)} h','Target 8 h',Icons.bedtime),Info('Steps','${c.steps}','Target 8000',Icons.directions_walk),Info('Goal',g,l,Icons.flag)]),section(c.t('ai')),infoBox(Icons.smart_toy,aiAdvice(g,f,l)),section('Meal Reminder'),reminder('Breakfast','7:30 AM',Icons.breakfast_dining),reminder('Lunch','1:00 PM',Icons.lunch_dining),reminder('Workout','6:00 PM',Icons.fitness_center)]);}}
-class HeroCard extends StatelessWidget{ const HeroCard({super.key,required this.title,required this.subtitle}); final String title,subtitle; @override Widget build(BuildContext context)=>Container(padding:const EdgeInsets.all(20),decoration:BoxDecoration(gradient:const LinearGradient(colors:[green,darkGreen]),borderRadius:BorderRadius.circular(28)),child:Row(children:[Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[const Text('Today Plan',style:TextStyle(color:Colors.white70)),const SizedBox(height:8),Text(title,style:const TextStyle(color:Colors.white,fontSize:18,fontWeight:FontWeight.w800)),const SizedBox(height:8),Text(subtitle,style:const TextStyle(color:Colors.white70))])),Image.asset('assets/images/fitness_hero.png',width:110)]));}
-class Info{Info(this.title,this.value,this.sub,this.icon);String title,value,sub;IconData icon;}
-Widget grid(List<Info> items)=>GridView.count(shrinkWrap:true,physics:const NeverScrollableScrollPhysics(),crossAxisCount:2,crossAxisSpacing:12,mainAxisSpacing:12,childAspectRatio:1.1,children:[for(final i in items) card(Column(crossAxisAlignment:CrossAxisAlignment.start,children:[CircleAvatar(backgroundColor:lightGreen,child:Icon(i.icon,color:green)),const SizedBox(height:12),Text(i.value,style:const TextStyle(fontSize:20,fontWeight:FontWeight.w800)),Text(i.title),Text(i.sub,style:const TextStyle(fontSize:12,color:Colors.grey))]))]);
+      if (isWide) {
+        // ── Web / Desktop layout: proper responsive layout ──
+        return Scaffold(
+          backgroundColor: const Color(0xFFFAFCFB),
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: green,
+            title: Row(
+              children: [
+                const Icon(Icons.eco, color: Colors.white, size: 26),
+                const SizedBox(width: 8),
+                const Text('NutriFit', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 22)),
+                const SizedBox(width: 40),
+                // Navigation items
+                ...List.generate(nav.destinations.length, (i) {
+                  final dest = nav.destinations[i] as NavigationDestination;
+                  final isSelected = c.tab == i;
+                  return InkWell(
+                    onTap: () => c.setTab(i),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      decoration: BoxDecoration(
+                        border: isSelected ? const Border(bottom: BorderSide(color: Colors.white, width: 3)) : null,
+                      ),
+                      child: Text(dest.label, style: TextStyle(color: isSelected ? Colors.white : Colors.white70, fontWeight: isSelected ? FontWeight.bold : FontWeight.normal)),
+                    ),
+                  );
+                }),
+              ],
+            ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  children: [
+                    Text(
+                      c.profile?.name.isNotEmpty == true ? c.profile!.name : 'User',
+                      style: const TextStyle(color: Colors.white70, fontSize: 14),
+                    ),
+                    const SizedBox(width: 12),
+                    CircleAvatar(
+                      radius: 16,
+                      backgroundColor: Colors.white24,
+                      child: Text(
+                        (c.profile?.name.isNotEmpty == true ? c.profile!.name[0] : 'U').toUpperCase(),
+                        style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          body: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1200),
+              child: body,
+            ),
+          ),
+        );
+      }
+
+      // ── Mobile layout: unchanged ──
+      return Scaffold(
+        body: SafeArea(child: body),
+        bottomNavigationBar: nav,
+      );
+    });
+  }
+}
+
+class HomeTab extends StatelessWidget{ const HomeTab({super.key}); @override Widget build(BuildContext context){final c=Scope.of(context);final p=c.profile;final g=p?.goal.isNotEmpty==true?p!.goal:'General Fitness';final f=p?.food.isNotEmpty==true?p!.food:'Eggetarian';final l=p?.location.isNotEmpty==true?p!.location:'Home Workout';final w=workout(g,l);final d=diet(g,f);return ListView(padding:const EdgeInsets.all(20),children:[Row(children:[Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text('Hi, ${p?.name.isNotEmpty==true?p!.name:'User'}',style:Theme.of(context).textTheme.headlineMedium),Text('Ready for ${g.toLowerCase()}?')])),CircleAvatar(radius:28,backgroundColor:lightGreen,child:Text((p?.name.isNotEmpty==true?p!.name[0]:'N').toUpperCase(),style:const TextStyle(color:green,fontWeight:FontWeight.w900,fontSize:22)))]),const SizedBox(height:20),HeroCard(title:w.first,subtitle:d.first),const SizedBox(height:16),grid(context,[Info('Hydration','${c.water} ml','Target 3000 ml',Icons.water_drop, c.water/3000),Info('Sleep','${c.sleep.toStringAsFixed(1)} h','Target 8 h',Icons.bedtime, c.sleep/8),Info('Steps','${c.steps}','Target 8000',Icons.directions_walk, c.steps/8000),Info('Goal',g,l,Icons.flag, 1.0)]),section(c.t('ai')),infoBox(Icons.smart_toy,aiAdvice(g,f,l)),section('Meal Reminder'),reminder('Breakfast','7:30 AM',Icons.breakfast_dining),reminder('Lunch','1:00 PM',Icons.lunch_dining),reminder('Workout','6:00 PM',Icons.fitness_center)]);}}
+class HeroCard extends StatelessWidget{ const HeroCard({super.key,required this.title,required this.subtitle}); final String title,subtitle; @override Widget build(BuildContext context)=>Container(padding:const EdgeInsets.all(20),decoration:BoxDecoration(gradient:const LinearGradient(colors:[green,darkGreen],begin:Alignment.topLeft,end:Alignment.bottomRight),borderRadius:BorderRadius.circular(28),boxShadow:[BoxShadow(color:green.withValues(alpha: 0.3),blurRadius:16,offset:const Offset(0,6))]),child:Row(children:[Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Container(padding:const EdgeInsets.symmetric(horizontal:10,vertical:4),decoration:BoxDecoration(color:Colors.white24,borderRadius:BorderRadius.circular(12)),child:const Text('Today Plan',style:TextStyle(color:Colors.white,fontSize:12,fontWeight:FontWeight.bold))),const SizedBox(height:10),Text(title,style:const TextStyle(color:Colors.white,fontSize:18,fontWeight:FontWeight.w800)),const SizedBox(height:8),Text(subtitle,style:const TextStyle(color:Colors.white70))])),Image.asset('assets/images/fitness_hero.png',width:110)]));}
+class Info{Info(this.title,this.value,this.sub,this.icon,this.progress);String title,value,sub;IconData icon;double progress;}
+Widget grid(BuildContext context, List<Info> items) {
+  final isWide = MediaQuery.of(context).size.width > 700;
+  return GridView.count(
+    shrinkWrap: true,
+    physics: const NeverScrollableScrollPhysics(),
+    crossAxisCount: isWide ? 4 : 2,
+    crossAxisSpacing: 12,
+    mainAxisSpacing: 12,
+    childAspectRatio: isWide ? 1.2 : 0.95,
+    children: [for(final i in items) _MetricCard(info: i)],
+  );
+}
+
+class _MetricCard extends StatefulWidget {
+  final Info info;
+  const _MetricCard({required this.info});
+  @override State<_MetricCard> createState() => _MetricCardState();
+}
+class _MetricCardState extends State<_MetricCard> {
+  bool _hovered = false;
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: _hovered ? green : const Color(0xFFE7EEE9), width: _hovered ? 1.5 : 1),
+          boxShadow: _hovered
+              ? [BoxShadow(color: green.withValues(alpha: 0.12), blurRadius: 16, offset: const Offset(0, 4))]
+              : [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 4)],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 40, height: 40,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  SizedBox(
+                    width: 36, height: 36,
+                    child: CircularProgressIndicator(
+                      value: widget.info.progress.clamp(0, 1).toDouble(),
+                      strokeWidth: 3,
+                      backgroundColor: lightGreen,
+                      color: green,
+                    ),
+                  ),
+                  Icon(widget.info.icon, color: green, size: 18),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(widget.info.value, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
+            Text(widget.info.title, style: const TextStyle(fontSize: 13)),
+            Text(widget.info.sub, style: const TextStyle(fontSize: 11, color: Colors.grey)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 Widget card(Widget child)=>Container(padding:const EdgeInsets.all(16),decoration:BoxDecoration(color:Colors.white,borderRadius:BorderRadius.circular(24),border:Border.all(color:const Color(0xFFE7EEE9))),child:child);
 Widget section(String title)=>Padding(padding:const EdgeInsets.only(top:20,bottom:10),child:Text(title,style:const TextStyle(fontSize:20,fontWeight:FontWeight.w800,color:textDark)));
 Widget infoBox(IconData icon,String text)=>Container(padding:const EdgeInsets.all(18),decoration:BoxDecoration(color:lightGreen,borderRadius:BorderRadius.circular(24)),child:Row(children:[CircleAvatar(backgroundColor:Colors.white,child:Icon(icon,color:green)),const SizedBox(width:12),Expanded(child:Text(text))]));
@@ -1617,12 +1913,14 @@ class _ShopTabState extends State<ShopTab>{
         const SizedBox(height:14),
         Wrap(spacing:8,children:[for(final b in ['All','GNC','MuscleBlaze','YouWeFit']) ChoiceChip(label:Text(b),selected:brand==b,onSelected:(_)=>setState(()=>brand=b))]),
         const SizedBox(height:14),
-        GridView.builder(
-          shrinkWrap:true,
-          physics:const NeverScrollableScrollPhysics(),
-          itemCount:list.length,
-          gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount:2,childAspectRatio:.63,crossAxisSpacing:12,mainAxisSpacing:12),
-          itemBuilder:(_,i)=>productCard(context,list[i])
+        GridView.count(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          crossAxisCount: MediaQuery.of(context).size.width > 700 ? 4 : 2,
+          childAspectRatio: MediaQuery.of(context).size.width > 700 ? 0.8 : 0.52,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          children: list.map((p) => productCard(context, p)).toList(),
         ),
         section('Cart'),
         InkWell(
@@ -1637,41 +1935,63 @@ class _ShopTabState extends State<ShopTab>{
 Widget productCard(BuildContext context,Product p){
   final c=Scope.of(context);
   final liked=c.wishlist.contains(p.id);
-  return card(Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
-    Expanded(child:Stack(children:[
-      Center(child:Image.asset(p.image,fit:BoxFit.contain)),
+  final isWeb = MediaQuery.of(context).size.width > 700;
+  
+  Widget imageStack = Stack(
+    children: [
+      Center(
+        child: Image.asset(
+          p.image,
+          fit: BoxFit.contain,
+          errorBuilder: (context, error, stackTrace) =>
+              const Icon(Icons.broken_image, size: 50, color: Colors.grey),
+        ),
+      ),
       Align(
-        alignment:Alignment.topRight,
-        child:IconButton(
-          onPressed:()=>c.toggleWish(p),
-          icon:Icon(liked?Icons.favorite:Icons.favorite_border,color:liked?Colors.redAccent:green)
-        )
-      )
-    ])),
-    Text(p.brand,style:const TextStyle(color:green,fontWeight:FontWeight.w700)),
-    Text(p.name,maxLines:2,overflow:TextOverflow.ellipsis,style:const TextStyle(fontWeight:FontWeight.w800)),
-    Text('₹${p.price.toStringAsFixed(0)} • ⭐ ${p.rating}'),
-    const SizedBox(height:8),
-    SizedBox(
-      width:double.infinity,
-      child:ElevatedButton(
-        onPressed:() async {
-          await c.addCart(p);
-          if (context.mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('🛒 Added to cart'),
-                backgroundColor: green,
-                duration: Duration(seconds: 1),
-                behavior: SnackBarBehavior.floating,
-              )
-            );
-          }
-        },
-        child:const Text('Add')
-      )
-    )
-  ]));
+        alignment: Alignment.topRight,
+        child: IconButton(
+          onPressed: () => c.toggleWish(p),
+          icon: Icon(liked ? Icons.favorite : Icons.favorite_border,
+              color: liked ? Colors.redAccent : green),
+        ),
+      ),
+    ],
+  );
+
+  return card(Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      if (isWeb) SizedBox(height: 160, child: imageStack) else Expanded(child: imageStack),
+      Text(p.brand, style: const TextStyle(color: green, fontWeight: FontWeight.w700)),
+      Text(p.name,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(fontWeight: FontWeight.w800)),
+      Text('₹${p.price.toStringAsFixed(0)} • ⭐ ${p.rating}'),
+      const SizedBox(height: 8),
+      if (isWeb) const Spacer(),
+      SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          style: isWeb ? null : ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(44)),
+          onPressed: () async {
+            await c.addCart(p);
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('🛒 Added to cart'),
+                  backgroundColor: green,
+                  duration: Duration(seconds: 1),
+                  behavior: SnackBarBehavior.floating,
+                ),
+              );
+            }
+          },
+          child: const Text('Add'),
+        ),
+      ),
+    ],
+  ));
 }
 
 class ProfileTab extends StatelessWidget{ const ProfileTab({super.key}); @override Widget build(BuildContext context){final c=Scope.of(context);final p=c.profile;return ListView(padding:const EdgeInsets.all(20),children:[Text(c.t('profile'),style:Theme.of(context).textTheme.headlineMedium),const SizedBox(height:16),card(Row(children:[CircleAvatar(radius:34,backgroundColor:lightGreen,child:Text((p?.name.isNotEmpty==true?p!.name[0]:'N').toUpperCase(),style:const TextStyle(fontSize:28,color:green,fontWeight:FontWeight.w900))),const SizedBox(width:14),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text(p?.name.isNotEmpty==true?p!.name:'NutriFit User',style:const TextStyle(fontSize:20,fontWeight:FontWeight.w800)),Text(p?.email.isNotEmpty==true?p!.email:'demo@nutrifit.local'),Text(p?.goal.isNotEmpty==true?p!.goal:'General Fitness',style:const TextStyle(color:green,fontWeight:FontWeight.w700))]))])),section('Progress Tracking'),detail('Age','${p?.age??'-'}'),detail('Height','${p?.height?.toStringAsFixed(0)??'-'} cm'),detail('Weight','${p?.weight?.toStringAsFixed(0)??'-'} kg'),detail('Food',p?.food??'-'),detail('Workout',p?.location??'-'),section(c.t('settings')),card(Column(children:[Row(children:[Expanded(child:Text(c.t('language'),style:const TextStyle(fontWeight:FontWeight.w800))),SegmentedButton<String>(segments:const [ButtonSegment(value:'en',label:Text('EN')),ButtonSegment(value:'ta',label:Text('TA'))],selected:{c.lang},onSelectionChanged:(s)=>c.setLang(s.first))]),const Divider(),ListTile(leading:const Icon(Icons.edit,color:green),title:const Text('Edit onboarding details'),onTap:()=>go(context,'/goal')),ListTile(leading:const Icon(Icons.logout,color:Colors.redAccent),title:Text(c.t('logout')),onTap:()async{await c.logout();if(context.mounted)Navigator.pushNamedAndRemoveUntil(context,'/login',(_)=>false);})]))]);}}
@@ -1759,7 +2079,12 @@ class CartScreen extends StatelessWidget {
                                   color: const Color(0xFFFAFCFB),
                                   borderRadius: BorderRadius.circular(16),
                                 ),
-                                child: Image.asset(p.image, fit: BoxFit.contain),
+                                child: Image.asset(
+                                  p.image,
+                                  fit: BoxFit.contain,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      const Icon(Icons.broken_image, size: 40, color: Colors.grey),
+                                ),
                               ),
                               const SizedBox(width: 16),
                               Expanded(
