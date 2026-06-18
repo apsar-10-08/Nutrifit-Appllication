@@ -2,7 +2,8 @@ name: Flutter CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - '**'
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -49,11 +50,17 @@ jobs:
       - name: Install dependencies
         run: pip install openpyxl
 
-      - name: Generate Excel Report
-        run: python test/e2e/generate_mock_excel.py
+      - name: Generate Excel Reports
+        run: |
+          python test/e2e/generate_mock_excel.py
+          python test/e2e/generate_selenium_report.py
+          python test/e2e/generate_vulnerability_report.py
 
-      - name: Upload Test Report
+      - name: Upload Test Reports
         uses: actions/upload-artifact@v4
         with:
-          name: NutriFit-Testcase-Report
-          path: test/e2e/NutriFit_E2E_Test_Report.xlsx
+          name: NutriFit-QA-Reports
+          path: |
+            test/e2e/NutriFit_E2E_Test_Report.xlsx
+            test/e2e/NutriFit_Selenium_E2E_Report.xlsx
+            test/e2e/NutriFit_Vulnerability_Report.xlsx
