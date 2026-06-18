@@ -73,6 +73,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: A_to_Z_Test_Report
-          path: test/A_to_Z_Test_Report.xlsx
+          name: NutriFit_E2E_Test_Report
+          path: test/e2e/NutriFit_E2E_Test_Report.xlsx
           retention-days: 14
