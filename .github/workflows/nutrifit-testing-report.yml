@@ -1,0 +1,86 @@
+name: NutriFit Complete 360 QA Testing & Report Workflow
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_dispatch:
+
+jobs:
+  testing-and-report-generation:
+    name: Flutter Testing & 360 Excel Report Generation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python Environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openpyxl
+
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Flutter Package Dependencies
+        run: flutter pub get
+
+      - name: Execute Flutter Static Analysis
+        run: flutter analyze
+
+      - name: Execute Flutter Unit & Widget Tests
+        run: flutter test
+
+      - name: Build Flutter Web Release
+        run: flutter build web --release
+
+      - name: Generate NutriFit 360 Test Cases Excel Report
+        run: python generate_360_test_cases.py
+
+      - name: Verify 360 Test Cases Report Integrity
+        run: python verify_360_test_cases.py
+
+      - name: Publish Summary to GitHub Actions Step Summary
+        run: |
+          echo "## 📊 NutriFit 360 Test Cases QA Report Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric / Category | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "| :--- | :---: |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Total Test Cases** | **360** |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Selenium Web UI Testing** | 100 |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Appium Android E2E Testing** | 90 |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Flutter Unit & Widget Testing** | 60 |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Functional & Integration Testing** | 50 |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Load & Performance Testing** | 30 |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Safe Vulnerability & Security Checks** | 30 |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Application Modules Covered** | **37 Modules** |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Initial Baseline Status** | All 360 Set to 'Not Executed' |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📁 **Generated Excel Report Artifact**: \`testing-reports/NutriFit_360_Test_Cases.xlsx\`" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload Excel Report Single File Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NutriFit_360_Test_Cases_Excel
+          path: testing-reports/NutriFit_360_Test_Cases.xlsx
+          retention-days: 90
+          if-no-files-found: error
+
+      - name: Upload Complete Testing Reports Directory Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NutriFit_Testing_Reports_Suite
+          path: testing-reports/
+          retention-days: 90
+          if-no-files-found: error
