@@ -1,0 +1,46 @@
+name: API Test Suite Pipeline
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  api-tests:
+    name: Execute REST & Supabase API Test Suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openpyxl requests
+
+      - name: Run API Tests & Report Generators
+        run: python test/e2e/api_test_suite.py
+
+      - name: Upload API Test Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: NutriFit-API-Test-Reports
+          path: |
+            test/e2e/reports/API_Test_Report.xlsx
+            test/e2e/reports/api-junit.xml
+          retention-days: 30
