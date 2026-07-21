@@ -1,0 +1,112 @@
+name: Complete CI/CD Deployment + Live E2E Testing
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    name: Build, Deploy & E2E Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Stage 1: Repository Checkout
+        uses: actions/checkout@v3
+
+      - name: Stage 2: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Stage 3: Install Flutter Dependencies
+        run: flutter pub get
+
+      - name: Stage 4: Static Analysis
+        run: flutter analyze --no-fatal-infos
+
+      - name: Stage 5: Build Web Application
+        run: flutter build web --base-href "/${{ github.event.repository.name }}/" --release
+
+      - name: Stage 6: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build/web
+          branch: gh-pages
+          token: ${{ secrets.GITHUB_TOKEN }}
+          clean: true
+
+      - name: Stage 7: Wait for Deployment & Verification
+        run: |
+          TARGET_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+          echo "Checking deployment status for: $TARGET_URL"
+          
+          # Poll the URL up to 30 times (5 minutes) until it returns 200
+          for i in {1..30}; do
+            STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$TARGET_URL" || true)
+            if [ "$STATUS_CODE" -eq 200 ]; then
+              echo "✅ Deployment is live! Received HTTP 200 from $TARGET_URL"
+              break
+            fi
+            if [ $i -eq 30 ]; then
+              echo "❌ Deployment verification timed out. URL returned status $STATUS_CODE"
+              exit 1
+            fi
+            echo "Waiting for deployment to sync (Status: $STATUS_CODE)... Retrying in 10s ($i/30)..."
+            sleep 10
+          done
+
+      - name: Stage 8: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Stage 9: Install Test Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium openpyxl
+
+      - name: Stage 10: Run Selenium E2E Tests
+        env:
+          BASE_URL: "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+          HEADLESS: "true"
+        run: python automation/run_tests.py
+
+      - name: Stage 11: Generate Job Summary
+        if: always()
+        run: |
+          if [ -f automation/reports/Summary/summary.md ]; then
+            cat automation/reports/Summary/summary.md >> $GITHUB_STEP_SUMMARY
+          else
+            echo "# E2E Test execution failed to complete summary generation." >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Stage 12: Upload Automation Test Reports & Evidence
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: E2E-Automation-Test-Reports
+          path: |
+            automation/reports/Excel/Automation_Test_Report.xlsx
+            automation/reports/Excel/Failed_Test_Cases.xlsx
+            automation/reports/Excel/Passed_Test_Cases.xlsx
+            automation/reports/Excel/Summary_Report.xlsx
+            automation/reports/HTML/execution-report.html
+            automation/reports/HTML/dashboard.html
+            automation/reports/JSON/execution-results.json
+            automation/reports/Summary/summary.md
+            automation/reports/Screenshots/
+            automation/reports/Logs/
+          retention-days: 30

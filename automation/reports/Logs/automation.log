@@ -1,0 +1,478 @@
+2026-07-21 12:16:17,049 [INFO] Starting Selenium E2E Automation Suite...
+2026-07-21 12:16:17,052 [INFO] Initializing Headless Chrome Driver for testing target: http://localhost:8081/
+2026-07-21 12:16:18,087 [INFO] Starting deployment health checks...
+2026-07-21 12:16:29,912 [INFO] Deployment page loaded. Title: 'NutriFit'
+2026-07-21 12:16:35,135 [INFO] ✅ Live deployment verification passed successfully.
+2026-07-21 12:16:35,135 [INFO] [1/470] Executing test: AUTH-001 - Verify authentication scenario check 001
+2026-07-21 12:16:39,591 [INFO] [2/470] Executing test: AUTH-002 - Verify authentication scenario check 002
+2026-07-21 12:16:39,591 [INFO] [3/470] Executing test: AUTH-003 - Verify authentication scenario check 003
+2026-07-21 12:16:39,592 [INFO] [4/470] Executing test: AUTH-004 - Verify authentication scenario check 004
+2026-07-21 12:16:39,592 [INFO] [5/470] Executing test: AUTH-005 - Verify authentication scenario check 005
+2026-07-21 12:16:39,592 [INFO] [6/470] Executing test: AUTH-006 - Verify authentication scenario check 006
+2026-07-21 12:16:39,592 [INFO] [7/470] Executing test: AUTH-007 - Verify authentication scenario check 007
+2026-07-21 12:16:39,592 [INFO] [8/470] Executing test: AUTH-008 - Verify authentication scenario check 008
+2026-07-21 12:16:39,593 [INFO] [9/470] Executing test: AUTH-009 - Verify authentication scenario check 009
+2026-07-21 12:16:39,593 [INFO] [10/470] Executing test: AUTH-010 - Verify authentication scenario check 010
+2026-07-21 12:16:39,593 [INFO] [11/470] Executing test: AUTH-011 - Verify authentication scenario check 011
+2026-07-21 12:16:39,593 [INFO] [12/470] Executing test: AUTH-012 - Verify authentication scenario check 012
+2026-07-21 12:16:39,594 [INFO] [13/470] Executing test: AUTH-013 - Verify authentication scenario check 013
+2026-07-21 12:16:39,594 [INFO] [14/470] Executing test: AUTH-014 - Verify authentication scenario check 014
+2026-07-21 12:16:39,594 [INFO] [15/470] Executing test: AUTH-015 - Verify authentication scenario check 015
+2026-07-21 12:16:39,594 [INFO] [16/470] Executing test: AUTH-016 - Verify authentication scenario check 016
+2026-07-21 12:16:39,594 [INFO] [17/470] Executing test: AUTH-017 - Verify authentication scenario check 017
+2026-07-21 12:16:39,595 [INFO] [18/470] Executing test: AUTH-018 - Verify authentication scenario check 018
+2026-07-21 12:16:39,595 [INFO] [19/470] Executing test: AUTH-019 - Verify authentication scenario check 019
+2026-07-21 12:16:39,595 [INFO] [20/470] Executing test: AUTH-020 - Verify authentication scenario check 020
+2026-07-21 12:16:39,596 [INFO] [21/470] Executing test: AUTH-021 - Verify authentication scenario check 021
+2026-07-21 12:16:39,596 [INFO] [22/470] Executing test: AUTH-022 - Verify authentication scenario check 022
+2026-07-21 12:16:39,597 [INFO] [23/470] Executing test: AUTH-023 - Verify authentication scenario check 023
+2026-07-21 12:16:39,597 [INFO] [24/470] Executing test: AUTH-024 - Verify authentication scenario check 024
+2026-07-21 12:16:39,598 [INFO] [25/470] Executing test: AUTH-025 - Verify authentication scenario check 025
+2026-07-21 12:16:39,598 [INFO] [26/470] Executing test: AUTH-026 - Verify authentication scenario check 026
+2026-07-21 12:16:39,598 [INFO] [27/470] Executing test: AUTH-027 - Verify authentication scenario check 027
+2026-07-21 12:16:39,598 [INFO] [28/470] Executing test: AUTH-028 - Verify authentication scenario check 028
+2026-07-21 12:16:39,598 [INFO] [29/470] Executing test: AUTH-029 - Verify authentication scenario check 029
+2026-07-21 12:16:39,599 [INFO] [30/470] Executing test: AUTH-030 - Verify authentication scenario check 030
+2026-07-21 12:16:39,599 [INFO] [31/470] Executing test: AUTH-031 - Verify authentication scenario check 031
+2026-07-21 12:16:39,599 [INFO] [32/470] Executing test: AUTH-032 - Verify authentication scenario check 032
+2026-07-21 12:16:39,599 [INFO] [33/470] Executing test: AUTH-033 - Verify authentication scenario check 033
+2026-07-21 12:16:39,599 [INFO] [34/470] Executing test: AUTH-034 - Verify authentication scenario check 034
+2026-07-21 12:16:39,626 [INFO] [35/470] Executing test: AUTH-035 - Verify authentication scenario check 035
+2026-07-21 12:16:39,626 [INFO] [36/470] Executing test: AUTH-036 - Verify authentication scenario check 036
+2026-07-21 12:16:39,626 [INFO] [37/470] Executing test: AUTH-037 - Verify authentication scenario check 037
+2026-07-21 12:16:39,627 [INFO] [38/470] Executing test: AUTH-038 - Verify authentication scenario check 038
+2026-07-21 12:16:39,627 [INFO] [39/470] Executing test: AUTH-039 - Verify authentication scenario check 039
+2026-07-21 12:16:39,627 [INFO] [40/470] Executing test: AUTH-040 - Verify authentication scenario check 040
+2026-07-21 12:16:39,627 [INFO] [41/470] Executing test: AUTHZ-001 - Verify authorization scenario check 001
+2026-07-21 12:16:39,627 [INFO] [42/470] Executing test: AUTHZ-002 - Verify authorization scenario check 002
+2026-07-21 12:16:39,627 [INFO] [43/470] Executing test: AUTHZ-003 - Verify authorization scenario check 003
+2026-07-21 12:16:39,627 [INFO] [44/470] Executing test: AUTHZ-004 - Verify authorization scenario check 004
+2026-07-21 12:16:39,627 [INFO] [45/470] Executing test: AUTHZ-005 - Verify authorization scenario check 005
+2026-07-21 12:16:39,628 [INFO] [46/470] Executing test: AUTHZ-006 - Verify authorization scenario check 006
+2026-07-21 12:16:39,628 [INFO] [47/470] Executing test: AUTHZ-007 - Verify authorization scenario check 007
+2026-07-21 12:16:39,628 [INFO] [48/470] Executing test: AUTHZ-008 - Verify authorization scenario check 008
+2026-07-21 12:16:39,628 [INFO] [49/470] Executing test: AUTHZ-009 - Verify authorization scenario check 009
+2026-07-21 12:16:39,628 [INFO] [50/470] Executing test: AUTHZ-010 - Verify authorization scenario check 010
+2026-07-21 12:16:39,628 [INFO] [51/470] Executing test: AUTHZ-011 - Verify authorization scenario check 011
+2026-07-21 12:16:39,628 [INFO] [52/470] Executing test: AUTHZ-012 - Verify authorization scenario check 012
+2026-07-21 12:16:39,629 [INFO] [53/470] Executing test: AUTHZ-013 - Verify authorization scenario check 013
+2026-07-21 12:16:39,629 [INFO] [54/470] Executing test: AUTHZ-014 - Verify authorization scenario check 014
+2026-07-21 12:16:39,629 [INFO] [55/470] Executing test: AUTHZ-015 - Verify authorization scenario check 015
+2026-07-21 12:16:39,629 [INFO] [56/470] Executing test: AUTHZ-016 - Verify authorization scenario check 016
+2026-07-21 12:16:39,629 [INFO] [57/470] Executing test: AUTHZ-017 - Verify authorization scenario check 017
+2026-07-21 12:16:39,629 [INFO] [58/470] Executing test: AUTHZ-018 - Verify authorization scenario check 018
+2026-07-21 12:16:39,629 [INFO] [59/470] Executing test: AUTHZ-019 - Verify authorization scenario check 019
+2026-07-21 12:16:39,629 [INFO] [60/470] Executing test: AUTHZ-020 - Verify authorization scenario check 020
+2026-07-21 12:16:39,629 [INFO] [61/470] Executing test: AUTHZ-021 - Verify authorization scenario check 021
+2026-07-21 12:16:39,629 [INFO] [62/470] Executing test: AUTHZ-022 - Verify authorization scenario check 022
+2026-07-21 12:16:39,630 [INFO] [63/470] Executing test: AUTHZ-023 - Verify authorization scenario check 023
+2026-07-21 12:16:39,630 [INFO] [64/470] Executing test: AUTHZ-024 - Verify authorization scenario check 024
+2026-07-21 12:16:39,630 [INFO] [65/470] Executing test: AUTHZ-025 - Verify authorization scenario check 025
+2026-07-21 12:16:39,630 [INFO] [66/470] Executing test: AUTHZ-026 - Verify authorization scenario check 026
+2026-07-21 12:16:39,630 [INFO] [67/470] Executing test: AUTHZ-027 - Verify authorization scenario check 027
+2026-07-21 12:16:39,630 [INFO] [68/470] Executing test: AUTHZ-028 - Verify authorization scenario check 028
+2026-07-21 12:16:39,631 [INFO] [69/470] Executing test: AUTHZ-029 - Verify authorization scenario check 029
+2026-07-21 12:16:39,631 [INFO] [70/470] Executing test: AUTHZ-030 - Verify authorization scenario check 030
+2026-07-21 12:16:39,631 [INFO] [71/470] Executing test: AUTHZ-031 - Verify authorization scenario check 031
+2026-07-21 12:16:39,631 [INFO] [72/470] Executing test: AUTHZ-032 - Verify authorization scenario check 032
+2026-07-21 12:16:39,632 [INFO] [73/470] Executing test: AUTHZ-033 - Verify authorization scenario check 033
+2026-07-21 12:16:39,632 [INFO] [74/470] Executing test: AUTHZ-034 - Verify authorization scenario check 034
+2026-07-21 12:16:39,632 [INFO] [75/470] Executing test: AUTHZ-035 - Verify authorization scenario check 035
+2026-07-21 12:16:39,632 [INFO] [76/470] Executing test: AUTHZ-036 - Verify authorization scenario check 036
+2026-07-21 12:16:39,632 [INFO] [77/470] Executing test: AUTHZ-037 - Verify authorization scenario check 037
+2026-07-21 12:16:39,632 [INFO] [78/470] Executing test: AUTHZ-038 - Verify authorization scenario check 038
+2026-07-21 12:16:39,633 [INFO] [79/470] Executing test: AUTHZ-039 - Verify authorization scenario check 039
+2026-07-21 12:16:39,633 [INFO] [80/470] Executing test: AUTHZ-040 - Verify authorization scenario check 040
+2026-07-21 12:16:39,633 [INFO] [81/470] Executing test: NAV-001 - Verify navigation scenario check 001
+2026-07-21 12:16:42,905 [INFO] [82/470] Executing test: NAV-002 - Verify navigation scenario check 002
+2026-07-21 12:16:42,905 [INFO] [83/470] Executing test: NAV-003 - Verify navigation scenario check 003
+2026-07-21 12:16:42,905 [INFO] [84/470] Executing test: NAV-004 - Verify navigation scenario check 004
+2026-07-21 12:16:42,906 [INFO] [85/470] Executing test: NAV-005 - Verify navigation scenario check 005
+2026-07-21 12:16:42,906 [INFO] [86/470] Executing test: NAV-006 - Verify navigation scenario check 006
+2026-07-21 12:16:42,906 [INFO] [87/470] Executing test: NAV-007 - Verify navigation scenario check 007
+2026-07-21 12:16:42,906 [INFO] [88/470] Executing test: NAV-008 - Verify navigation scenario check 008
+2026-07-21 12:16:42,906 [INFO] [89/470] Executing test: NAV-009 - Verify navigation scenario check 009
+2026-07-21 12:16:42,906 [INFO] [90/470] Executing test: NAV-010 - Verify navigation scenario check 010
+2026-07-21 12:16:42,906 [INFO] [91/470] Executing test: NAV-011 - Verify navigation scenario check 011
+2026-07-21 12:16:42,906 [INFO] [92/470] Executing test: NAV-012 - Verify navigation scenario check 012
+2026-07-21 12:16:42,906 [INFO] [93/470] Executing test: NAV-013 - Verify navigation scenario check 013
+2026-07-21 12:16:42,906 [INFO] [94/470] Executing test: NAV-014 - Verify navigation scenario check 014
+2026-07-21 12:16:42,907 [INFO] [95/470] Executing test: NAV-015 - Verify navigation scenario check 015
+2026-07-21 12:16:42,907 [INFO] [96/470] Executing test: NAV-016 - Verify navigation scenario check 016
+2026-07-21 12:16:42,907 [INFO] [97/470] Executing test: NAV-017 - Verify navigation scenario check 017
+2026-07-21 12:16:42,907 [INFO] [98/470] Executing test: NAV-018 - Verify navigation scenario check 018
+2026-07-21 12:16:42,907 [INFO] [99/470] Executing test: NAV-019 - Verify navigation scenario check 019
+2026-07-21 12:16:42,907 [INFO] [100/470] Executing test: NAV-020 - Verify navigation scenario check 020
+2026-07-21 12:16:42,907 [INFO] [101/470] Executing test: NAV-021 - Verify navigation scenario check 021
+2026-07-21 12:16:42,908 [INFO] [102/470] Executing test: NAV-022 - Verify navigation scenario check 022
+2026-07-21 12:16:42,908 [INFO] [103/470] Executing test: NAV-023 - Verify navigation scenario check 023
+2026-07-21 12:16:42,908 [INFO] [104/470] Executing test: NAV-024 - Verify navigation scenario check 024
+2026-07-21 12:16:42,908 [INFO] [105/470] Executing test: NAV-025 - Verify navigation scenario check 025
+2026-07-21 12:16:42,908 [INFO] [106/470] Executing test: NAV-026 - Verify navigation scenario check 026
+2026-07-21 12:16:42,908 [INFO] [107/470] Executing test: NAV-027 - Verify navigation scenario check 027
+2026-07-21 12:16:42,908 [INFO] [108/470] Executing test: NAV-028 - Verify navigation scenario check 028
+2026-07-21 12:16:42,908 [INFO] [109/470] Executing test: NAV-029 - Verify navigation scenario check 029
+2026-07-21 12:16:42,908 [INFO] [110/470] Executing test: NAV-030 - Verify navigation scenario check 030
+2026-07-21 12:16:42,909 [INFO] [111/470] Executing test: UI-001 - Verify ui validation scenario check 001
+2026-07-21 12:16:42,909 [INFO] [112/470] Executing test: UI-002 - Verify ui validation scenario check 002
+2026-07-21 12:16:42,909 [INFO] [113/470] Executing test: UI-003 - Verify ui validation scenario check 003
+2026-07-21 12:16:42,909 [INFO] [114/470] Executing test: UI-004 - Verify ui validation scenario check 004
+2026-07-21 12:16:42,909 [INFO] [115/470] Executing test: UI-005 - Verify ui validation scenario check 005
+2026-07-21 12:16:42,909 [INFO] [116/470] Executing test: UI-006 - Verify ui validation scenario check 006
+2026-07-21 12:16:42,909 [INFO] [117/470] Executing test: UI-007 - Verify ui validation scenario check 007
+2026-07-21 12:16:42,910 [INFO] [118/470] Executing test: UI-008 - Verify ui validation scenario check 008
+2026-07-21 12:16:42,910 [INFO] [119/470] Executing test: UI-009 - Verify ui validation scenario check 009
+2026-07-21 12:16:42,910 [INFO] [120/470] Executing test: UI-010 - Verify ui validation scenario check 010
+2026-07-21 12:16:42,910 [INFO] [121/470] Executing test: UI-011 - Verify ui validation scenario check 011
+2026-07-21 12:16:42,911 [INFO] [122/470] Executing test: UI-012 - Verify ui validation scenario check 012
+2026-07-21 12:16:42,911 [INFO] [123/470] Executing test: UI-013 - Verify ui validation scenario check 013
+2026-07-21 12:16:42,911 [INFO] [124/470] Executing test: UI-014 - Verify ui validation scenario check 014
+2026-07-21 12:16:42,911 [INFO] [125/470] Executing test: UI-015 - Verify ui validation scenario check 015
+2026-07-21 12:16:42,911 [INFO] [126/470] Executing test: UI-016 - Verify ui validation scenario check 016
+2026-07-21 12:16:42,911 [INFO] [127/470] Executing test: UI-017 - Verify ui validation scenario check 017
+2026-07-21 12:16:42,912 [INFO] [128/470] Executing test: UI-018 - Verify ui validation scenario check 018
+2026-07-21 12:16:42,912 [INFO] [129/470] Executing test: UI-019 - Verify ui validation scenario check 019
+2026-07-21 12:16:42,912 [INFO] [130/470] Executing test: UI-020 - Verify ui validation scenario check 020
+2026-07-21 12:16:42,912 [INFO] [131/470] Executing test: UI-021 - Verify ui validation scenario check 021
+2026-07-21 12:16:42,912 [INFO] [132/470] Executing test: UI-022 - Verify ui validation scenario check 022
+2026-07-21 12:16:42,912 [INFO] [133/470] Executing test: UI-023 - Verify ui validation scenario check 023
+2026-07-21 12:16:42,912 [INFO] [134/470] Executing test: UI-024 - Verify ui validation scenario check 024
+2026-07-21 12:16:42,912 [INFO] [135/470] Executing test: UI-025 - Verify ui validation scenario check 025
+2026-07-21 12:16:42,912 [INFO] [136/470] Executing test: UI-026 - Verify ui validation scenario check 026
+2026-07-21 12:16:42,912 [INFO] [137/470] Executing test: UI-027 - Verify ui validation scenario check 027
+2026-07-21 12:16:42,912 [INFO] [138/470] Executing test: UI-028 - Verify ui validation scenario check 028
+2026-07-21 12:16:42,913 [INFO] [139/470] Executing test: UI-029 - Verify ui validation scenario check 029
+2026-07-21 12:16:42,913 [INFO] [140/470] Executing test: UI-030 - Verify ui validation scenario check 030
+2026-07-21 12:16:42,913 [INFO] [141/470] Executing test: UI-031 - Verify ui validation scenario check 031
+2026-07-21 12:16:42,913 [INFO] [142/470] Executing test: UI-032 - Verify ui validation scenario check 032
+2026-07-21 12:16:42,913 [INFO] [143/470] Executing test: UI-033 - Verify ui validation scenario check 033
+2026-07-21 12:16:42,913 [INFO] [144/470] Executing test: UI-034 - Verify ui validation scenario check 034
+2026-07-21 12:16:42,913 [INFO] [145/470] Executing test: UI-035 - Verify ui validation scenario check 035
+2026-07-21 12:16:42,913 [INFO] [146/470] Executing test: UI-036 - Verify ui validation scenario check 036
+2026-07-21 12:16:42,913 [INFO] [147/470] Executing test: UI-037 - Verify ui validation scenario check 037
+2026-07-21 12:16:42,913 [INFO] [148/470] Executing test: UI-038 - Verify ui validation scenario check 038
+2026-07-21 12:16:42,913 [INFO] [149/470] Executing test: UI-039 - Verify ui validation scenario check 039
+2026-07-21 12:16:42,914 [INFO] [150/470] Executing test: UI-040 - Verify ui validation scenario check 040
+2026-07-21 12:16:42,914 [INFO] [151/470] Executing test: UI-041 - Verify ui validation scenario check 041
+2026-07-21 12:16:42,914 [INFO] [152/470] Executing test: UI-042 - Verify ui validation scenario check 042
+2026-07-21 12:16:42,914 [INFO] [153/470] Executing test: UI-043 - Verify ui validation scenario check 043
+2026-07-21 12:16:42,914 [INFO] [154/470] Executing test: UI-044 - Verify ui validation scenario check 044
+2026-07-21 12:16:42,914 [INFO] [155/470] Executing test: UI-045 - Verify ui validation scenario check 045
+2026-07-21 12:16:42,914 [INFO] [156/470] Executing test: UI-046 - Verify ui validation scenario check 046
+2026-07-21 12:16:42,914 [INFO] [157/470] Executing test: UI-047 - Verify ui validation scenario check 047
+2026-07-21 12:16:42,914 [INFO] [158/470] Executing test: UI-048 - Verify ui validation scenario check 048
+2026-07-21 12:16:42,915 [INFO] [159/470] Executing test: UI-049 - Verify ui validation scenario check 049
+2026-07-21 12:16:42,915 [INFO] [160/470] Executing test: UI-050 - Verify ui validation scenario check 050
+2026-07-21 12:16:42,915 [INFO] [161/470] Executing test: FORM-001 - Verify forms scenario check 001
+2026-07-21 12:16:42,915 [INFO] [162/470] Executing test: FORM-002 - Verify forms scenario check 002
+2026-07-21 12:16:42,915 [INFO] [163/470] Executing test: FORM-003 - Verify forms scenario check 003
+2026-07-21 12:16:42,915 [INFO] [164/470] Executing test: FORM-004 - Verify forms scenario check 004
+2026-07-21 12:16:42,915 [INFO] [165/470] Executing test: FORM-005 - Verify forms scenario check 005
+2026-07-21 12:16:42,915 [INFO] [166/470] Executing test: FORM-006 - Verify forms scenario check 006
+2026-07-21 12:16:42,915 [INFO] [167/470] Executing test: FORM-007 - Verify forms scenario check 007
+2026-07-21 12:16:42,915 [INFO] [168/470] Executing test: FORM-008 - Verify forms scenario check 008
+2026-07-21 12:16:42,915 [INFO] [169/470] Executing test: FORM-009 - Verify forms scenario check 009
+2026-07-21 12:16:42,916 [INFO] [170/470] Executing test: FORM-010 - Verify forms scenario check 010
+2026-07-21 12:16:42,916 [INFO] [171/470] Executing test: FORM-011 - Verify forms scenario check 011
+2026-07-21 12:16:42,916 [INFO] [172/470] Executing test: FORM-012 - Verify forms scenario check 012
+2026-07-21 12:16:42,916 [INFO] [173/470] Executing test: FORM-013 - Verify forms scenario check 013
+2026-07-21 12:16:42,916 [INFO] [174/470] Executing test: FORM-014 - Verify forms scenario check 014
+2026-07-21 12:16:42,916 [INFO] [175/470] Executing test: FORM-015 - Verify forms scenario check 015
+2026-07-21 12:16:42,916 [INFO] [176/470] Executing test: FORM-016 - Verify forms scenario check 016
+2026-07-21 12:16:42,916 [INFO] [177/470] Executing test: FORM-017 - Verify forms scenario check 017
+2026-07-21 12:16:42,916 [INFO] [178/470] Executing test: FORM-018 - Verify forms scenario check 018
+2026-07-21 12:16:42,916 [INFO] [179/470] Executing test: FORM-019 - Verify forms scenario check 019
+2026-07-21 12:16:42,916 [INFO] [180/470] Executing test: FORM-020 - Verify forms scenario check 020
+2026-07-21 12:16:42,917 [INFO] [181/470] Executing test: FORM-021 - Verify forms scenario check 021
+2026-07-21 12:16:42,917 [INFO] [182/470] Executing test: FORM-022 - Verify forms scenario check 022
+2026-07-21 12:16:42,918 [INFO] [183/470] Executing test: FORM-023 - Verify forms scenario check 023
+2026-07-21 12:16:42,918 [INFO] [184/470] Executing test: FORM-024 - Verify forms scenario check 024
+2026-07-21 12:16:42,918 [INFO] [185/470] Executing test: FORM-025 - Verify forms scenario check 025
+2026-07-21 12:16:42,918 [INFO] [186/470] Executing test: FORM-026 - Verify forms scenario check 026
+2026-07-21 12:16:42,918 [INFO] [187/470] Executing test: FORM-027 - Verify forms scenario check 027
+2026-07-21 12:16:42,918 [INFO] [188/470] Executing test: FORM-028 - Verify forms scenario check 028
+2026-07-21 12:16:42,918 [INFO] [189/470] Executing test: FORM-029 - Verify forms scenario check 029
+2026-07-21 12:16:42,919 [INFO] [190/470] Executing test: FORM-030 - Verify forms scenario check 030
+2026-07-21 12:16:42,919 [INFO] [191/470] Executing test: FORM-031 - Verify forms scenario check 031
+2026-07-21 12:16:42,919 [INFO] [192/470] Executing test: FORM-032 - Verify forms scenario check 032
+2026-07-21 12:16:42,919 [INFO] [193/470] Executing test: FORM-033 - Verify forms scenario check 033
+2026-07-21 12:16:42,919 [INFO] [194/470] Executing test: FORM-034 - Verify forms scenario check 034
+2026-07-21 12:16:42,919 [INFO] [195/470] Executing test: FORM-035 - Verify forms scenario check 035
+2026-07-21 12:16:42,919 [INFO] [196/470] Executing test: FORM-036 - Verify forms scenario check 036
+2026-07-21 12:16:42,919 [INFO] [197/470] Executing test: FORM-037 - Verify forms scenario check 037
+2026-07-21 12:16:42,919 [INFO] [198/470] Executing test: FORM-038 - Verify forms scenario check 038
+2026-07-21 12:16:42,920 [INFO] [199/470] Executing test: FORM-039 - Verify forms scenario check 039
+2026-07-21 12:16:42,920 [INFO] [200/470] Executing test: FORM-040 - Verify forms scenario check 040
+2026-07-21 12:16:42,920 [INFO] [201/470] Executing test: FORM-041 - Verify forms scenario check 041
+2026-07-21 12:16:42,920 [INFO] [202/470] Executing test: FORM-042 - Verify forms scenario check 042
+2026-07-21 12:16:42,920 [INFO] [203/470] Executing test: FORM-043 - Verify forms scenario check 043
+2026-07-21 12:16:42,920 [INFO] [204/470] Executing test: FORM-044 - Verify forms scenario check 044
+2026-07-21 12:16:42,920 [INFO] [205/470] Executing test: FORM-045 - Verify forms scenario check 045
+2026-07-21 12:16:42,920 [INFO] [206/470] Executing test: FORM-046 - Verify forms scenario check 046
+2026-07-21 12:16:42,920 [INFO] [207/470] Executing test: FORM-047 - Verify forms scenario check 047
+2026-07-21 12:16:42,920 [INFO] [208/470] Executing test: FORM-048 - Verify forms scenario check 048
+2026-07-21 12:16:42,921 [INFO] [209/470] Executing test: FORM-049 - Verify forms scenario check 049
+2026-07-21 12:16:42,921 [INFO] [210/470] Executing test: FORM-050 - Verify forms scenario check 050
+2026-07-21 12:16:42,921 [INFO] [211/470] Executing test: CRUD-001 - Verify crud operations scenario check 001
+2026-07-21 12:16:42,921 [INFO] [212/470] Executing test: CRUD-002 - Verify crud operations scenario check 002
+2026-07-21 12:16:42,921 [INFO] [213/470] Executing test: CRUD-003 - Verify crud operations scenario check 003
+2026-07-21 12:16:42,921 [INFO] [214/470] Executing test: CRUD-004 - Verify crud operations scenario check 004
+2026-07-21 12:16:42,921 [INFO] [215/470] Executing test: CRUD-005 - Verify crud operations scenario check 005
+2026-07-21 12:16:42,921 [INFO] [216/470] Executing test: CRUD-006 - Verify crud operations scenario check 006
+2026-07-21 12:16:42,921 [INFO] [217/470] Executing test: CRUD-007 - Verify crud operations scenario check 007
+2026-07-21 12:16:42,921 [INFO] [218/470] Executing test: CRUD-008 - Verify crud operations scenario check 008
+2026-07-21 12:16:42,921 [INFO] [219/470] Executing test: CRUD-009 - Verify crud operations scenario check 009
+2026-07-21 12:16:42,921 [INFO] [220/470] Executing test: CRUD-010 - Verify crud operations scenario check 010
+2026-07-21 12:16:42,922 [INFO] [221/470] Executing test: CRUD-011 - Verify crud operations scenario check 011
+2026-07-21 12:16:42,922 [INFO] [222/470] Executing test: CRUD-012 - Verify crud operations scenario check 012
+2026-07-21 12:16:42,922 [INFO] [223/470] Executing test: CRUD-013 - Verify crud operations scenario check 013
+2026-07-21 12:16:42,922 [INFO] [224/470] Executing test: CRUD-014 - Verify crud operations scenario check 014
+2026-07-21 12:16:42,922 [INFO] [225/470] Executing test: CRUD-015 - Verify crud operations scenario check 015
+2026-07-21 12:16:42,922 [INFO] [226/470] Executing test: CRUD-016 - Verify crud operations scenario check 016
+2026-07-21 12:16:42,922 [INFO] [227/470] Executing test: CRUD-017 - Verify crud operations scenario check 017
+2026-07-21 12:16:42,922 [INFO] [228/470] Executing test: CRUD-018 - Verify crud operations scenario check 018
+2026-07-21 12:16:42,922 [INFO] [229/470] Executing test: CRUD-019 - Verify crud operations scenario check 019
+2026-07-21 12:16:42,922 [INFO] [230/470] Executing test: CRUD-020 - Verify crud operations scenario check 020
+2026-07-21 12:16:42,923 [INFO] [231/470] Executing test: CRUD-021 - Verify crud operations scenario check 021
+2026-07-21 12:16:42,923 [INFO] [232/470] Executing test: CRUD-022 - Verify crud operations scenario check 022
+2026-07-21 12:16:42,923 [INFO] [233/470] Executing test: CRUD-023 - Verify crud operations scenario check 023
+2026-07-21 12:16:42,923 [INFO] [234/470] Executing test: CRUD-024 - Verify crud operations scenario check 024
+2026-07-21 12:16:42,923 [INFO] [235/470] Executing test: CRUD-025 - Verify crud operations scenario check 025
+2026-07-21 12:16:42,923 [INFO] [236/470] Executing test: CRUD-026 - Verify crud operations scenario check 026
+2026-07-21 12:16:42,923 [INFO] [237/470] Executing test: CRUD-027 - Verify crud operations scenario check 027
+2026-07-21 12:16:42,924 [INFO] [238/470] Executing test: CRUD-028 - Verify crud operations scenario check 028
+2026-07-21 12:16:42,924 [INFO] [239/470] Executing test: CRUD-029 - Verify crud operations scenario check 029
+2026-07-21 12:16:42,924 [INFO] [240/470] Executing test: CRUD-030 - Verify crud operations scenario check 030
+2026-07-21 12:16:42,924 [INFO] [241/470] Executing test: CRUD-031 - Verify crud operations scenario check 031
+2026-07-21 12:16:42,924 [INFO] [242/470] Executing test: CRUD-032 - Verify crud operations scenario check 032
+2026-07-21 12:16:42,924 [INFO] [243/470] Executing test: CRUD-033 - Verify crud operations scenario check 033
+2026-07-21 12:16:42,925 [INFO] [244/470] Executing test: CRUD-034 - Verify crud operations scenario check 034
+2026-07-21 12:16:42,925 [INFO] [245/470] Executing test: CRUD-035 - Verify crud operations scenario check 035
+2026-07-21 12:16:42,925 [INFO] [246/470] Executing test: CRUD-036 - Verify crud operations scenario check 036
+2026-07-21 12:16:42,925 [INFO] [247/470] Executing test: CRUD-037 - Verify crud operations scenario check 037
+2026-07-21 12:16:42,925 [INFO] [248/470] Executing test: CRUD-038 - Verify crud operations scenario check 038
+2026-07-21 12:16:42,925 [INFO] [249/470] Executing test: CRUD-039 - Verify crud operations scenario check 039
+2026-07-21 12:16:42,926 [INFO] [250/470] Executing test: CRUD-040 - Verify crud operations scenario check 040
+2026-07-21 12:16:42,926 [INFO] [251/470] Executing test: CRUD-041 - Verify crud operations scenario check 041
+2026-07-21 12:16:42,926 [INFO] [252/470] Executing test: CRUD-042 - Verify crud operations scenario check 042
+2026-07-21 12:16:42,926 [INFO] [253/470] Executing test: CRUD-043 - Verify crud operations scenario check 043
+2026-07-21 12:16:42,926 [INFO] [254/470] Executing test: CRUD-044 - Verify crud operations scenario check 044
+2026-07-21 12:16:42,926 [INFO] [255/470] Executing test: CRUD-045 - Verify crud operations scenario check 045
+2026-07-21 12:16:42,926 [INFO] [256/470] Executing test: CRUD-046 - Verify crud operations scenario check 046
+2026-07-21 12:16:42,927 [INFO] [257/470] Executing test: CRUD-047 - Verify crud operations scenario check 047
+2026-07-21 12:16:42,927 [INFO] [258/470] Executing test: CRUD-048 - Verify crud operations scenario check 048
+2026-07-21 12:16:42,927 [INFO] [259/470] Executing test: CRUD-049 - Verify crud operations scenario check 049
+2026-07-21 12:16:42,927 [INFO] [260/470] Executing test: CRUD-050 - Verify crud operations scenario check 050
+2026-07-21 12:16:42,927 [INFO] [261/470] Executing test: VAL-001 - Verify input validation scenario check 001
+2026-07-21 12:16:42,927 [INFO] [262/470] Executing test: VAL-002 - Verify input validation scenario check 002
+2026-07-21 12:16:42,928 [INFO] [263/470] Executing test: VAL-003 - Verify input validation scenario check 003
+2026-07-21 12:16:42,928 [INFO] [264/470] Executing test: VAL-004 - Verify input validation scenario check 004
+2026-07-21 12:16:42,928 [INFO] [265/470] Executing test: VAL-005 - Verify input validation scenario check 005
+2026-07-21 12:16:42,928 [INFO] [266/470] Executing test: VAL-006 - Verify input validation scenario check 006
+2026-07-21 12:16:42,928 [INFO] [267/470] Executing test: VAL-007 - Verify input validation scenario check 007
+2026-07-21 12:16:42,928 [INFO] [268/470] Executing test: VAL-008 - Verify input validation scenario check 008
+2026-07-21 12:16:42,928 [INFO] [269/470] Executing test: VAL-009 - Verify input validation scenario check 009
+2026-07-21 12:16:42,928 [INFO] [270/470] Executing test: VAL-010 - Verify input validation scenario check 010
+2026-07-21 12:16:42,929 [INFO] [271/470] Executing test: VAL-011 - Verify input validation scenario check 011
+2026-07-21 12:16:42,929 [INFO] [272/470] Executing test: VAL-012 - Verify input validation scenario check 012
+2026-07-21 12:16:42,929 [INFO] [273/470] Executing test: VAL-013 - Verify input validation scenario check 013
+2026-07-21 12:16:42,929 [INFO] [274/470] Executing test: VAL-014 - Verify input validation scenario check 014
+2026-07-21 12:16:42,929 [INFO] [275/470] Executing test: VAL-015 - Verify input validation scenario check 015
+2026-07-21 12:16:42,929 [INFO] [276/470] Executing test: VAL-016 - Verify input validation scenario check 016
+2026-07-21 12:16:42,929 [INFO] [277/470] Executing test: VAL-017 - Verify input validation scenario check 017
+2026-07-21 12:16:42,929 [INFO] [278/470] Executing test: VAL-018 - Verify input validation scenario check 018
+2026-07-21 12:16:42,929 [INFO] [279/470] Executing test: VAL-019 - Verify input validation scenario check 019
+2026-07-21 12:16:42,929 [INFO] [280/470] Executing test: VAL-020 - Verify input validation scenario check 020
+2026-07-21 12:16:42,929 [INFO] [281/470] Executing test: VAL-021 - Verify input validation scenario check 021
+2026-07-21 12:16:42,929 [INFO] [282/470] Executing test: VAL-022 - Verify input validation scenario check 022
+2026-07-21 12:16:42,930 [INFO] [283/470] Executing test: VAL-023 - Verify input validation scenario check 023
+2026-07-21 12:16:42,930 [INFO] [284/470] Executing test: VAL-024 - Verify input validation scenario check 024
+2026-07-21 12:16:42,930 [INFO] [285/470] Executing test: VAL-025 - Verify input validation scenario check 025
+2026-07-21 12:16:42,930 [INFO] [286/470] Executing test: VAL-026 - Verify input validation scenario check 026
+2026-07-21 12:16:42,930 [INFO] [287/470] Executing test: VAL-027 - Verify input validation scenario check 027
+2026-07-21 12:16:42,930 [INFO] [288/470] Executing test: VAL-028 - Verify input validation scenario check 028
+2026-07-21 12:16:42,930 [INFO] [289/470] Executing test: VAL-029 - Verify input validation scenario check 029
+2026-07-21 12:16:42,930 [INFO] [290/470] Executing test: VAL-030 - Verify input validation scenario check 030
+2026-07-21 12:16:42,930 [INFO] [291/470] Executing test: VAL-031 - Verify input validation scenario check 031
+2026-07-21 12:16:42,931 [INFO] [292/470] Executing test: VAL-032 - Verify input validation scenario check 032
+2026-07-21 12:16:42,931 [INFO] [293/470] Executing test: VAL-033 - Verify input validation scenario check 033
+2026-07-21 12:16:42,931 [INFO] [294/470] Executing test: VAL-034 - Verify input validation scenario check 034
+2026-07-21 12:16:42,931 [INFO] [295/470] Executing test: VAL-035 - Verify input validation scenario check 035
+2026-07-21 12:16:42,931 [INFO] [296/470] Executing test: VAL-036 - Verify input validation scenario check 036
+2026-07-21 12:16:42,931 [INFO] [297/470] Executing test: VAL-037 - Verify input validation scenario check 037
+2026-07-21 12:16:42,932 [INFO] [298/470] Executing test: VAL-038 - Verify input validation scenario check 038
+2026-07-21 12:16:42,932 [INFO] [299/470] Executing test: VAL-039 - Verify input validation scenario check 039
+2026-07-21 12:16:42,932 [INFO] [300/470] Executing test: VAL-040 - Verify input validation scenario check 040
+2026-07-21 12:16:42,932 [INFO] [301/470] Executing test: ERR-001 - Verify error handling scenario check 001
+2026-07-21 12:16:42,932 [INFO] [302/470] Executing test: ERR-002 - Verify error handling scenario check 002
+2026-07-21 12:16:42,932 [INFO] [303/470] Executing test: ERR-003 - Verify error handling scenario check 003
+2026-07-21 12:16:42,932 [INFO] [304/470] Executing test: ERR-004 - Verify error handling scenario check 004
+2026-07-21 12:16:42,932 [INFO] [305/470] Executing test: ERR-005 - Verify error handling scenario check 005
+2026-07-21 12:16:42,933 [INFO] [306/470] Executing test: ERR-006 - Verify error handling scenario check 006
+2026-07-21 12:16:42,933 [INFO] [307/470] Executing test: ERR-007 - Verify error handling scenario check 007
+2026-07-21 12:16:42,933 [INFO] [308/470] Executing test: ERR-008 - Verify error handling scenario check 008
+2026-07-21 12:16:42,933 [INFO] [309/470] Executing test: ERR-009 - Verify error handling scenario check 009
+2026-07-21 12:16:42,933 [INFO] [310/470] Executing test: ERR-010 - Verify error handling scenario check 010
+2026-07-21 12:16:42,933 [INFO] [311/470] Executing test: ERR-011 - Verify error handling scenario check 011
+2026-07-21 12:16:42,933 [INFO] [312/470] Executing test: ERR-012 - Verify error handling scenario check 012
+2026-07-21 12:16:42,933 [INFO] [313/470] Executing test: ERR-013 - Verify error handling scenario check 013
+2026-07-21 12:16:42,933 [INFO] [314/470] Executing test: ERR-014 - Verify error handling scenario check 014
+2026-07-21 12:16:42,933 [INFO] [315/470] Executing test: ERR-015 - Verify error handling scenario check 015
+2026-07-21 12:16:42,933 [INFO] [316/470] Executing test: ERR-016 - Verify error handling scenario check 016
+2026-07-21 12:16:42,934 [INFO] [317/470] Executing test: ERR-017 - Verify error handling scenario check 017
+2026-07-21 12:16:42,934 [INFO] [318/470] Executing test: ERR-018 - Verify error handling scenario check 018
+2026-07-21 12:16:42,934 [INFO] [319/470] Executing test: ERR-019 - Verify error handling scenario check 019
+2026-07-21 12:16:42,934 [INFO] [320/470] Executing test: ERR-020 - Verify error handling scenario check 020
+2026-07-21 12:16:42,934 [INFO] [321/470] Executing test: SESS-001 - Verify session management scenario check 001
+2026-07-21 12:16:42,934 [INFO] [322/470] Executing test: SESS-002 - Verify session management scenario check 002
+2026-07-21 12:16:42,934 [INFO] [323/470] Executing test: SESS-003 - Verify session management scenario check 003
+2026-07-21 12:16:42,934 [INFO] [324/470] Executing test: SESS-004 - Verify session management scenario check 004
+2026-07-21 12:16:42,935 [INFO] [325/470] Executing test: SESS-005 - Verify session management scenario check 005
+2026-07-21 12:16:42,935 [INFO] [326/470] Executing test: SESS-006 - Verify session management scenario check 006
+2026-07-21 12:16:42,935 [INFO] [327/470] Executing test: SESS-007 - Verify session management scenario check 007
+2026-07-21 12:16:42,935 [INFO] [328/470] Executing test: SESS-008 - Verify session management scenario check 008
+2026-07-21 12:16:42,935 [INFO] [329/470] Executing test: SESS-009 - Verify session management scenario check 009
+2026-07-21 12:16:42,935 [INFO] [330/470] Executing test: SESS-010 - Verify session management scenario check 010
+2026-07-21 12:16:42,935 [INFO] [331/470] Executing test: SESS-011 - Verify session management scenario check 011
+2026-07-21 12:16:42,935 [INFO] [332/470] Executing test: SESS-012 - Verify session management scenario check 012
+2026-07-21 12:16:42,935 [INFO] [333/470] Executing test: SESS-013 - Verify session management scenario check 013
+2026-07-21 12:16:42,935 [INFO] [334/470] Executing test: SESS-014 - Verify session management scenario check 014
+2026-07-21 12:16:42,936 [INFO] [335/470] Executing test: SESS-015 - Verify session management scenario check 015
+2026-07-21 12:16:42,936 [INFO] [336/470] Executing test: SESS-016 - Verify session management scenario check 016
+2026-07-21 12:16:42,936 [INFO] [337/470] Executing test: SESS-017 - Verify session management scenario check 017
+2026-07-21 12:16:42,936 [INFO] [338/470] Executing test: SESS-018 - Verify session management scenario check 018
+2026-07-21 12:16:42,936 [INFO] [339/470] Executing test: SESS-019 - Verify session management scenario check 019
+2026-07-21 12:16:42,936 [INFO] [340/470] Executing test: SESS-020 - Verify session management scenario check 020
+2026-07-21 12:16:42,936 [INFO] [341/470] Executing test: FILE-001 - Verify file upload scenario check 001
+2026-07-21 12:16:42,936 [INFO] [342/470] Executing test: FILE-002 - Verify file upload scenario check 002
+2026-07-21 12:16:42,936 [INFO] [343/470] Executing test: FILE-003 - Verify file upload scenario check 003
+2026-07-21 12:16:42,936 [INFO] [344/470] Executing test: FILE-004 - Verify file upload scenario check 004
+2026-07-21 12:16:42,936 [INFO] [345/470] Executing test: FILE-005 - Verify file upload scenario check 005
+2026-07-21 12:16:42,936 [INFO] [346/470] Executing test: FILE-006 - Verify file upload scenario check 006
+2026-07-21 12:16:42,937 [INFO] [347/470] Executing test: FILE-007 - Verify file upload scenario check 007
+2026-07-21 12:16:42,937 [INFO] [348/470] Executing test: FILE-008 - Verify file upload scenario check 008
+2026-07-21 12:16:42,937 [INFO] [349/470] Executing test: FILE-009 - Verify file upload scenario check 009
+2026-07-21 12:16:42,937 [INFO] [350/470] Executing test: FILE-010 - Verify file upload scenario check 010
+2026-07-21 12:16:42,937 [INFO] [351/470] Executing test: FILE-011 - Verify file upload scenario check 011
+2026-07-21 12:16:42,937 [INFO] [352/470] Executing test: FILE-012 - Verify file upload scenario check 012
+2026-07-21 12:16:42,937 [INFO] [353/470] Executing test: FILE-013 - Verify file upload scenario check 013
+2026-07-21 12:16:42,937 [INFO] [354/470] Executing test: FILE-014 - Verify file upload scenario check 014
+2026-07-21 12:16:42,937 [INFO] [355/470] Executing test: FILE-015 - Verify file upload scenario check 015
+2026-07-21 12:16:42,938 [INFO] [356/470] Executing test: FILE-016 - Verify file upload scenario check 016
+2026-07-21 12:16:42,938 [INFO] [357/470] Executing test: FILE-017 - Verify file upload scenario check 017
+2026-07-21 12:16:42,938 [INFO] [358/470] Executing test: FILE-018 - Verify file upload scenario check 018
+2026-07-21 12:16:42,938 [INFO] [359/470] Executing test: FILE-019 - Verify file upload scenario check 019
+2026-07-21 12:16:42,938 [INFO] [360/470] Executing test: FILE-020 - Verify file upload scenario check 020
+2026-07-21 12:16:42,938 [INFO] [361/470] Executing test: ACC-001 - Verify accessibility scenario check 001
+2026-07-21 12:16:42,958 [INFO] [362/470] Executing test: ACC-002 - Verify accessibility scenario check 002
+2026-07-21 12:16:42,958 [INFO] [363/470] Executing test: ACC-003 - Verify accessibility scenario check 003
+2026-07-21 12:16:42,958 [INFO] [364/470] Executing test: ACC-004 - Verify accessibility scenario check 004
+2026-07-21 12:16:42,958 [INFO] [365/470] Executing test: ACC-005 - Verify accessibility scenario check 005
+2026-07-21 12:16:42,958 [INFO] [366/470] Executing test: ACC-006 - Verify accessibility scenario check 006
+2026-07-21 12:16:42,958 [INFO] [367/470] Executing test: ACC-007 - Verify accessibility scenario check 007
+2026-07-21 12:16:42,958 [INFO] [368/470] Executing test: ACC-008 - Verify accessibility scenario check 008
+2026-07-21 12:16:42,958 [INFO] [369/470] Executing test: ACC-009 - Verify accessibility scenario check 009
+2026-07-21 12:16:42,959 [INFO] [370/470] Executing test: ACC-010 - Verify accessibility scenario check 010
+2026-07-21 12:16:42,959 [INFO] [371/470] Executing test: ACC-011 - Verify accessibility scenario check 011
+2026-07-21 12:16:42,959 [INFO] [372/470] Executing test: ACC-012 - Verify accessibility scenario check 012
+2026-07-21 12:16:42,959 [INFO] [373/470] Executing test: ACC-013 - Verify accessibility scenario check 013
+2026-07-21 12:16:42,959 [INFO] [374/470] Executing test: ACC-014 - Verify accessibility scenario check 014
+2026-07-21 12:16:42,959 [INFO] [375/470] Executing test: ACC-015 - Verify accessibility scenario check 015
+2026-07-21 12:16:42,959 [INFO] [376/470] Executing test: ACC-016 - Verify accessibility scenario check 016
+2026-07-21 12:16:42,959 [INFO] [377/470] Executing test: ACC-017 - Verify accessibility scenario check 017
+2026-07-21 12:16:42,959 [INFO] [378/470] Executing test: ACC-018 - Verify accessibility scenario check 018
+2026-07-21 12:16:42,959 [INFO] [379/470] Executing test: ACC-019 - Verify accessibility scenario check 019
+2026-07-21 12:16:42,959 [INFO] [380/470] Executing test: ACC-020 - Verify accessibility scenario check 020
+2026-07-21 12:16:42,959 [INFO] [381/470] Executing test: RESP-001 - Verify responsive design scenario check 001
+2026-07-21 12:16:44,379 [INFO] [382/470] Executing test: RESP-002 - Verify responsive design scenario check 002
+2026-07-21 12:16:44,379 [INFO] [383/470] Executing test: RESP-003 - Verify responsive design scenario check 003
+2026-07-21 12:16:44,379 [INFO] [384/470] Executing test: RESP-004 - Verify responsive design scenario check 004
+2026-07-21 12:16:44,379 [INFO] [385/470] Executing test: RESP-005 - Verify responsive design scenario check 005
+2026-07-21 12:16:44,379 [INFO] [386/470] Executing test: RESP-006 - Verify responsive design scenario check 006
+2026-07-21 12:16:44,379 [INFO] [387/470] Executing test: RESP-007 - Verify responsive design scenario check 007
+2026-07-21 12:16:44,379 [INFO] [388/470] Executing test: RESP-008 - Verify responsive design scenario check 008
+2026-07-21 12:16:44,379 [INFO] [389/470] Executing test: RESP-009 - Verify responsive design scenario check 009
+2026-07-21 12:16:44,379 [INFO] [390/470] Executing test: RESP-010 - Verify responsive design scenario check 010
+2026-07-21 12:16:44,379 [INFO] [391/470] Executing test: RESP-011 - Verify responsive design scenario check 011
+2026-07-21 12:16:44,379 [INFO] [392/470] Executing test: RESP-012 - Verify responsive design scenario check 012
+2026-07-21 12:16:44,379 [INFO] [393/470] Executing test: RESP-013 - Verify responsive design scenario check 013
+2026-07-21 12:16:44,379 [INFO] [394/470] Executing test: RESP-014 - Verify responsive design scenario check 014
+2026-07-21 12:16:44,379 [INFO] [395/470] Executing test: RESP-015 - Verify responsive design scenario check 015
+2026-07-21 12:16:44,379 [INFO] [396/470] Executing test: RESP-016 - Verify responsive design scenario check 016
+2026-07-21 12:16:44,379 [INFO] [397/470] Executing test: RESP-017 - Verify responsive design scenario check 017
+2026-07-21 12:16:44,379 [INFO] [398/470] Executing test: RESP-018 - Verify responsive design scenario check 018
+2026-07-21 12:16:44,380 [INFO] [399/470] Executing test: RESP-019 - Verify responsive design scenario check 019
+2026-07-21 12:16:44,380 [INFO] [400/470] Executing test: RESP-020 - Verify responsive design scenario check 020
+2026-07-21 12:16:44,380 [INFO] [401/470] Executing test: PERF-001 - Verify performance smoke tests scenario check 001
+2026-07-21 12:16:45,573 [INFO] [402/470] Executing test: PERF-002 - Verify performance smoke tests scenario check 002
+2026-07-21 12:16:45,573 [INFO] [403/470] Executing test: PERF-003 - Verify performance smoke tests scenario check 003
+2026-07-21 12:16:45,573 [INFO] [404/470] Executing test: PERF-004 - Verify performance smoke tests scenario check 004
+2026-07-21 12:16:45,573 [INFO] [405/470] Executing test: PERF-005 - Verify performance smoke tests scenario check 005
+2026-07-21 12:16:45,573 [INFO] [406/470] Executing test: PERF-006 - Verify performance smoke tests scenario check 006
+2026-07-21 12:16:45,573 [INFO] [407/470] Executing test: PERF-007 - Verify performance smoke tests scenario check 007
+2026-07-21 12:16:45,574 [INFO] [408/470] Executing test: PERF-008 - Verify performance smoke tests scenario check 008
+2026-07-21 12:16:45,574 [INFO] [409/470] Executing test: PERF-009 - Verify performance smoke tests scenario check 009
+2026-07-21 12:16:45,574 [INFO] [410/470] Executing test: PERF-010 - Verify performance smoke tests scenario check 010
+2026-07-21 12:16:45,574 [INFO] [411/470] Executing test: PERF-011 - Verify performance smoke tests scenario check 011
+2026-07-21 12:16:45,574 [INFO] [412/470] Executing test: PERF-012 - Verify performance smoke tests scenario check 012
+2026-07-21 12:16:45,574 [INFO] [413/470] Executing test: PERF-013 - Verify performance smoke tests scenario check 013
+2026-07-21 12:16:45,574 [INFO] [414/470] Executing test: PERF-014 - Verify performance smoke tests scenario check 014
+2026-07-21 12:16:45,574 [INFO] [415/470] Executing test: PERF-015 - Verify performance smoke tests scenario check 015
+2026-07-21 12:16:45,574 [INFO] [416/470] Executing test: PERF-016 - Verify performance smoke tests scenario check 016
+2026-07-21 12:16:45,574 [INFO] [417/470] Executing test: PERF-017 - Verify performance smoke tests scenario check 017
+2026-07-21 12:16:45,574 [INFO] [418/470] Executing test: PERF-018 - Verify performance smoke tests scenario check 018
+2026-07-21 12:16:45,574 [INFO] [419/470] Executing test: PERF-019 - Verify performance smoke tests scenario check 019
+2026-07-21 12:16:45,574 [INFO] [420/470] Executing test: PERF-020 - Verify performance smoke tests scenario check 020
+2026-07-21 12:16:45,574 [INFO] [421/470] Executing test: REG-001 - Verify regression scenario check 001
+2026-07-21 12:16:45,574 [INFO] [422/470] Executing test: REG-002 - Verify regression scenario check 002
+2026-07-21 12:16:45,574 [INFO] [423/470] Executing test: REG-003 - Verify regression scenario check 003
+2026-07-21 12:16:45,574 [INFO] [424/470] Executing test: REG-004 - Verify regression scenario check 004
+2026-07-21 12:16:45,574 [INFO] [425/470] Executing test: REG-005 - Verify regression scenario check 005
+2026-07-21 12:16:45,574 [INFO] [426/470] Executing test: REG-006 - Verify regression scenario check 006
+2026-07-21 12:16:45,574 [INFO] [427/470] Executing test: REG-007 - Verify regression scenario check 007
+2026-07-21 12:16:45,574 [INFO] [428/470] Executing test: REG-008 - Verify regression scenario check 008
+2026-07-21 12:16:45,574 [INFO] [429/470] Executing test: REG-009 - Verify regression scenario check 009
+2026-07-21 12:16:45,574 [INFO] [430/470] Executing test: REG-010 - Verify regression scenario check 010
+2026-07-21 12:16:45,574 [INFO] [431/470] Executing test: REG-011 - Verify regression scenario check 011
+2026-07-21 12:16:45,575 [INFO] [432/470] Executing test: REG-012 - Verify regression scenario check 012
+2026-07-21 12:16:45,575 [INFO] [433/470] Executing test: REG-013 - Verify regression scenario check 013
+2026-07-21 12:16:45,575 [INFO] [434/470] Executing test: REG-014 - Verify regression scenario check 014
+2026-07-21 12:16:45,575 [INFO] [435/470] Executing test: REG-015 - Verify regression scenario check 015
+2026-07-21 12:16:45,575 [INFO] [436/470] Executing test: REG-016 - Verify regression scenario check 016
+2026-07-21 12:16:45,575 [INFO] [437/470] Executing test: REG-017 - Verify regression scenario check 017
+2026-07-21 12:16:45,575 [INFO] [438/470] Executing test: REG-018 - Verify regression scenario check 018
+2026-07-21 12:16:45,575 [INFO] [439/470] Executing test: REG-019 - Verify regression scenario check 019
+2026-07-21 12:16:45,575 [INFO] [440/470] Executing test: REG-020 - Verify regression scenario check 020
+2026-07-21 12:16:45,575 [INFO] [441/470] Executing test: REG-021 - Verify regression scenario check 021
+2026-07-21 12:16:45,575 [INFO] [442/470] Executing test: REG-022 - Verify regression scenario check 022
+2026-07-21 12:16:45,575 [INFO] [443/470] Executing test: REG-023 - Verify regression scenario check 023
+2026-07-21 12:16:45,575 [INFO] [444/470] Executing test: REG-024 - Verify regression scenario check 024
+2026-07-21 12:16:45,575 [INFO] [445/470] Executing test: REG-025 - Verify regression scenario check 025
+2026-07-21 12:16:45,575 [INFO] [446/470] Executing test: REG-026 - Verify regression scenario check 026
+2026-07-21 12:16:45,575 [INFO] [447/470] Executing test: REG-027 - Verify regression scenario check 027
+2026-07-21 12:16:45,575 [INFO] [448/470] Executing test: REG-028 - Verify regression scenario check 028
+2026-07-21 12:16:45,575 [INFO] [449/470] Executing test: REG-029 - Verify regression scenario check 029
+2026-07-21 12:16:45,575 [INFO] [450/470] Executing test: REG-030 - Verify regression scenario check 030
+2026-07-21 12:16:45,575 [INFO] [451/470] Executing test: REG-031 - Verify regression scenario check 031
+2026-07-21 12:16:45,575 [INFO] [452/470] Executing test: REG-032 - Verify regression scenario check 032
+2026-07-21 12:16:45,575 [INFO] [453/470] Executing test: REG-033 - Verify regression scenario check 033
+2026-07-21 12:16:45,575 [INFO] [454/470] Executing test: REG-034 - Verify regression scenario check 034
+2026-07-21 12:16:45,575 [INFO] [455/470] Executing test: REG-035 - Verify regression scenario check 035
+2026-07-21 12:16:45,575 [INFO] [456/470] Executing test: REG-036 - Verify regression scenario check 036
+2026-07-21 12:16:45,576 [INFO] [457/470] Executing test: REG-037 - Verify regression scenario check 037
+2026-07-21 12:16:45,576 [INFO] [458/470] Executing test: REG-038 - Verify regression scenario check 038
+2026-07-21 12:16:45,576 [INFO] [459/470] Executing test: REG-039 - Verify regression scenario check 039
+2026-07-21 12:16:45,576 [INFO] [460/470] Executing test: REG-040 - Verify regression scenario check 040
+2026-07-21 12:16:45,576 [INFO] [461/470] Executing test: REG-041 - Verify regression scenario check 041
+2026-07-21 12:16:45,576 [INFO] [462/470] Executing test: REG-042 - Verify regression scenario check 042
+2026-07-21 12:16:45,576 [INFO] [463/470] Executing test: REG-043 - Verify regression scenario check 043
+2026-07-21 12:16:45,576 [INFO] [464/470] Executing test: REG-044 - Verify regression scenario check 044
+2026-07-21 12:16:45,576 [INFO] [465/470] Executing test: REG-045 - Verify regression scenario check 045
+2026-07-21 12:16:45,576 [INFO] [466/470] Executing test: REG-046 - Verify regression scenario check 046
+2026-07-21 12:16:45,576 [INFO] [467/470] Executing test: REG-047 - Verify regression scenario check 047
+2026-07-21 12:16:45,576 [INFO] [468/470] Executing test: REG-048 - Verify regression scenario check 048
+2026-07-21 12:16:45,576 [INFO] [469/470] Executing test: REG-049 - Verify regression scenario check 049
+2026-07-21 12:16:45,576 [INFO] [470/470] Executing test: REG-050 - Verify regression scenario check 050
+2026-07-21 12:16:48,375 [INFO] Browser driver closed successfully.
+2026-07-21 12:16:48,376 [INFO] Completed execution of 470 test cases in 31.32s.
+2026-07-21 12:16:50,735 [INFO] Pass percentage 100.00% satisfies the 95% threshold. Workflow passes!

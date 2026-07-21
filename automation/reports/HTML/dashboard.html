@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>E2E Automation Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #F4F8F6;
+            margin: 0;
+            padding: 24px;
+            color: #172B21;
+        }
+        .header {
+            background: linear-gradient(135deg, #10A866 0%, #087A4A 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(16, 168, 102, 0.15);
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 { margin: 0; font-size: 28px; font-weight: 800; }
+        .header p { margin: 8px 0 0 0; opacity: 0.9; font-size: 14px; }
+        .grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+        .panel {
+            background: white;
+            padding: 24px;
+            border-radius: 24px;
+            border: 1px solid #E7EEE9;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+        .panel h2 { margin-top: 0; font-size: 18px; font-weight: 800; margin-bottom: 20px; color: #087A4A; border-bottom: 2px solid #E8F8F0; padding-bottom: 10px; }
+        .metrics-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .metric-box {
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid #E7EEE9;
+        }
+        .metric-box .num { font-size: 32px; font-weight: 800; }
+        .metric-box .label { font-size: 11px; color: #809689; font-weight: 600; text-transform: uppercase; margin-top: 4px; }
+        .donut-chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            margin-bottom: 24px;
+        }
+        .donut-chart {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #10A866 0% 100.0%,
+                #FF3333 100.0% 100.0%,
+                #FFAA00 100.0% 100%
+            );
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .donut-chart::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+        }
+        .donut-center {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+        .donut-center .pct { font-size: 24px; font-weight: 800; color: #087A4A; }
+        .donut-center .lbl { font-size: 10px; color: #809689; text-transform: uppercase; }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>📊 Test Automation Executive Dashboard</h1>
+            <p>Target: http://localhost:8081/ | Timestamp: 2026-07-21 12:16:50</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.15); padding: 10px 20px; border-radius: 14px; font-weight: bold; font-size: 14px;">
+            PASSED (100.0%)
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="panel">
+            <h2>📦 Module Execution Trends & Pass Rates</h2>
+            
+        <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px;">
+                <span>📂 Authentication</span>
+                <span>40/40 (100.0%)</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #E7EEE9; border-radius: 4px; overflow: hidden;">
+                <div style="width: 100.0%; height: 100%; background: #10A866; border-radius: 4px;"></div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px;">
+                <span>📂 Authorization</span>
+                <span>40/40 (100.0%)</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #E7EEE9; border-radius: 4px; overflow: hidden;">
+                <div style="width: 100.0%; height: 100%; background: #10A866; border-radius: 4px;"></div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px;">
+                <span>📂 Navigation</span>
+                <span>30/30 (100.0%)</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #E7EEE9; border-radius: 4px; overflow: hidden;">
+                <div style="width: 100.0%; height: 100%; background: #10A866; border-radius: 4px;"></div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px;">
+                <span>📂 UI Validation</span>
+                <span>50/50 (100.0%)</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #E7EEE9; border-radius: 4px; overflow: hidden;">
+                <div style="width: 100.0%; height: 100%; background: #10A866; border-radius: 4px;"></div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px;">
+                <span>📂 Forms</span>
+                <span>50/50 (100.0%)</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #E7EEE9; border-radius: 4px; overflow: hidden;">
+                <div style="width: 100.0%; height: 100%; background: #10A866; border-radius: 4px;"></div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px;">
+                <span>📂 CRUD Operations</span>
+                <span>50/50 (100.0%)</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #E7EEE9; border-radius: 4px; overflow: hidden;">
+                <div style="width: 100.0%; height: 100%; background: #10A866; border-radius: 4px;"></div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px;">
+                <span>📂 Input Validation</span>
+                <span>40/40 (100.0%)</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #E7EEE9; border-radius: 4px; overflow: hidden;">
+                <div style="width: 100.0%; height: 100%; background: #10A866; border-radius: 4px;"></div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px;">
+                <span>📂 Error Handling</span>
+                <span>20/20 (100.0%)</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #E7EEE9; border-radius: 4px; overflow: hidden;">
+                <div style="width: 100.0%; height: 100%; background: #10A866; border-radius: 4px;"></div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px;">
+                <span>📂 Session Management</span>
+                <span>20/20 (100.0%)</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #E7EEE9; border-radius: 4px; overflow: hidden;">
+                <div style="width: 100.0%; height: 100%; background: #10A866; border-radius: 4px;"></div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px;">
+                <span>📂 File Upload</span>
+                <span>20/20 (100.0%)</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #E7EEE9; border-radius: 4px; overflow: hidden;">
+                <div style="width: 100.0%; height: 100%; background: #10A866; border-radius: 4px;"></div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px;">
+                <span>📂 Accessibility</span>
+                <span>20/20 (100.0%)</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #E7EEE9; border-radius: 4px; overflow: hidden;">
+                <div style="width: 100.0%; height: 100%; background: #10A866; border-radius: 4px;"></div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px;">
+                <span>📂 Responsive Design</span>
+                <span>20/20 (100.0%)</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #E7EEE9; border-radius: 4px; overflow: hidden;">
+                <div style="width: 100.0%; height: 100%; background: #10A866; border-radius: 4px;"></div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px;">
+                <span>📂 Performance Smoke Tests</span>
+                <span>20/20 (100.0%)</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #E7EEE9; border-radius: 4px; overflow: hidden;">
+                <div style="width: 100.0%; height: 100%; background: #10A866; border-radius: 4px;"></div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px;">
+                <span>📂 Regression</span>
+                <span>50/50 (100.0%)</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: #E7EEE9; border-radius: 4px; overflow: hidden;">
+                <div style="width: 100.0%; height: 100%; background: #10A866; border-radius: 4px;"></div>
+            </div>
+        </div>
+        
+        </div>
+        
+        <div class="panel">
+            <h2>📈 Test Summary</h2>
+            <div class="donut-chart-container">
+                <div class="donut-chart">
+                    <div class="donut-center">
+                        <div class="pct">100.0%</div>
+                        <div class="lbl">Passed</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="legend">
+                <div class="legend-item"><span class="dot" style="background:#10A866;"></span> Passed (470)</div>
+                <div class="legend-item"><span class="dot" style="background:#FF3333;"></span> Failed (0)</div>
+                <div class="legend-item"><span class="dot" style="background:#FFAA00;"></span> Skipped (0)</div>
+            </div>
+            
+            <div class="metrics-summary" style="margin-top: 24px;">
+                <div class="metric-box" style="background:#E8F8F0; border-color:#80CCA8;">
+                    <div class="num" style="color:#10A866;">470</div>
+                    <div class="label" style="color:#087A4A;">Passed</div>
+                </div>
+                <div class="metric-box" style="background:#FFF5F5; border-color:#FFAAAA;">
+                    <div class="num" style="color:#FF3333;">0</div>
+                    <div class="label" style="color:#AA2222;">Failed</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

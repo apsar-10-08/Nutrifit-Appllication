@@ -19,6 +19,8 @@ create table if not exists public.profiles (
   food_preference text check (food_preference in ('Vegetarian','Non-Vegetarian','Eggetarian','')) default '',
   workout_location text check (workout_location in ('Gym Workout','Home Workout','')) default '',
   preferred_language text check (preferred_language in ('en','ta')) default 'en',
+  reminders_json jsonb,
+  ai_history_json jsonb,
   avatar_url text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -186,6 +188,24 @@ create table if not exists public.cart_items (
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   unique(user_id, product_id)
+);
+
+create table if not exists public.addresses (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references public.profiles(id) on delete cascade,
+  full_name text not null,
+  mobile text not null,
+  house_no text not null,
+  street text not null,
+  landmark text,
+  city text not null,
+  district text not null,
+  state text not null,
+  pincode text not null,
+  instructions text,
+  is_default boolean not null default false,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
 );
 
 create table if not exists public.orders (

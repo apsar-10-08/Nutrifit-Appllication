@@ -1,0 +1,145 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter gen-l10n
+
+## exception
+
+ProcessException: ProcessException: `dart format` failed with exit code 65
+
+stdout:
+Formatted no files in 0.01 seconds.
+
+
+stderr:
+Could not format because the source could not be parsed:
+
+line 138, column 14 of c:/project/NutriFit_Flutter_Supabase/lib/l10n/app_localizations_ar.dart: 'continue' can't be used as an identifier because it's a keyword.
+    â•·
+138 â”‚   String get continue => 'Ø¹Ø±Ø¨Ù‰ continue';
+    â”‚              ^^^^^^^^
+    â•µ
+Could not format because the source could not be parsed:
+
+line 138, column 14 of c:/project/NutriFit_Flutter_Supabase/lib/l10n/app_localizations_en.dart: 'continue' can't be used as an identifier because it's a keyword.
+    â•·
+138 â”‚   String get continue => 'continue';
+    â”‚              ^^^^^^^^
+    â•µ
+Could not format because the source could not be parsed:
+
+line 138, column 14 of c:/project/NutriFit_Flutter_Supabase/lib/l10n/app_localizations_hi.dart: 'continue' can't be used as an identifier because it's a keyword.
+    â•·
+138 â”‚   String get continue => 'à¤¹à¤¿à¤‚à¤¦à¥€ continue';
+    â”‚              ^^^^^^^^
+    â•µ
+Could not format because the source could not be parsed:
+
+line 138, column 14 of c:/project/NutriFit_Flutter_Supabase/lib/l10n/app_localizations_kn.dart: 'continue' can't be used as an identifier because it's a keyword.
+    â•·
+138 â”‚   String get continue => 'à²•à²¨à³à²¨à²¡ continue';
+    â”‚              ^^^^^^^^
+    â•µ
+Could not format because the source could not be parsed:
+
+line 138, column 14 of c:/project/NutriFit_Flutter_Supabase/lib/l10n/app_localizations_ml.dart: 'continue' can't be used as an identifier because it's a keyword.
+    â•·
+138 â”‚   String get continue => 'à´®à´²à´¯à´¾à´³à´‚ continue';
+    â”‚              ^^^^^^^^
+    â•µ
+Could not format because the source could not be parsed:
+
+line 138, column 14 of c:/project/NutriFit_Flutter_Supabase/lib/l10n/app_localizations_ta.dart: 'continue' can't be used as an identifier because it's a keyword.
+    â•·
+138 â”‚   String get continue => 'à®¤à®®à®¿à®´à¯ continue';
+    â”‚              ^^^^^^^^
+    â•µ
+Could not format because the source could not be parsed:
+
+line 138, column 14 of c:/project/NutriFit_Flutter_Supabase/lib/l10n/app_localizations_te.dart: 'continue' can't be used as an identifier because it's a keyword.
+    â•·
+138 â”‚   String get continue => 'à°¤à±†à°²à±à°—à± continue';
+    â”‚              ^^^^^^^^
+    â•µ
+Could not format because the source could not be parsed:
+
+line 364, column 14 of c:/project/NutriFit_Flutter_Supabase/lib/l10n/app_localizations.dart: 'continue' can't be used as an identifier because it's a keyword.
+    â•·
+364 â”‚   String get continue;
+    â”‚              ^^^^^^^^
+    â•µ
+
+  Command: C:\flutter\bin\cache\dart-sdk\bin\dart.exe C:\flutter\bin\cache\dart-sdk\bin\dart.exe format C:\project\NutriFit_Flutter_Supabase\lib\l10n\app_localizations_ar.dart C:\project\NutriFit_Flutter_Supabase\lib\l10n\app_localizations_en.dart C:\project\NutriFit_Flutter_Supabase\lib\l10n\app_localizations_hi.dart C:\project\NutriFit_Flutter_Supabase\lib\l10n\app_localizations_kn.dart C:\project\NutriFit_Flutter_Supabase\lib\l10n\app_localizations_ml.dart C:\project\NutriFit_Flutter_Supabase\lib\l10n\app_localizations_ta.dart C:\project\NutriFit_Flutter_Supabase\lib\l10n\app_localizations_te.dart C:\project\NutriFit_Flutter_Supabase\lib\l10n\app_localizations.dart
+
+```
+#0      generateLocalizations (package:flutter_tools/src/localizations/gen_l10n.dart:96:7)
+<asynchronous suspension>
+#1      GenerateLocalizationsCommand.runCommand (package:flutter_tools/src/commands/generate_localizations.dart:263:5)
+<asynchronous suspension>
+#2      FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:1630:27)
+<asynchronous suspension>
+#3      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+<asynchronous suspension>
+#4      CommandRunner.runCommand (package:args/command_runner.dart:212:13)
+<asynchronous suspension>
+#5      FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:496:9)
+<asynchronous suspension>
+#6      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+<asynchronous suspension>
+#7      FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:431:5)
+<asynchronous suspension>
+#8      FlutterCommandRunner.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:307:33)
+<asynchronous suspension>
+#9      run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:104:11)
+<asynchronous suspension>
+#10     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+<asynchronous suspension>
+#11     main (package:flutter_tools/executable.dart:103:3)
+<asynchronous suspension>
+```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel stable, 3.44.1, on Microsoft Windows [Version 10.0.26200.8655], locale en-IN) [319ms]
+    • Flutter version 3.44.1 on channel stable at C:\flutter
+    • Upstream repository https://github.com/flutter/flutter.git
+    • Framework revision 924134a44c (4 weeks ago), 2026-05-29 12:13:22 -0400
+    • Engine revision c416acfeb8
+    • Dart version 3.12.1
+    • DevTools version 2.57.0
+    • Feature flags: enable-web, enable-linux-desktop, enable-macos-desktop, enable-windows-desktop, enable-android, enable-ios, cli-animations, enable-native-assets, enable-swift-package-manager, omit-legacy-version-file, enable-lldb-debugging, enable-uiscene-migration
+
+[✓] Windows Version (11 Home Single Language 64-bit, 25H2, 2009) [3.1s]
+
+[!] Android toolchain - develop for Android devices (Android SDK version 36.1.0) [805ms]
+    • Android SDK at C:\Users\apsar\AppData\Local\Android\sdk
+    • Emulator version 36.5.11.0 (build_id 15261927) (CL:N/A)
+    ✗ cmdline-tools component is missing.
+      Try installing or updating Android Studio.
+      Alternatively, download the tools from https://developer.android.com/studio#command-line-tools-only and make sure to set the ANDROID_HOME environment variable.
+      See https://developer.android.com/studio/command-line for more details.
+    ✗ Android license status unknown.
+      Run `flutter doctor --android-licenses` to accept the SDK licenses.
+      See https://flutter.dev/to/windows-android-setup for more details.
+
+[✓] Chrome - develop for the web [13ms]
+    • Chrome at C:\Program Files\Google\Chrome\Application\chrome.exe
+
+[✗] Visual Studio - develop Windows apps [11ms]
+    ✗ Visual Studio not installed; this is necessary to develop Windows apps.
+      Download at https://visualstudio.microsoft.com/downloads/.
+      Please install the "Desktop development with C++" workload, including all of its default components
+
+[✓] Connected device (3 available) [409ms]
+    • Windows (desktop) • windows • windows-x64    • Microsoft Windows [Version 10.0.26200.8655]
+    • Chrome (web)      • chrome  • web-javascript • Google Chrome 149.0.7827.155
+    • Edge (web)        • edge    • web-javascript • Microsoft Edge 149.0.4022.80
+
+[✓] Network resources [1,067ms]
+    • All expected network resources are available.
+
+! Doctor found issues in 2 categories.
+```
