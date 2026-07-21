@@ -30,8 +30,8 @@ def run_test():
 
     driver = None
     try:
-        print("Connecting to local Appium server at http://127.0.0.1:4723/...")
-        driver = webdriver.Remote('http://127.0.0.1:4723/', options=options)
+        print("Connecting to local Appium server at http://127.0.0.1:4723/wd/hub...")
+        driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', options=options)
         log_step(ws, 'TC001', 'App Launch', 'Launch the app successfully', 'App opens without crashing', 'App opened successfully', 'PASS')
         
         def wait_and_click(selector, by=AppiumBy.XPATH, timeout=10):

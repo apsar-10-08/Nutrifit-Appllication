@@ -72,8 +72,8 @@ jobs:
           arch: x86_64
           profile: pixel_6
           script: |
-            # Start Appium server in background
-            appium &
+            # Start Appium server in background with base path enabled
+            appium --use-basepath &
             
             # Wait for Appium to start
             sleep 10
