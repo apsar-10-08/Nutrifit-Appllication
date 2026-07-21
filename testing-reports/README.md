@@ -1,55 +1,44 @@
 # NutriFit QA Testing & Report Documentation
 
-Welcome to the **NutriFit QA Testing and Automation System** documentation. This directory contains the complete quality assurance test case report workbook, summary analysis, execution guidelines, and automated report generation scripts.
+Welcome to the **NutriFit QA Testing and Automation System** documentation. This directory contains all generated Excel test case workbooks, executive summaries, and execution manuals.
 
 ---
 
-## 📁 Directory Contents
+## 📁 Directory Contents & 6 Category Excel Reports
 
 ```
 testing-reports/
-├── NutriFit_360_Test_Cases.xlsx  # 360-Test Case Excel Workbook (9 Sheets)
-├── test-summary.md               # Executive Test Case Breakdown & Coverage Matrix
-├── README.md                     # Technical Documentation (This file)
-└── evidence/                     # Execution Screenshots & Evidence Artifacts (CI Generated)
+├── Selenium_Web_Test_Cases.xlsx              # 350 Selenium Web UI Test Cases
+├── Appium_Android_Test_Cases.xlsx            # 350 Appium Android E2E Test Cases
+├── E2E_Test_Cases.xlsx                        # 350 End-to-End Workflow Test Cases
+├── Functional_Test_Cases.xlsx                 # 350 Functional & Unit Test Cases
+├── Load_Test_Cases.xlsx                       # 350 Load & Performance Test Cases
+├── Safe_Code_and_Configuration_Checks.xlsx   # 350 Safe Security & Config Test Cases
+├── NutriFit_360_Test_Cases.xlsx              # 360 Combined Master Test Cases
+├── category-reports-summary.md                # 2,100 Test Cases Category Summary
+├── test-summary.md                            # Executive QA Report
+└── README.md                                  # Documentation Guide (This file)
 ```
 
 ---
 
-## 📊 Excel Workbook Architecture (`NutriFit_360_Test_Cases.xlsx`)
+## 📊 Summary of Category Excel Workbooks (Total 2,100 Test Cases)
 
-The generated Excel workbook contains **9 structured worksheets**:
+Each file contains **350 unique test cases** defaulting to status **`Not Executed`** and covers all 22 NutriFit modules across 14 standard columns:
 
-1. **`Test Summary`**: High-level executive dashboard featuring live Excel formula metrics (`COUNTIF`, `COUNTIFS`), KPI cards, Testing Type Breakdown table, and 37 Module Coverage table.
-2. **`Selenium Tests`**: **100** structured test cases (`SEL-WEB-001` to `SEL-WEB-100`) covering Selenium Web UI, responsive layouts, forms, and browser interaction.
-3. **`Appium E2E Tests`**: **90** structured test cases (`APP-AND-001` to `APP-AND-090`) covering native Android gestures, hardware back navigation, biometrics, dark mode, and permissions.
-4. **`Flutter Tests`**: **60** structured test cases (`FLU-TST-001` to `FLU-TST-060`) covering Dart unit logic, model JSON parsing, Provider state management, and WidgetTester rendering.
-5. **`Functional Tests`**: **50** structured test cases (`FUN-INT-001` to `FUN-INT-050`) covering end-to-end user workflows, multi-screen state sync, and Supabase database integration.
-6. **`Load Tests`**: **30** structured test cases (`PER-LOD-001` to `PER-LOD-030`) covering REST API throughput, 60 FPS UI rendering, memory stability, and database latency under load.
-7. **`Safe Vulnerability Checks`**: **30** structured test cases (`SEC-VUL-001` to `SEC-VUL-030`) covering passive security audits, secret isolation, OWASP compliance, and safe SQLi/XSS checks.
-8. **`Failed Tests`**: Dedicated failure tracking view for instant review of failed test cases during execution runs.
-9. **`Execution Evidence`**: Evidence log matrix linking Test Case IDs to screenshot file paths, execution timestamps, and CI artifact packages.
+- `Test Case ID` | `Module` | `Test Scenario` | `Test Title` | `Objective` | `Preconditions` | `Test Steps` | `Test Data` | `Expected Result` | `Actual Result` | `Priority` | `Severity` | `Status` | `Remarks`
 
 ---
 
-## 🛠️ How to Regenerate or Update the Report
+## 🛠️ How to Regenerate Category Workbooks
 
-To generate or update `NutriFit_360_Test_Cases.xlsx` programmatically:
+To generate or update all 6 category Excel files programmatically:
 
-1. Ensure Python 3.8+ and `openpyxl` are installed:
-   ```bash
-   pip install openpyxl
-   ```
+```bash
+python generate_category_excel_reports.py
+python verify_category_excel_reports.py
+```
 
-2. Run the generator script from the project root directory:
-   ```bash
-   python generate_360_test_cases.py
-   ```
-
-3. Validate the generated file using the verification script:
-   ```bash
-   python verify_360_test_cases.py
-   ```
 
 ---
 
