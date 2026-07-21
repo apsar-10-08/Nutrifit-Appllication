@@ -37,6 +37,15 @@ jobs:
       - name: Stage 4: Static Analysis
         run: flutter analyze --no-fatal-infos
 
+      - name: Create .env file
+        run: |
+          if [ -f .env.example ]; then
+            cp .env.example .env
+          else
+            echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" > .env
+            echo "SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
+          fi
+
       - name: Stage 5: Build Web Application
         run: flutter build web --base-href "/${{ github.event.repository.name }}/" --release
 
