@@ -142,6 +142,17 @@ class Profile {
     age: age ?? this.age, height: height ?? this.height, weight: weight ?? this.weight, food: food ?? this.food, location: location ?? this.location, lang: lang ?? this.lang, onboardingCompleted: onboardingCompleted ?? this.onboardingCompleted);
   Map<String,dynamic> toJson() => {'id': id, 'full_name': name, 'email': email, 'goal': goal, 'gender': gender, 'age': age, 'height_cm': height, 'weight_kg': weight, 'food_preference': food, 'workout_location': location, 'preferred_language': lang, 'onboarding_completed': onboardingCompleted};
   Map<String,dynamic> profileJson(String uid) => {'id': uid, 'full_name': name, 'email': email, 'gender': gender, 'age': age, 'height_cm': height, 'weight_kg': weight, 'food_preference': food, 'workout_location': location, 'preferred_language': lang, 'onboarding_completed': onboardingCompleted};
+  double get bmi {
+    if (height == null || weight == null || height! <= 0 || weight! <= 0) return 0.0;
+    final hM = height! / 100.0;
+    return weight! / (hM * hM);
+  }
+
+  int get recommendedWaterGoal {
+    if (weight == null || weight! <= 0) return 2000;
+    return (weight! * 35).round();
+  }
+
   factory Profile.from(Map<String,dynamic> j) => Profile(id:(j['id']??'demo-user').toString(), name:(j['full_name']??'').toString(), email:(j['email']??'').toString(), goal:(j['goal']??'').toString(), gender:(j['gender']??'').toString(), age:int.tryParse('${j['age']??''}'), height:double.tryParse('${j['height_cm']??''}'), weight:double.tryParse('${j['weight_kg']??''}'), food:(j['food_preference']??'').toString(), location:(j['workout_location']??'').toString(), lang:(j['preferred_language']??'en').toString(), onboardingCompleted: j['onboarding_completed'] == true);
 }
 
