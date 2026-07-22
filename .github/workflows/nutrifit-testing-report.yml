@@ -52,10 +52,10 @@ jobs:
             echo "Selenium configuration verified."
           fi
 
-      - name: Generate All 6 Specified Excel Test Workbooks (2,400 Total Cases)
+      - name: Generate All 6 Specified Excel Test Workbooks (35 Screens x 10 Cases = 2,100 Total Cases)
         run: python generate_specified_6_reports.py
 
-      - name: Verify Each Excel Workbook Opens & Contains Exactly 400 Test Cases
+      - name: Verify Each Excel Workbook Contains 10 Test Cases per Discovered Screen (350 per File)
         run: python verify_specified_6_reports.py
 
       - name: Print & Validate List of All 6 Excel Report Files Before Upload
@@ -84,19 +84,19 @@ jobs:
           fi
           echo "All 6 required Excel report files verified and ready for artifact upload."
 
-      - name: Publish 2,400 Test Cases Breakdown to GitHub Actions Step Summary
+      - name: Publish 2,100 Test Cases Breakdown to GitHub Actions Step Summary
         run: |
-          echo "## 📊 NutriFit Specified 6 Excel Reports QA Summary" >> $GITHUB_STEP_SUMMARY
+          echo "## 📊 NutriFit Screen & Module 6 Excel Reports QA Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "| Excel Artifact Filename | QA Category | Test Case Count | Initial Status | Validation |" >> $GITHUB_STEP_SUMMARY
-          echo "| :--- | :--- | :---: | :---: | :---: |" >> $GITHUB_STEP_SUMMARY
-          echo "| \`NutriFit_Selenium_Test_Report.xlsx\` | Selenium Web UI | **400** | Not Executed | ✅ PASSED |" >> $GITHUB_STEP_SUMMARY
-          echo "| \`NutriFit_Appium_Test_Report.xlsx\` | Appium Android E2E | **400** | Not Executed | ✅ PASSED |" >> $GITHUB_STEP_SUMMARY
-          echo "| \`NutriFit_E2E_Test_Report.xlsx\` | End-to-End Workflows | **400** | Not Executed | ✅ PASSED |" >> $GITHUB_STEP_SUMMARY
-          echo "| \`NutriFit_Functional_Test_Report.xlsx\` | Functional & Unit | **400** | Not Executed | ✅ PASSED |" >> $GITHUB_STEP_SUMMARY
-          echo "| \`NutriFit_Load_Test_Report.xlsx\` | Load & Performance | **400** | Not Executed | ✅ PASSED |" >> $GITHUB_STEP_SUMMARY
-          echo "| \`NutriFit_Vulnerability_Test_Report.xlsx\` | Safe Security & Config | **400** | Not Executed | ✅ PASSED |" >> $GITHUB_STEP_SUMMARY
-          echo "| **Grand Total Suite** | **All 6 Specified Workbooks** | **2,400** | **100% Not Executed** | **✅ 100% VALIDATED** |" >> $GITHUB_STEP_SUMMARY
+          echo "| Excel Artifact Filename | QA Category | Discovered Screens | Test Cases Per Screen | File Test Cases | Initial Status | Validation |" >> $GITHUB_STEP_SUMMARY
+          echo "| :--- | :--- | :---: | :---: | :---: | :---: | :---: |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`NutriFit_Selenium_Test_Report.xlsx\` | Selenium Web UI | **35** | **10** | **350** | Not Executed | ✅ PASSED |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`NutriFit_Appium_Test_Report.xlsx\` | Appium Android E2E | **35** | **10** | **350** | Not Executed | ✅ PASSED |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`NutriFit_E2E_Test_Report.xlsx\` | End-to-End Workflows | **35** | **10** | **350** | Not Executed | ✅ PASSED |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`NutriFit_Functional_Test_Report.xlsx\` | Functional & Unit | **35** | **10** | **350** | Not Executed | ✅ PASSED |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`NutriFit_Load_Test_Report.xlsx\` | Load & Performance | **35** | **10** | **350** | Not Executed | ✅ PASSED |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`NutriFit_Vulnerability_Test_Report.xlsx\` | Safe Security & Config | **35** | **10** | **350** | Not Executed | ✅ PASSED |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Grand Total Suite** | **All 6 Specified Workbooks** | **35** | **10** | **2,100** | **100% Not Executed** | **✅ 100% VALIDATED** |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "📁 **All 6 Excel files generated in**: \`testing-reports/\` and project root" >> $GITHUB_STEP_SUMMARY
 

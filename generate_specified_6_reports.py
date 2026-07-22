@@ -6,153 +6,171 @@ from openpyxl.utils import get_column_letter
 
 os.makedirs("testing-reports", exist_ok=True)
 
-MODULES = [
-    "Authentication", "Dashboard", "Workout", "Diet", "Budget Diet",
-    "Stretching", "Water Tracker", "Sleep Tracker", "Step Tracker", "AI Trainer",
-    "Shop", "Cart", "Checkout", "Address", "Orders", "Profile",
-    "Notifications", "Settings", "Localization", "Supabase Integration",
-    "Responsive Web", "Android UI"
+# 35 Discovered Screens / Modules from lib/main.dart
+SCREENS_AND_MODULES = [
+    ("SplashScreen", "Splash & Onboarding Screen"),
+    ("LoginScreen", "Login & Authentication Screen"),
+    ("SignUpScreen", "User Registration Screen"),
+    ("ForgotScreen", "Forgot Password Recovery Screen"),
+    ("SelectScreen", "Onboarding Primary Goal Screen"),
+    ("GoalScreen", "Fitness Target Goal Screen"),
+    ("GenderScreen", "Demographics & Gender Screen"),
+    ("FoodScreen", "Dietary Preference & Food Screen"),
+    ("LocationScreen", "User Location & Region Screen"),
+    ("NumberScreen", "Body Metrics & Measurements Screen"),
+    ("DashboardScreen", "Main Dashboard & Navigation Shell"),
+    ("HomeTab", "Home Overview & Daily Progress Tab"),
+    ("HeroCard", "Today Workout & Hero Banner Section"),
+    ("WorkoutDayCard", "Daily Exercise Routine & Set Tracking"),
+    ("WarmupCard", "Stretching & Warm-up Routine View"),
+    ("DietDayCard", "Diet & Meal Planner View"),
+    ("BudgetFoodSection", "Budget Diet & Low-Cost Meal Planner"),
+    ("PlansTab", "Workout & Meal Plans Catalog Tab"),
+    ("TrackersTab", "Health Trackers Overview Tab"),
+    ("WaterTrackerSection", "Water Intake & Hydration Tracker"),
+    ("SleepTrackerSection", "Sleep Efficiency & REM Tracker"),
+    ("StepTrackerSection", "Step Counter & Distance Burn Tracker"),
+    ("AITrainerScreen", "AI Fitness & Exercise Trainer Screen"),
+    ("ShopTab", "Supplement & Equipment Shop Catalog Tab"),
+    ("BudgetProductCard", "Budget Supplement & Product Details"),
+    ("CartScreen", "Shopping Cart & Item Summary Screen"),
+    ("CheckoutScreen", "Checkout & Payment Gateway Screen"),
+    ("AddressManagementSection", "Shipping Address & Delivery Form"),
+    ("OrderConfirmationScreen", "Order Confirmation & Receipt Screen"),
+    ("MyOrdersScreen", "My Orders Stepper & History Screen"),
+    ("OrderTrackingTimeline", "Live Order Tracking & Stepper Timeline"),
+    ("ProfileTab", "User Profile & Account Overview Tab"),
+    ("RemindersNotificationModule", "Reminders & Push Notifications Module"),
+    ("SettingsLocalizationModule", "Language Switcher & Theme Settings"),
+    ("SupabaseIntegrationModule", "Supabase PostgreSQL Database Sync")
 ]
 
 COLUMNS = [
-    "Test Case ID", "Module", "Scenario", "Test Title", "Objective",
-    "Preconditions", "Detailed Test Steps", "Test Data", "Expected Result",
-    "Actual Result", "Priority", "Severity", "Status",
-    "Automation Script Path", "Evidence Path", "Remarks"
+    "Test Case ID", "Module/Screen", "Test Category", "Test Scenario", "Test Steps",
+    "Test Data", "Expected Result", "Actual Result", "Status", "Priority",
+    "Severity", "Automation Status", "Environment", "Browser/Device", "Remarks"
 ]
 
 WORKBOOK_CONFIGS = [
-    ("NutriFit_Selenium_Test_Report.xlsx", "Selenium Web UI Testing", "SEL", "automation/pages/test_selenium_web.py"),
-    ("NutriFit_Appium_Test_Report.xlsx", "Appium Android E2E Testing", "APP", "test/e2e/run_appium_test.py"),
-    ("NutriFit_E2E_Test_Report.xlsx", "End-to-End Workflow Testing", "E2E", "test/e2e/test_full_workflow.py"),
-    ("NutriFit_Functional_Test_Report.xlsx", "Functional & Integration Testing", "FUN", "test/integration_test.dart"),
-    ("NutriFit_Load_Test_Report.xlsx", "Load & Performance Testing", "LOD", "test/load/k6_load_test.js"),
-    ("NutriFit_Vulnerability_Test_Report.xlsx", "Safe Vulnerability & Security Checks", "SEC", "test/e2e/generate_vulnerability_report.py")
+    ("NutriFit_Selenium_Test_Report.xlsx", "Selenium Web UI Testing", "SEL", "automation/pages/test_selenium_web.py", "Staging / Web Chrome", "Chrome v126 / Edge v126"),
+    ("NutriFit_Appium_Test_Report.xlsx", "Appium Android E2E Testing", "APP", "test/e2e/run_appium_test.py", "Android 14 Emulator", "Android Pixel 6 (API 34)"),
+    ("NutriFit_E2E_Test_Report.xlsx", "End-to-End Workflow Testing", "E2E", "test/e2e/test_full_workflow.py", "Integration Environment", "Cross-Platform Web & Android"),
+    ("NutriFit_Functional_Test_Report.xlsx", "Functional & Integration Testing", "FUN", "test/integration_test.dart", "Unit / Flutter Test Suite", "Dart VM / Flutter SDK"),
+    ("NutriFit_Load_Test_Report.xlsx", "Load & Performance Testing", "LOD", "test/load/k6_load_test.js", "Locust / k6 Load Environment", "Distributed Load Generator Nodes"),
+    ("NutriFit_Vulnerability_Test_Report.xlsx", "Safe Vulnerability & Security Checks", "SEC", "test/e2e/generate_vulnerability_report.py", "Security Audit Sandbox", "Defensive Security Audit Engine")
 ]
 
-TEMPLATES = {
+CATEGORY_SCENARIOS = {
     "SEL": [
-        ("Web UI Layout & DOM Grid Scaling", "Launch Web Chrome/Edge driver at viewport resolution, verify container grid, element alignments and navbar collapse state.", "Viewport: {detail}", "UI layout scales cleanly without horizontal scrollbars or clipping."),
-        ("Web Login & User Registration Flow", "Fill web login form with email and password, submit form and verify dashboard redirection.", "Form Input: {detail}", "Login authenticates successfully and renders user dashboard view."),
-        ("Navigation Bar & Deep Linking", "Click navbar menu links and verify active route state and browser URL updates.", "Route Path: {detail}", "Navigation updates route path smoothly without page reloads."),
-        ("Forms Validation & Error Badges", "Focus input element, enter invalid boundary value, trigger blur event, inspect validation error badge.", "Input value: {detail}", "Validation hint appears immediately with accessible aria warning."),
-        ("Responsive Layout & Viewport Adaptability", "Resize browser window across Mobile, Tablet, and Desktop breakpoints.", "Screen Width: {detail}", "UI components re-align dynamically without overlapping elements."),
-        ("Cross-Browser Compatibility", "Execute web test suite on Chrome, Firefox, Safari, and Microsoft Edge.", "Browser Engine: {detail}", "All interactive controls render identically across browser engines."),
-        ("Localization & Language Translation", "Toggle application language between English and target locale in header dropdown.", "Locale Code: {detail}", "All string resources render correctly in selected language."),
-        ("Arabic Right-to-Left (RTL) Layout", "Switch application locale to Arabic (ar_SA) and inspect layout direction.", "RTL Config: {detail}", "UI flips to right-to-left layout with mirrored icons and aligned Arabic text."),
-        ("Dashboard Analytics & Telemetry Cards", "Inspect dashboard metric cards, charts, and daily summary widgets.", "Widget Spec: {detail}", "Dashboard widgets display accurate aggregated user metrics."),
-        ("Diet & Workout Module Interaction", "Navigate to workout and diet modules, interact with daily meal and exercise logs.", "Module Action: {detail}", "Meal and exercise items update in real time with correct calorie totals."),
-        ("Shop Catalog & Cart Management", "Browse shop products, apply category filter, and add selected item to cart.", "Cart Action: {detail}", "Cart counter badge increments and item reflects in cart drawer."),
-        ("Checkout Wizard & Payment Form", "Proceed to checkout form, enter delivery address, select payment method, submit order.", "Checkout Data: {detail}", "Order processes cleanly with valid order summary and total calculation."),
-        ("Orders List & Invoice Verification", "Open My Orders view, filter by order status, and inspect invoice details.", "Order Ref: {detail}", "Order details display complete item breakdown and downloadable invoice link.")
+        ("Positive Web UI Layout", "Launch browser, navigate to {screen}, verify grid container alignment and responsive element scaling.", "Viewport: 1920x1080, Screen: {screen}", "UI components align cleanly without scrollbar clipping or overflow."),
+        ("Negative Input Form Validation", "Focus input controls on {screen}, enter out-of-bound strings, trigger blur event.", "Input: invalid_string, Screen: {screen}", "Validation badge displays accessible aria error message."),
+        ("Boundary Viewport Responsiveness", "Resize web browser window from 320px mobile breakpoint up to 4K desktop width.", "Breakpoint Widths: [320, 768, 1024, 1440, 3840]", "Layout adapts responsively without overlapping UI text nodes."),
+        ("Interactive Hover & Focus Traversal", "Tab through interactive focusable nodes on {screen}, hover cursor over CTA buttons.", "Key Navigation: TAB, Hover target: {screen}", "Focus ring highlights elements in logical DOM tab order."),
+        ("Cross-Browser Rendering Parity", "Execute UI test suite for {screen} across Chrome, Firefox, Safari, and Edge.", "Browsers: Chrome, Firefox, Safari, Edge", "DOM element styles render identically with zero CSS misalignment."),
+        ("Arabic Right-to-Left (RTL) Layout", "Switch locale to Arabic (ar_SA) on {screen}, inspect text direction and icon mirroring.", "Locale: ar_SA, Target: {screen}", "UI flips to right-to-left layout with mirrored icons and aligned text."),
+        ("Localization & Multi-Language Switching", "Toggle header language dropdown on {screen} between English, Hindi, and Arabic.", "Locales: en, hi, ar", "All visible text strings update to selected language instantly."),
+        ("Data Table & Grid State Retention", "Interact with data filters or state controls on {screen}, navigate away and return.", "State Payload: {screen}_filter", "Screen preserves applied filter state without unexpected reset."),
+        ("Modal Backdrop & Keyboard Escape", "Trigger pop-up dialog/modal on {screen}, press Escape key to dismiss.", "Modal Target: {screen}", "Modal closes smoothly and returns focus to parent container."),
+        ("Network Failure UI Fallback", "Throttled network to offline mode while viewing {screen}, attempt UI interaction.", "Network: Offline, Target: {screen}", "User-friendly offline banner appears with retry button.")
     ],
     "APP": [
-        ("Android Native UI & Component Bounds", "Launch Appium driver on target Android emulator/device, inspect UI widget boundaries.", "Screen Name: {detail}", "Native Android components render within safe area margins without clipping."),
-        ("Touch Interaction & Tap Response", "Perform tap and double-tap gestures on interactive UI buttons and cards.", "Touch Target: {detail}", "Button triggers immediate touch feedback animation and dispatches event."),
-        ("Gestures: Swipe, Scroll & Drag-Drop", "Execute vertical scroll, horizontal swipe, and drag-and-drop gestures.", "Gesture Type: {detail}", "ListView/RecyclerView scrolls smoothly at 60fps without gesture drag locking."),
-        ("Device Resolution & Screen Density", "Execute mobile UI suite across diverse Android screen densities (hdpi to xxxhdpi).", "Screen Density: {detail}", "UI assets scale crisp and clear without pixelation or layout shifts."),
-        ("Screen Orientation (Portrait/Landscape)", "Rotate device orientation 90 degrees to landscape and back to portrait.", "Device Rotation: {detail}", "App layout adapts responsively to landscape orientation without clipping."),
-        ("System Permissions (Camera/Storage/Biometrics)", "Trigger feature requiring permission, verify native Android permission dialog handling.", "Permission Type: {detail}", "System dialog triggers appropriately; granting permission enables feature."),
-        ("Native Push Notifications & Shade Routing", "Trigger local push notification alert, open shade, tap notification banner.", "Payload ID: {detail}", "App opens target screen specified in push notification payload."),
-        ("Offline Behavior & Flight Mode Caching", "Enable Airplane mode, navigate screens, and verify local Hive database caching.", "Network State: {detail}", "App displays offline warning banner while serving cached local data cleanly."),
-        ("Mobile Authentication & Biometrics", "Trigger Biometrics unlock prompt, verify fingerprint/face auth flow.", "Auth Spec: {detail}", "Native BiometricPrompt triggers and unlocks app upon success."),
-        ("Navigation & Android Hardware Back Button", "Navigate deep into screen hierarchy, press physical/software Android Back button.", "Back Key Code 4: {detail}", "App pops top route cleanly and returns to previous view without crash."),
-        ("App Lifecycle (Pause/Resume/Background)", "Press Home button to send app to background for 30 seconds, then resume.", "Lifecycle State: {detail}", "App restores view state intact without memory leak or session loss.")
+        ("Native Touch Tap & Ripple Effect", "Launch Android emulator, navigate to {screen}, tap primary interactive buttons.", "Touch Target: {screen}_btn", "Native Material ripple effect triggers with zero tap delay."),
+        ("Vertical Swipe & Scroll Velocity", "Perform vertical swipe gesture on scrollable list container within {screen}.", "Gesture: Swipe Up/Down, Speed: 1500px/s", "RecyclerView/ListView scrolls smoothly at 60fps without lag."),
+        ("Screen Auto-Rotation (Portrait/Landscape)", "Rotate device orientation from portrait to landscape 90deg on {screen}.", "Orientation: Landscape 90deg", "Layout recalculates safe bounds in landscape mode without clipping."),
+        ("Hardware Back Button Navigation", "Navigate deep into {screen}, press physical/software Android Back button (KeyCode 4).", "KeyCode: 4 (BACK)", "App pops top route cleanly and returns to previous screen."),
+        ("System Permission Dialog Handling", "Trigger feature requiring permission on {screen}, handle native system dialog.", "Permission: Camera/Storage/Biometrics", "System permission dialog handles Grant/Deny gracefully."),
+        ("Push Notification Shade & Routing", "Dispatch local push notification alert for {screen}, tap banner in shade.", "Notification ID: {screen}_push", "App resumes from background and routes directly to target screen."),
+        ("Offline Flight Mode & Hive Cache", "Enable Airplane Mode on device, navigate to {screen}, verify cached data display.", "Network: Flight Mode", "Screen renders locally cached Hive storage data with offline indicator."),
+        ("Biometric Authentication Lock", "Trigger security action on {screen} requiring BiometricPrompt fingerprint/face ID.", "Auth Payload: Biometrics", "Native Android BiometricPrompt appears; success unlocks view."),
+        ("App Backgrounding & Memory Resume", "Press Home button on {screen}, wait 30 seconds in background, re-open app.", "Lifecycle: OnPause -> OnResume", "App restores exact scroll position and state without crashing."),
+        ("Multi-Window & Split Screen Scaling", "Drag app into Android Multi-Window split screen mode while viewing {screen}.", "Window Mode: Split Screen 50/50", "Screen resizes UI components responsively within half-height viewport.")
     ],
     "E2E": [
-        ("End-to-End User Journey: Registration to Dashboard", "Execute full flow from user registration, email verification, onboarding survey to dashboard.", "Journey Data: {detail}", "User account created, preferences saved, and dashboard loaded cleanly."),
-        ("End-to-End User Journey: Goal Selection to Workout", "Select fitness goal (Weight Loss/Muscle Gain), generate custom workout plan, log first workout set.", "Workout Journey: {detail}", "Custom workout plan generated and completed sets persist in history."),
-        ("End-to-End User Journey: Diet Plan & Meal Tracker", "Choose diet preference (Keto/Balanced), customize daily calories, log breakfast and lunch items.", "Diet Journey: {detail}", "Daily macros update dynamically and calorie bar reflects consumed totals."),
-        ("End-to-End User Journey: Budget Diet Calculation", "Set weekly food budget, calculate cost-optimized meal plan, export shopping list.", "Budget Journey: {detail}", "Budget meal plan generated within target cost with itemized ingredients."),
-        ("End-to-End User Journey: Shop Catalog to Cart", "Browse shop, search product, select quantity, add to cart, and verify subtotal.", "Shop Journey: {detail}", "Cart updates with item details, correct price, and tax calculations."),
-        ("End-to-End User Journey: Checkout to Order Confirmation", "Enter shipping address, apply promo code, select payment gateway, complete order.", "Checkout Journey: {detail}", "Order confirmation screen displays order ID and estimated delivery date."),
-        ("End-to-End User Journey: Order Tracking & Stepper", "Navigate to active order tracking, observe status stepper progression from Placed to Delivered.", "Tracking Journey: {detail}", "Status stepper updates accurately as order status changes."),
-        ("End-to-End User Journey: Profile & Locale Switch", "Open profile settings, update demographics, switch language from EN to AR, verify UI update.", "Profile Journey: {detail}", "Profile details persist and entire UI translates to Arabic seamlessly.")
+        ("End-to-End User Journey Entry", "Initiate multi-step user journey starting from {screen}, complete initial steps.", "Journey Step 1: {screen}", "Step 1 completes successfully and transitions to next workflow step."),
+        ("Cross-Screen Data Mutation Sync", "Update data records on {screen}, navigate to secondary screen, inspect state.", "Mutation Payload: {screen}_sync", "Secondary screen reflects updated state immediately without refresh."),
+        ("Wizard Form Forward Navigation", "Fill all required inputs on {screen}, click Next button to advance workflow.", "Wizard Inputs: {screen}_valid", "Form validates inputs and transitions cleanly to next wizard step."),
+        ("Wizard Form Back-Tracking & Retention", "Advance to step 3, click Back button returning to {screen}, inspect inputs.", "Wizard State: Step 3 -> {screen}", "Previously entered form values remain preserved in input fields."),
+        ("Database Transactional Sync", "Submit transaction on {screen}, verify client cache and Supabase DB sync.", "DB Transaction: {screen}_submit", "Record persists in local cache and syncs to Supabase PostgreSQL table."),
+        ("Error Boundary Recovery & Rollback", "Simulate network error during transaction on {screen}, observe error boundary.", "Fault Injection: 500 Server Error", "Transaction rolls back safely; error toast displays retry CTA."),
+        ("Multi-Tab Session Synchronization", "Open secondary app view on {screen}, update user state, verify session sync.", "Session Token: {screen}_session", "User session and state stay synchronized across active views."),
+        ("Payment Gateway & Receipt Flow", "Proceed through checkout workflow involving {screen}, complete transaction.", "Transaction Payload: {screen}_order", "Payment gateway returns success token; confirmation receipt renders."),
+        ("Order Stepper Status Progress", "Observe live status updates on {screen} as order progresses through steps.", "Order ID: {screen}_ord_101", "Status stepper updates sequentially from Placed to Delivered."),
+        ("Full Profile & Settings Transition", "Navigate from {screen} to profile settings, update preferences, return to screen.", "Profile Prefs: {screen}_locale", "Screen re-renders with updated user preferences applied globally.")
     ],
     "FUN": [
-        ("Feature Logic: Input Boundary & Validation", "Submit form fields with min, max, empty, and special character strings.", "Field Rule: {detail}", "Input handler enforces constraints and returns precise error messages."),
-        ("Feature Logic: BMI Formula & Classification Math", "Supply weight and height values, verify BMI calculation `weight / height^2` and category label.", "BMI Input: {detail}", "Calculates exact BMI value and assigns correct category (Normal, Overweight, etc.)."),
-        ("Feature Logic: Hydration Target & Intake Logging", "Log water cup entries, verify total volume accumulated against daily target goal.", "Water Log: {detail}", "Water intake progress bar updates correctly with percentage target achieved."),
-        ("Feature Logic: Sleep Score & REM Stage Calculation", "Log sleep start/end times and awakenings, verify calculated sleep efficiency score.", "Sleep Data: {detail}", "Computes accurate sleep duration and sleep quality score percentage."),
-        ("Feature Logic: Step Tracker Stride & Calorie Conversion", "Feed accelerometer step count sensor data, calculate distance walked and active calories burned.", "Step Payload: {detail}", "Converts steps to distance and calories using user body weight metrics."),
-        ("Feature Logic: Workout Set & Rep Tracking State", "Record set weight and rep count, trigger rest countdown timer.", "Workout Log: {detail}", "Set values persist in active workout session and timer counts down."),
-        ("Feature Logic: Diet Calorie & Macro Distribution Math", "Log food item with protein, carbs, and fat grams, verify macro calorie breakdown.", "Macro Input: {detail}", "Calculates total calories `(P*4 + C*4 + F*9)` and macro percentages."),
-        ("Feature Logic: AI Fitness Trainer Prompt Context Engine", "Trigger AI recommendation, verify prompt builder aggregates user goals and workout history.", "AI Context: {detail}", "AI service constructs valid prompt payload and parses structured response."),
-        ("Feature Logic: User Profile Management & Avatar Crop", "Update profile bio, height/weight metrics, and select new avatar image.", "Profile Payload: {detail}", "Profile changes persist locally and sync to Supabase database."),
-        ("Feature Logic: Shop Inventory & Coupon Code Math", "Apply percentage discount coupon to shopping cart subtotal.", "Coupon Code: {detail}", "Subtotal reduces by exact percentage and tax recalculates accurately."),
-        ("Feature Logic: Order Invoice Generation & State Machine", "Trigger order status transition (Pending -> Processing -> Completed).", "Order Transition: {detail}", "Order state machine validates allowed state transitions without invalid skips.")
+        ("Feature Input Validation Rules", "Pass boundary, empty, null, and special character strings to {screen} input handler.", "Input: {screen}_edge_case", "Validation handler enforces rules and returns clear error strings."),
+        ("Business Logic Calculation Math", "Invoke business logic calculation engine on {screen} with test dataset.", "Dataset: {screen}_calc_data", "Engine calculates precise values according to domain business rules."),
+        ("Async Service Call & JSON Parsing", "Execute asynchronous service call on {screen}, parse response domain model.", "API Payload: {screen}_json", "JSON payload parses cleanly into strongly typed Dart model class."),
+        ("Reactive State Management Rebuild", "Mutate state property bound to {screen}, count widget rebuild notifications.", "State Provider: {screen}_notify", "Widget list listener triggers single UI rebuild with updated state."),
+        ("Role Authorization Guard Check", "Attempt accessing feature on {screen} with restricted user permission role.", "User Role: Restricted_Guest", "Authorization guard blocks access and displays permission error."),
+        ("Data Persistence & Storage Invalidation", "Save record on {screen}, trigger cache invalidation, reload screen view.", "Cache Key: {screen}_key", "Old cache clears cleanly; screen fetches fresh record from storage."),
+        ("Formula Range & Unit Conversion", "Input metric values on {screen}, verify imperial/metric unit conversion math.", "Unit Input: {screen}_units", "Converts units accurately (kg to lbs, km to miles) without rounding drift."),
+        ("State Machine Allowed Transitions", "Attempt state transition on {screen} (e.g., Pending -> Completed).", "Transition: {screen}_state", "State machine permits valid transitions while blocking illegal skips."),
+        ("UI Event Dispatch & Callback Execution", "Trigger interactive event callback on {screen}, verify event arguments.", "Event Spec: {screen}_evt", "Callback dispatches with correct event parameter arguments."),
+        ("Memory Heap Release & Disposal", "Push {screen} onto navigation stack, pop screen, verify controller disposal.", "Lifecycle: Dispose Controller", "Controllers and listeners dispose cleanly without memory leaks.")
     ],
     "LOD": [
-        ("Load Benchmark: Concurrent User Load (50-1000 VUs)", "Run load test generator with concurrent virtual users, measure system throughput.", "VU Scalability: {detail}", "System maintains stable throughput with P95 latency below SLA threshold."),
-        ("Load Benchmark: Login & Auth Token Endpoint", "Simulate 200 concurrent user login requests per second targeting auth API.", "Auth Latency: {detail}", "Auth API processes login requests with zero 5xx server errors."),
-        ("Load Benchmark: Dashboard Metrics Fetch Throughput", "Execute continuous read requests targeting aggregated dashboard summary endpoint.", "Dashboard Load: {detail}", "Dashboard endpoint returns response in < 250ms under peak load."),
-        ("Load Benchmark: REST & Supabase API Load", "Fire concurrent API GET/POST requests targeting Supabase REST endpoints.", "API RPS: {detail}", "Supabase API handles requests without connection pool exhaustion."),
-        ("Load Benchmark: Database Query Execution & Connection Sizing", "Run heavy relational query suite targeting Supabase PostgreSQL instance under load.", "DB Query Load: {detail}", "Query execution time remains under 100ms with connection pool active."),
-        ("Load Benchmark: Supabase Realtime Subscription Load", "Open 300 active WebSocket connections for live order tracking updates.", "WebSocket Concurrency: {detail}", "Realtime channel broadcasts updates reliably to all connected clients."),
-        ("Load Benchmark: Product Catalog Search & Pagination", "Execute search and paginated requests on shop catalog database containing 10,000 items.", "Catalog Search Load: {detail}", "Catalog search returns paginated results in < 200ms."),
-        ("Load Benchmark: Cart Concurrent Addition & Optimistic Lock", "Simulate 150 users simultaneously adding low-stock items to cart.", "Cart Concurrency: {detail}", "Inventory locks prevent over-selling and maintain stock count integrity."),
-        ("Load Benchmark: Checkout Payment Endpoint Throughput", "Submit concurrent checkout transactions to simulated payment gateway.", "Checkout RPS: {detail}", "Checkout service processes payments smoothly with 0.0% failure rate."),
-        ("Load Benchmark: Order Creation Batch & Lock Contention", "Insert 500 order records simultaneously into database table.", "Batch Insert: {detail}", "Batch insertion completes without deadlocks or primary key collision errors."),
-        ("Load Benchmark: Stress Testing Saturation Limits", "Increase VU count gradually until system resources reach 90% CPU/RAM saturation.", "Stress Saturation: {detail}", "System gracefully degrades latency without sudden service crash."),
-        ("Load Benchmark: Spike Testing (10x Surge in 10s)", "Inject sudden burst of 500 VUs over a 5-second interval.", "Traffic Spike: {detail}", "System absorbs traffic spike without dropping incoming HTTP connections."),
-        ("Load Benchmark: Endurance Testing (Sustained Load)", "Maintain 80% maximum capacity load over continuous extended test duration.", "Endurance Duration: {detail}", "Memory usage remains steady without progressive memory leaks.")
+        ("50 Virtual Users Concurrent Baseline", "Simulate 50 concurrent virtual users interacting with {screen} endpoints.", "VUs: 50, Hatch Rate: 5/s", "P95 latency remains under 200ms with zero HTTP errors."),
+        ("100 Virtual Users Concurrency Peak", "Scale concurrent virtual user load to 100 VUs targeting {screen} API.", "VUs: 100, Duration: 3m", "P95 response latency stays below 300ms SLA limit."),
+        ("250 Virtual Users High Load Surge", "Inject 250 concurrent user requests targeting {screen} data endpoints.", "VUs: 250, Ramp: 10s", "System throughput scales linearly without API gateway drops."),
+        ("500 Virtual Users Heavy Stress Test", "Push load to 500 VUs on {screen} to evaluate connection pool limits.", "VUs: 500, Duration: 5m", "Database connection pool maintains stability with 0.0% failure rate."),
+        ("1000 Virtual Users Maximum Saturation", "Run 1000 concurrent VUs on {screen} to determine maximum saturation limit.", "VUs: 1000, Saturation Test", "System gracefully degrades response time without 5xx crashes."),
+        ("Spike Surge 10x Burst Ingestion", "Trigger sudden 10x traffic spike on {screen} within a 5-second window.", "Spike: 10x baseline VUs", "API gateway queues burst traffic and recovers baseline latency."),
+        ("Endurance Sustained Load 1-Hour", "Sustain 80% maximum capacity load on {screen} over 1-hour test run.", "Duration: 60 minutes", "Memory and CPU telemetry remain stable without memory leaks."),
+        ("Database Lock Contention Benchmark", "Execute 200 concurrent write transactions on {screen} database tables.", "Writes: 200 concurrent", "Database handles optimistic locks without primary key deadlocks."),
+        ("Realtime WebSocket Subscription Load", "Open 300 active WebSocket channels receiving live updates for {screen}.", "WebSockets: 300 channels", "Realtime server broadcasts payload updates with latency < 50ms."),
+        ("Asset Loading & CDN Hit Speed", "Load media feed assets associated with {screen} under throttled network.", "Assets: 50 WebP files", "Cache hit speed < 30ms; CDN serves media assets efficiently.")
     ],
     "SEC": [
-        ("Security Validation: Authentication & Password Policy", "Test login endpoint against brute-force attacks and password complexity rules.", "Auth Defense: {detail}", "Account locks after 5 failed attempts; weak passwords rejected."),
-        ("Security Validation: Role-Based Authorization & IDOR Checks", "Attempt accessing secondary user's private data using non-owner JWT token.", "IDOR Check: {detail}", "Server rejects unauthorized data access with HTTP 403 Forbidden."),
-        ("Security Validation: Session Token Management & Revocation", "Verify JWT expiry time, HTTP-only cookie flags, and token revocation on logout.", "Session Security: {detail}", "Expired or revoked JWT tokens are immediately rejected by API gateway."),
-        ("Security Validation: Input Sanitization & SQL Injection Defense", "Submit safe SQLi payloads `' OR '1'='1` in search and login text fields.", "Safe SQLi Payload: {detail}", "Input is parameterized/escaped cleanly; no raw SQL execution occurs."),
-        ("Security Validation: Cross-Site Scripting (XSS) DOM Escaping", "Submit safe script payload `<script>alert(1)</script>` into profile name input.", "Safe XSS Payload: {detail}", "Input is sanitized and rendered as plain text string; script does not execute."),
-        ("Security Validation: Data Encryption at Rest & In-Transit (TLS 1.3)", "Audit transport security protocols and database storage encryption settings.", "Encryption Audit: {detail}", "All outbound connections enforce TLS 1.3; database columns use AES-256."),
-        ("Security Validation: API Rate Limiting & Abuse Prevention", "Send 100 rapid requests within 5 seconds to public API endpoints.", "Rate Limit Check: {detail}", "API gateway returns HTTP 429 Too Many Requests after threshold."),
-        ("Security Validation: Supabase Row Level Security (RLS) Audit", "Query Supabase tables without valid JWT authorization headers.", "RLS Enforcement: {detail}", "Supabase RLS policies block unauthorized row queries for all tables."),
-        ("Security Validation: Access Control & Privileged Route Guard", "Attempt navigating directly to admin routes as standard user role.", "Route Guard: {detail}", "Router blocks navigation and redirects user to permission denied view."),
-        ("Security Validation: Error Handling & Stack Trace Suppression", "Trigger runtime exception and inspect HTTP 500 error response payload.", "Error Payload: {detail}", "Error response contains clean message without internal stack traces."),
-        ("Security Validation: Sensitive Data Exposure & PII Masking", "Audit log files and API response bodies for raw password or credit card data.", "PII Audit: {detail}", "Sensitive user fields are masked or omitted entirely from logs."),
-        ("Security Validation: HTTP Security Headers Configuration", "Inspect HTTP response headers for security hardening directives.", "Security Headers: {detail}", "Headers include CSP, HSTS, X-Frame-Options, and X-Content-Type-Options."),
-        ("Security Validation: Dependency Vulnerability Audit", "Scan project dependencies and configuration files for known CVE vulnerabilities.", "Dependency Audit: {detail}", "Zero high or critical severity vulnerabilities detected in dependencies.")
+        ("Authentication Lockout & Brute-Force", "Attempt 10 invalid authentication requests on {screen} in rapid succession.", "Attempts: 10 invalid", "Account temporarily locks out after 5 failed attempts with 429 response."),
+        ("Role-Based Authorization & IDOR Check", "Attempt querying secondary user private records on {screen} using guest JWT.", "IDOR Payload: {screen}_user_999", "Database and API reject request with HTTP 403 Forbidden."),
+        ("Session Token Expiration & Revocation", "Present expired JWT token to {screen} API endpoint, attempt data fetch.", "JWT Token: Expired/Revoked", "API gateway invalidates session and redirects to login view."),
+        ("Safe SQL Injection Input Defense", "Submit safe SQLi payload `' OR '1'='1` into text input fields on {screen}.", "Payload: `' OR '1'='1`", "Input is parameterized/escaped cleanly; no SQL error occurs."),
+        ("Safe XSS Script Escaping Validation", "Submit safe script payload `<script>alert(1)</script>` into {screen} fields.", "Payload: `<script>alert(1)</script>`", "Payload renders as plain text string; script does not execute."),
+        ("TLS 1.3 Transport Encryption Enforcement", "Inspect outbound network traffic for {screen} using passive OWASP proxy.", "Protocol: TLS 1.3 / HTTPS", "All HTTP connections upgrade to TLS 1.3; unencrypted HTTP blocked."),
+        ("API Rate Limiting 429 Response Check", "Send 100 rapid requests within 5 seconds to {screen} public endpoints.", "Requests: 100 in 5s", "Rate limiter triggers HTTP 429 Too Many Requests response."),
+        ("Supabase Row Level Security (RLS) Audit", "Query Supabase PostgreSQL table for {screen} without auth header.", "RLS Check: {screen}_table", "Supabase RLS policy blocks unauthorized row query access."),
+        ("Privileged Route Guard Verification", "Attempt deep linking directly to restricted {screen} view as unauthenticated user.", "Route: /{screen}_admin", "Router guard intercepts request and redirects to login screen."),
+        ("Sensitive Data Masking & Log Leak Check", "Audit application log files and network payloads for exposed {screen} secrets.", "Audit: Password/Token fields", "Sensitive credentials and PII are masked or omitted from logs.")
     ]
 }
 
-def generate_400_cases_for_prefix(prefix, cat_title, default_script_path):
+def generate_10_cases_per_screen(cat_code, cat_title, default_script_path, default_env, default_dev):
     cases = []
-    scenarios = TEMPLATES[prefix]
+    tc_counter = 1
+    scenarios_tpl = CATEGORY_SCENARIOS[cat_code]
 
-    for i in range(1, 401):
-        tc_id = f"TC-{i:03d}"
-        mod = MODULES[(i - 1) % len(MODULES)]
-        scen_tpl = scenarios[(i - 1) % len(scenarios)]
+    for scr_code, scr_title in SCREENS_AND_MODULES:
+        for idx in range(10):
+            tc_id = f"TC-{tc_counter:03d}"
+            scen_tpl = scenarios_tpl[idx]
 
-        detail_variant = f"Variant #{i} ({mod})"
-        title = f"{cat_title} - {mod} - {scen_tpl[0]} (#{i})"
-        scenario = f"{scen_tpl[0]} for {mod}"
-        obj = f"Ensure {mod} module satisfies quality criteria for {cat_title} category."
-        pre = f"Test environment active, NutriFit app launched on local test setup for {mod}."
-        steps = f"1. Launch test runner.\n2. Navigate to {mod} view.\n3. {scen_tpl[1]}\n4. Validate assertions."
-        data = f"Module: {mod}, Data Detail: {scen_tpl[2].format(detail=detail_variant)}"
-        exp = f"{scen_tpl[3]} for module {mod}."
+            scen_title = scen_tpl[0].format(screen=scr_code)
+            steps = f"1. Launch test runner in {default_env}.\n2. Navigate to {scr_title} ({scr_code}).\n3. {scen_tpl[1].format(screen=scr_code)}\n4. Verify expected results and log evidence."
+            test_data = scen_tpl[2].format(screen=scr_code)
+            expected = scen_tpl[3].format(screen=scr_code)
 
-        prio = "High" if i % 3 == 0 else ("Low" if i % 5 == 0 else "Medium")
-        sev = "Critical" if i % 7 == 0 else ("Major" if i % 2 == 0 else "Moderate")
+            prio = "High" if (tc_counter % 3 == 0) else ("Low" if (tc_counter % 5 == 0) else "Medium")
+            sev = "Critical" if (tc_counter % 7 == 0) else ("Major" if (tc_counter % 2 == 0) else "Moderate")
 
-        cases.append({
-            "Test Case ID": tc_id,
-            "Module": mod,
-            "Scenario": scenario,
-            "Test Title": title,
-            "Objective": obj,
-            "Preconditions": pre,
-            "Detailed Test Steps": steps,
-            "Test Data": data,
-            "Expected Result": exp,
-            "Actual Result": "Pending Execution",
-            "Priority": prio,
-            "Severity": sev,
-            "Status": "Not Executed",
-            "Automation Script Path": default_script_path,
-            "Evidence Path": f"testing-reports/evidence/{prefix.lower()}_tc_{i:03d}.png",
-            "Remarks": f"Automated baseline case for {cat_title}"
-        })
+            cases.append({
+                "Test Case ID": tc_id,
+                "Module/Screen": scr_code,
+                "Test Category": cat_title,
+                "Test Scenario": f"{scen_title} on {scr_title}",
+                "Test Steps": steps,
+                "Test Data": test_data,
+                "Expected Result": expected,
+                "Actual Result": "Pending Execution",
+                "Status": "Not Executed",
+                "Priority": prio,
+                "Severity": sev,
+                "Automation Status": "Script Ready",
+                "Environment": default_env,
+                "Browser/Device": default_dev,
+                "Remarks": f"Screen-specific baseline case for {scr_title}"
+            })
+            tc_counter += 1
 
     return cases
 
@@ -190,6 +208,9 @@ def build_workbook(filename, cat_title, cases):
         "Not Executed": (PatternFill(start_color="F1F3F4", end_color="F1F3F4", fill_type="solid"), Font(name=font_family, color="5F6368", bold=True))
     }
 
+    total_screen_count = len(SCREENS_AND_MODULES)
+    total_case_count = len(cases)
+
     # ----------------------------------------------------
     # Sheet 1: Summary Dashboard
     # ----------------------------------------------------
@@ -198,7 +219,7 @@ def build_workbook(filename, cat_title, cases):
 
     ws_sum["A1"] = f"NutriFit QA Report - {cat_title}"
     ws_sum["A1"].font = title_font
-    ws_sum["A2"] = f"Report File: {filename} | Total Test Cases: 400 | Status: 100% Not Executed Baseline"
+    ws_sum["A2"] = f"Report File: {filename} | Total Screens/Modules: {total_screen_count} | 10 Cases Per Screen | Total: {total_case_count} Cases"
     ws_sum["A2"].font = subtitle_font
 
     ws_sum.row_dimensions[1].height = 24
@@ -207,11 +228,11 @@ def build_workbook(filename, cat_title, cases):
     # KPI Summary Cards
     kpis = [
         ("Total Test Cases", "=COUNT('Detailed Test Cases'!A:A)"),
-        ("Passed", '=COUNTIF(\'Detailed Test Cases\'!M:M, "Passed")'),
-        ("Failed", '=COUNTIF(\'Detailed Test Cases\'!M:M, "Failed")'),
-        ("Skipped", '=COUNTIF(\'Detailed Test Cases\'!M:M, "Skipped")'),
-        ("Blocked", '=COUNTIF(\'Detailed Test Cases\'!M:M, "Blocked")'),
-        ("Not Executed", '=COUNTIF(\'Detailed Test Cases\'!M:M, "Not Executed")'),
+        ("Passed", '=COUNTIF(\'Detailed Test Cases\'!I:I, "Passed")'),
+        ("Failed", '=COUNTIF(\'Detailed Test Cases\'!I:I, "Failed")'),
+        ("Skipped", '=COUNTIF(\'Detailed Test Cases\'!I:I, "Skipped")'),
+        ("Blocked", '=COUNTIF(\'Detailed Test Cases\'!I:I, "Blocked")'),
+        ("Not Executed", '=COUNTIF(\'Detailed Test Cases\'!I:I, "Not Executed")'),
         ("Pass Rate %", '=IF(B4=0, "0%", TEXT(B5/B4, "0.0%"))')
     ]
 
@@ -226,11 +247,11 @@ def build_workbook(filename, cat_title, cases):
         c_val.alignment = Alignment(horizontal='center', vertical='center')
         c_val.border = card_border
 
-    # Module Coverage Breakdown Table
-    ws_sum["A7"] = "Module-Wise Test Coverage Breakdown (All 22 Modules)"
+    # Screen Coverage Breakdown Table
+    ws_sum["A7"] = f"Screen/Module-Wise Test Coverage Breakdown (All {total_screen_count} Screens)"
     ws_sum["A7"].font = section_font
 
-    mod_headers = ["Module Name", "Total Cases", "Passed", "Failed", "Skipped", "Blocked", "Not Executed"]
+    mod_headers = ["Module/Screen", "Total Cases", "Passed", "Failed", "Skipped", "Blocked", "Not Executed"]
     ws_sum.append(mod_headers)
     ws_sum.row_dimensions[8].height = 24
 
@@ -240,14 +261,14 @@ def build_workbook(filename, cat_title, cases):
         cell.fill = header_fill
         cell.alignment = Alignment(horizontal='center', vertical='center')
 
-    for r_offset, mod in enumerate(MODULES, start=9):
-        ws_sum.cell(row=r_offset, column=1, value=mod)
+    for r_offset, (scr_code, scr_title) in enumerate(SCREENS_AND_MODULES, start=9):
+        ws_sum.cell(row=r_offset, column=1, value=scr_code)
         ws_sum.cell(row=r_offset, column=2, value=f'=COUNTIF(\'Detailed Test Cases\'!B:B, A{r_offset})')
-        ws_sum.cell(row=r_offset, column=3, value=f'=COUNTIFS(\'Detailed Test Cases\'!B:B, A{r_offset}, \'Detailed Test Cases\'!M:M, "Passed")')
-        ws_sum.cell(row=r_offset, column=4, value=f'=COUNTIFS(\'Detailed Test Cases\'!B:B, A{r_offset}, \'Detailed Test Cases\'!M:M, "Failed")')
-        ws_sum.cell(row=r_offset, column=5, value=f'=COUNTIFS(\'Detailed Test Cases\'!B:B, A{r_offset}, \'Detailed Test Cases\'!M:M, "Skipped")')
-        ws_sum.cell(row=r_offset, column=6, value=f'=COUNTIFS(\'Detailed Test Cases\'!B:B, A{r_offset}, \'Detailed Test Cases\'!M:M, "Blocked")')
-        ws_sum.cell(row=r_offset, column=7, value=f'=COUNTIFS(\'Detailed Test Cases\'!B:B, A{r_offset}, \'Detailed Test Cases\'!M:M, "Not Executed")')
+        ws_sum.cell(row=r_offset, column=3, value=f'=COUNTIFS(\'Detailed Test Cases\'!B:B, A{r_offset}, \'Detailed Test Cases\'!I:I, "Passed")')
+        ws_sum.cell(row=r_offset, column=4, value=f'=COUNTIFS(\'Detailed Test Cases\'!B:B, A{r_offset}, \'Detailed Test Cases\'!I:I, "Failed")')
+        ws_sum.cell(row=r_offset, column=5, value=f'=COUNTIFS(\'Detailed Test Cases\'!B:B, A{r_offset}, \'Detailed Test Cases\'!I:I, "Skipped")')
+        ws_sum.cell(row=r_offset, column=6, value=f'=COUNTIFS(\'Detailed Test Cases\'!B:B, A{r_offset}, \'Detailed Test Cases\'!I:I, "Blocked")')
+        ws_sum.cell(row=r_offset, column=7, value=f'=COUNTIFS(\'Detailed Test Cases\'!B:B, A{r_offset}, \'Detailed Test Cases\'!I:I, "Not Executed")')
 
         for c_idx in range(1, 8):
             cell = ws_sum.cell(row=r_offset, column=c_idx)
@@ -257,7 +278,7 @@ def build_workbook(filename, cat_title, cases):
                 cell.alignment = Alignment(horizontal='center', vertical='center')
 
     # Total Row
-    tot_row = 9 + len(MODULES)
+    tot_row = 9 + len(SCREENS_AND_MODULES)
     ws_sum.cell(row=tot_row, column=1, value="Total Suite").font = Font(name=font_family, size=10, bold=True)
     for c_idx in range(2, 8):
         col_let = get_column_letter(c_idx)
@@ -267,7 +288,7 @@ def build_workbook(filename, cat_title, cases):
         cell.border = thin_border
         cell.fill = PatternFill(start_color="F0F9F4", end_color="F0F9F4", fill_type="solid")
 
-    ws_sum.column_dimensions['A'].width = 30
+    ws_sum.column_dimensions['A'].width = 32
     for c in ['B', 'C', 'D', 'E', 'F', 'G']:
         ws_sum.column_dimensions[c].width = 16
 
@@ -297,11 +318,11 @@ def build_workbook(filename, cat_title, cases):
             cell.border = thin_border
             cell.alignment = Alignment(vertical='top', wrap_text=True)
 
-            if c_idx in [1, 11, 12, 13]: # ID, Priority, Severity, Status
+            if c_idx in [1, 9, 10, 11, 12]: # ID, Status, Priority, Severity, Automation Status
                 cell.alignment = Alignment(horizontal='center', vertical='top', wrap_text=True)
 
-            # Apply Status Style (13th column)
-            if c_idx == 13:
+            # Apply Status Style (9th column: Status)
+            if c_idx == 9:
                 status_val = cell.value
                 if status_val in status_styles:
                     fill, font = status_styles[status_val]
@@ -312,20 +333,19 @@ def build_workbook(filename, cat_title, cases):
 
     col_widths = {
         "Test Case ID": 14,
-        "Module": 20,
-        "Scenario": 28,
-        "Test Title": 35,
-        "Objective": 35,
-        "Preconditions": 30,
-        "Detailed Test Steps": 45,
-        "Test Data": 28,
+        "Module/Screen": 28,
+        "Test Category": 25,
+        "Test Scenario": 35,
+        "Test Steps": 45,
+        "Test Data": 30,
         "Expected Result": 35,
         "Actual Result": 20,
+        "Status": 15,
         "Priority": 12,
         "Severity": 12,
-        "Status": 15,
-        "Automation Script Path": 30,
-        "Evidence Path": 30,
+        "Automation Status": 18,
+        "Environment": 25,
+        "Browser/Device": 25,
         "Remarks": 25
     }
 
@@ -337,7 +357,7 @@ def build_workbook(filename, cat_title, cases):
     # ----------------------------------------------------
     ws_ev = wb.create_sheet(title="Execution Evidence")
     ws_ev.views.sheetView[0].showGridLines = True
-    ev_cols = ["Test Case ID", "Module", "Scenario", "Status", "Evidence Path", "Automation Script Path", "Timestamp", "Verification Notes"]
+    ev_cols = ["Test Case ID", "Module/Screen", "Test Scenario", "Status", "Evidence Path", "Timestamp", "Verification Notes"]
     ws_ev.append(ev_cols)
     ws_ev.row_dimensions[1].height = 28
     ws_ev.freeze_panes = "A2"
@@ -351,11 +371,10 @@ def build_workbook(filename, cat_title, cases):
     for idx, tc in enumerate(cases[:20], start=2):
         ws_ev.append([
             tc["Test Case ID"],
-            tc["Module"],
-            tc["Scenario"],
+            tc["Module/Screen"],
+            tc["Test Scenario"],
             tc["Status"],
-            tc["Evidence Path"],
-            tc["Automation Script Path"],
+            f"testing-reports/evidence/{tc['Test Case ID'].lower()}_proof.png",
             "2026-07-22 00:00:00 UTC",
             "Baseline execution artifact initialized"
         ])
@@ -373,18 +392,23 @@ def build_workbook(filename, cat_title, cases):
     rep_path = os.path.join("testing-reports", filename)
     wb.save(rep_path)
     shutil.copy(rep_path, filename)
-    print(f"SUCCESS: Saved '{rep_path}' and '{filename}' with 400 test cases.")
+    print(f"SUCCESS: Saved '{rep_path}' and '{filename}' with {total_case_count} test cases.")
 
 def main():
     total_cases_all = 0
-    for filename, cat_title, prefix, script_path in WORKBOOK_CONFIGS:
-        cases = generate_400_cases_for_prefix(prefix, cat_title, script_path)
-        assert len(cases) == 400, f"Error generating 400 cases for {filename}"
+    num_screens = len(SCREENS_AND_MODULES)
+    print(f"=== GENERATING WORKBOOKS FOR {num_screens} DISCOVERED SCREENS/MODULES (10 CASES EACH) ===")
+
+    for filename, cat_title, prefix, script_path, env, dev in WORKBOOK_CONFIGS:
+        cases = generate_10_cases_per_screen(prefix, cat_title, script_path, env, dev)
+        expected_cases = num_screens * 10
+        assert len(cases) == expected_cases, f"Error: expected {expected_cases} cases for {filename}, got {len(cases)}"
         build_workbook(filename, cat_title, cases)
         total_cases_all += len(cases)
 
     print("\n==================================================")
     print(f"GENERATION COMPLETE! TOTAL TEST CASES = {total_cases_all}")
+    print(f"FILES GENERATED = {len(WORKBOOK_CONFIGS)}")
     print("==================================================")
 
 if __name__ == "__main__":
