@@ -32,65 +32,94 @@ WORKBOOK_CONFIGS = [
 
 TEMPLATES = {
     "SEL": [
-        ("Verify responsive page layout grid scaling across viewport widths", "Launch Web Chrome/Edge driver at viewport resolution, verify container grid, element alignments and navbar collapse state.", "Viewport: {detail}", "UI layout scales cleanly without horizontal scrollbars or clipping."),
-        ("Verify form input validation & error highlight rendering", "Focus input element, enter invalid boundary value, trigger blur event, inspect validation error badge.", "Input value: {detail}", "Validation hint appears immediately with accessible aria warning."),
-        ("Verify interactive hover transitions & button clicks", "Hover cursor over CTA element, verify CSS transition state, trigger click action.", "Element selector: {detail}", "Button triggers transition and dispatches action without unhandled JS exceptions."),
-        ("Verify modal backdrop blur, focus trap, and escape key close", "Trigger modal pop-up dialog, attempt keyboard tab traversal inside modal, hit ESC key.", "Modal dialog: {detail}", "Modal opens centered with focus trap; closes smoothly on ESC key event."),
-        ("Verify data table sorting, search filtering, and pagination", "Navigate to list grid, enter search keyword, click column header to sort, navigate to next page.", "Page size = 15, Filter: {detail}", "Grid filters dynamically, sorts columns, and paginates smoothly."),
-        ("Verify multi-tab window navigation & session persistence", "Open secondary browser tab, navigate to application route, perform action, return to tab 1.", "Session storage token: {detail}", "Authentication session persists seamlessly across browser tabs."),
-        ("Verify web browser Back/Forward history state synchronization", "Deep link to feature screen, click Back button, then Forward button in browser.", "History stack: {detail}", "Browser history syncs cleanly with router path and DOM view."),
-        ("Verify image lazy loading & WebP asset rendering", "Scroll down page rapidly to trigger lazy viewport loading of media content.", "Asset path: {detail}", "Images display placeholder skeleton before loading optimized WebP image asset."),
-        ("Verify light/dark theme switching and CSS custom property updates", "Click global theme toggle in top header navbar.", "Theme toggle selector: {detail}", "CSS variables update globally across all visible DOM containers."),
-        ("Verify keyboard tab order traversal and ARIA accessibility roles", "Press TAB key repeatedly from top of web page to traverse focusable DOM elements.", "Keyboard navigation: {detail}", "Focus ring highlights interactive elements in logical DOM order.")
+        ("Web UI Layout & DOM Grid Scaling", "Launch Web Chrome/Edge driver at viewport resolution, verify container grid, element alignments and navbar collapse state.", "Viewport: {detail}", "UI layout scales cleanly without horizontal scrollbars or clipping."),
+        ("Web Login & User Registration Flow", "Fill web login form with email and password, submit form and verify dashboard redirection.", "Form Input: {detail}", "Login authenticates successfully and renders user dashboard view."),
+        ("Navigation Bar & Deep Linking", "Click navbar menu links and verify active route state and browser URL updates.", "Route Path: {detail}", "Navigation updates route path smoothly without page reloads."),
+        ("Forms Validation & Error Badges", "Focus input element, enter invalid boundary value, trigger blur event, inspect validation error badge.", "Input value: {detail}", "Validation hint appears immediately with accessible aria warning."),
+        ("Responsive Layout & Viewport Adaptability", "Resize browser window across Mobile, Tablet, and Desktop breakpoints.", "Screen Width: {detail}", "UI components re-align dynamically without overlapping elements."),
+        ("Cross-Browser Compatibility", "Execute web test suite on Chrome, Firefox, Safari, and Microsoft Edge.", "Browser Engine: {detail}", "All interactive controls render identically across browser engines."),
+        ("Localization & Language Translation", "Toggle application language between English and target locale in header dropdown.", "Locale Code: {detail}", "All string resources render correctly in selected language."),
+        ("Arabic Right-to-Left (RTL) Layout", "Switch application locale to Arabic (ar_SA) and inspect layout direction.", "RTL Config: {detail}", "UI flips to right-to-left layout with mirrored icons and aligned Arabic text."),
+        ("Dashboard Analytics & Telemetry Cards", "Inspect dashboard metric cards, charts, and daily summary widgets.", "Widget Spec: {detail}", "Dashboard widgets display accurate aggregated user metrics."),
+        ("Diet & Workout Module Interaction", "Navigate to workout and diet modules, interact with daily meal and exercise logs.", "Module Action: {detail}", "Meal and exercise items update in real time with correct calorie totals."),
+        ("Shop Catalog & Cart Management", "Browse shop products, apply category filter, and add selected item to cart.", "Cart Action: {detail}", "Cart counter badge increments and item reflects in cart drawer."),
+        ("Checkout Wizard & Payment Form", "Proceed to checkout form, enter delivery address, select payment method, submit order.", "Checkout Data: {detail}", "Order processes cleanly with valid order summary and total calculation."),
+        ("Orders List & Invoice Verification", "Open My Orders view, filter by order status, and inspect invoice details.", "Order Ref: {detail}", "Order details display complete item breakdown and downloadable invoice link.")
     ],
     "APP": [
-        ("Verify native touch swipe & vertical list scrolling", "Execute vertical swipe gesture on scrollable RecyclerView/ListView container.", "W3C TouchAction: {detail}", "Container scrolls smoothly at 60fps without lag or touch drag locking."),
-        ("Verify Android hardware Back button stack navigation", "Navigate deep into module screen hierarchy, press physical/software back button.", "KeyCode 4 (BACK): {detail}", "App pops top route cleanly and returns to previous view without exiting."),
-        ("Verify screen auto-rotation (Portrait to Landscape)", "Rotate device orientation to landscape 90deg, inspect UI adaptation.", "Orientation: {detail}", "Layout resizes responsively in landscape mode without button overlap."),
-        ("Verify native Android push notification banner & tap routing", "Trigger local push notification alert, open shade, tap notification banner.", "Payload ID: {detail}", "App opens target screen specified in push notification payload."),
-        ("Verify Android BiometricPrompt fingerprint/face unlock", "Trigger security action requiring biometric confirmation.", "Biometric mock: {detail}", "Native Android BiometricPrompt appears; success unlocks target view."),
-        ("Verify camera permission request dialog and avatar capture", "Tap upload photo action, handle Android system permission dialog, take photo.", "CAMERA permission: {detail}", "Permission granted dialog works; captured image updates target profile asset."),
-        ("Verify Android deep link URI scheme execution via ADB", "Send ADB shell command to launch deep link URI into app.", "ADB intent: {detail}", "App opens directly into target screen specified in URI intent."),
-        ("Verify app backgrounding, pause, and resume lifecycle state", "Press Home button to send app to background for 30s, re-open app.", "Android Lifecycle: {detail}", "App resumes state intact without memory leak or session timeout."),
-        ("Verify system dark mode integration with Android OS settings", "Toggle system-wide Android Dark Theme switch from quick settings shade.", "OS Theme setting: {detail}", "NutriFit automatically adapts to system dark theme preference."),
-        ("Verify offline cached state when switching Airplane mode", "Turn on Airplane Mode on device, navigate app screens.", "Offline network: {detail}", "App displays offline warning banner while serving cached local storage data.")
+        ("Android Native UI & Component Bounds", "Launch Appium driver on target Android emulator/device, inspect UI widget boundaries.", "Screen Name: {detail}", "Native Android components render within safe area margins without clipping."),
+        ("Touch Interaction & Tap Response", "Perform tap and double-tap gestures on interactive UI buttons and cards.", "Touch Target: {detail}", "Button triggers immediate touch feedback animation and dispatches event."),
+        ("Gestures: Swipe, Scroll & Drag-Drop", "Execute vertical scroll, horizontal swipe, and drag-and-drop gestures.", "Gesture Type: {detail}", "ListView/RecyclerView scrolls smoothly at 60fps without gesture drag locking."),
+        ("Device Resolution & Screen Density", "Execute mobile UI suite across diverse Android screen densities (hdpi to xxxhdpi).", "Screen Density: {detail}", "UI assets scale crisp and clear without pixelation or layout shifts."),
+        ("Screen Orientation (Portrait/Landscape)", "Rotate device orientation 90 degrees to landscape and back to portrait.", "Device Rotation: {detail}", "App layout adapts responsively to landscape orientation without clipping."),
+        ("System Permissions (Camera/Storage/Biometrics)", "Trigger feature requiring permission, verify native Android permission dialog handling.", "Permission Type: {detail}", "System dialog triggers appropriately; granting permission enables feature."),
+        ("Native Push Notifications & Shade Routing", "Trigger local push notification alert, open shade, tap notification banner.", "Payload ID: {detail}", "App opens target screen specified in push notification payload."),
+        ("Offline Behavior & Flight Mode Caching", "Enable Airplane mode, navigate screens, and verify local Hive database caching.", "Network State: {detail}", "App displays offline warning banner while serving cached local data cleanly."),
+        ("Mobile Authentication & Biometrics", "Trigger Biometrics unlock prompt, verify fingerprint/face auth flow.", "Auth Spec: {detail}", "Native BiometricPrompt triggers and unlocks app upon success."),
+        ("Navigation & Android Hardware Back Button", "Navigate deep into screen hierarchy, press physical/software Android Back button.", "Back Key Code 4: {detail}", "App pops top route cleanly and returns to previous view without crash."),
+        ("App Lifecycle (Pause/Resume/Background)", "Press Home button to send app to background for 30 seconds, then resume.", "Lifecycle State: {detail}", "App restores view state intact without memory leak or session loss.")
     ],
     "E2E": [
-        ("Verify complete end-to-end user workflow execution", "Initiate multi-step workflow from entry point, complete all input forms, submit final transaction.", "Workflow payload: {detail}", "Entire end-to-end flow completes successfully and updates DB state."),
-        ("Verify cross-module state synchronization after data mutation", "Mutate user data in one module, navigate to secondary module screen, inspect state.", "Sync payload: {detail}", "Secondary module reflects updated state immediately without manual refresh."),
-        ("Verify multi-step wizard step navigation & back-tracking", "Progress to step 3 of wizard form, click back button to step 2, update field, proceed.", "Wizard state: {detail}", "Form state preserves entered values during forward and backward navigation."),
-        ("Verify transactional data persistence & client sync", "Submit new record, trigger server refresh, inspect local database cache sync.", "DB Transaction: {detail}", "Record persists locally and syncs with Supabase PostgreSQL instance."),
-        ("Verify error recovery and transaction rollbacks on failure", "Simulate server error mid-transaction, verify UI error boundary and state rollback.", "Fault injection: {detail}", "Transaction rolls back safely; clear user-friendly error toast displayed.")
+        ("End-to-End User Journey: Registration to Dashboard", "Execute full flow from user registration, email verification, onboarding survey to dashboard.", "Journey Data: {detail}", "User account created, preferences saved, and dashboard loaded cleanly."),
+        ("End-to-End User Journey: Goal Selection to Workout", "Select fitness goal (Weight Loss/Muscle Gain), generate custom workout plan, log first workout set.", "Workout Journey: {detail}", "Custom workout plan generated and completed sets persist in history."),
+        ("End-to-End User Journey: Diet Plan & Meal Tracker", "Choose diet preference (Keto/Balanced), customize daily calories, log breakfast and lunch items.", "Diet Journey: {detail}", "Daily macros update dynamically and calorie bar reflects consumed totals."),
+        ("End-to-End User Journey: Budget Diet Calculation", "Set weekly food budget, calculate cost-optimized meal plan, export shopping list.", "Budget Journey: {detail}", "Budget meal plan generated within target cost with itemized ingredients."),
+        ("End-to-End User Journey: Shop Catalog to Cart", "Browse shop, search product, select quantity, add to cart, and verify subtotal.", "Shop Journey: {detail}", "Cart updates with item details, correct price, and tax calculations."),
+        ("End-to-End User Journey: Checkout to Order Confirmation", "Enter shipping address, apply promo code, select payment gateway, complete order.", "Checkout Journey: {detail}", "Order confirmation screen displays order ID and estimated delivery date."),
+        ("End-to-End User Journey: Order Tracking & Stepper", "Navigate to active order tracking, observe status stepper progression from Placed to Delivered.", "Tracking Journey: {detail}", "Status stepper updates accurately as order status changes."),
+        ("End-to-End User Journey: Profile & Locale Switch", "Open profile settings, update demographics, switch language from EN to AR, verify UI update.", "Profile Journey: {detail}", "Profile details persist and entire UI translates to Arabic seamlessly.")
     ],
     "FUN": [
-        ("Verify component logic and state mutation functions", "Invoke component function with test parameters, observe return values and side effects.", "Function params: {detail}", "Function executes logic accurately and updates internal state correctly."),
-        ("Verify validation constraints and edge-case handling", "Pass boundary, empty, and out-of-bounds inputs to validation handler.", "Edge case input: {detail}", "Validation rules enforce constraints and return precise error strings."),
-        ("Verify asynchronous service calls and Futures resolution", "Execute async service method, await Future completion, parse response model.", "Async payload: {detail}", "Service parses JSON response cleanly into domain model instance."),
-        ("Verify reactive state listener callbacks and UI rebuilds", "Mutate state property in Provider model, count listener callbacks triggered.", "Provider notify: {detail}", "Listeners receive notification and rebuild bound UI components once."),
-        ("Verify authorization guard rules and permission checks", "Attempt feature access with restricted user permissions.", "Auth role: {detail}", "Authorization guard blocks access and redirects to permission error screen.")
+        ("Feature Logic: Input Boundary & Validation", "Submit form fields with min, max, empty, and special character strings.", "Field Rule: {detail}", "Input handler enforces constraints and returns precise error messages."),
+        ("Feature Logic: BMI Formula & Classification Math", "Supply weight and height values, verify BMI calculation `weight / height^2` and category label.", "BMI Input: {detail}", "Calculates exact BMI value and assigns correct category (Normal, Overweight, etc.)."),
+        ("Feature Logic: Hydration Target & Intake Logging", "Log water cup entries, verify total volume accumulated against daily target goal.", "Water Log: {detail}", "Water intake progress bar updates correctly with percentage target achieved."),
+        ("Feature Logic: Sleep Score & REM Stage Calculation", "Log sleep start/end times and awakenings, verify calculated sleep efficiency score.", "Sleep Data: {detail}", "Computes accurate sleep duration and sleep quality score percentage."),
+        ("Feature Logic: Step Tracker Stride & Calorie Conversion", "Feed accelerometer step count sensor data, calculate distance walked and active calories burned.", "Step Payload: {detail}", "Converts steps to distance and calories using user body weight metrics."),
+        ("Feature Logic: Workout Set & Rep Tracking State", "Record set weight and rep count, trigger rest countdown timer.", "Workout Log: {detail}", "Set values persist in active workout session and timer counts down."),
+        ("Feature Logic: Diet Calorie & Macro Distribution Math", "Log food item with protein, carbs, and fat grams, verify macro calorie breakdown.", "Macro Input: {detail}", "Calculates total calories `(P*4 + C*4 + F*9)` and macro percentages."),
+        ("Feature Logic: AI Fitness Trainer Prompt Context Engine", "Trigger AI recommendation, verify prompt builder aggregates user goals and workout history.", "AI Context: {detail}", "AI service constructs valid prompt payload and parses structured response."),
+        ("Feature Logic: User Profile Management & Avatar Crop", "Update profile bio, height/weight metrics, and select new avatar image.", "Profile Payload: {detail}", "Profile changes persist locally and sync to Supabase database."),
+        ("Feature Logic: Shop Inventory & Coupon Code Math", "Apply percentage discount coupon to shopping cart subtotal.", "Coupon Code: {detail}", "Subtotal reduces by exact percentage and tax recalculates accurately."),
+        ("Feature Logic: Order Invoice Generation & State Machine", "Trigger order status transition (Pending -> Processing -> Completed).", "Order Transition: {detail}", "Order state machine validates allowed state transitions without invalid skips.")
     ],
     "LOD": [
-        ("Verify API endpoint response latency under 100 concurrent VUs", "Run Locust load generator targeting local server endpoint for 5 minutes.", "100 VU, Hatch rate 10/s: {detail}", "P95 latency < 300ms, HTTP error rate = 0.0%."),
-        ("Verify UI rendering framerate (60 FPS) under continuous interaction", "Perform automated continuous UI actions while monitoring Flutter Performance overlay.", "FPS telemetry: {detail}", "Frame rendering stays steady at 60 FPS without jank or dropped frames."),
-        ("Verify heap memory stability during 15-minute continuous test run", "Execute repeated view transitions while connected to Memory Profiler.", "Heap Profiler: {detail}", "Heap memory remains stable under 180MB without progressive memory leaks."),
-        ("Verify bulk database batch insertion performance", "Insert 500 records concurrently into local Supabase Docker test instance.", "500 records: {detail}", "Total batch insertion execution completes in under 1.5 seconds."),
-        ("Verify asset image loading optimization & cache hit speed", "Load media feed containing 50 WebP assets under throttled network conditions.", "Asset suite: {detail}", "First contentful paint < 400ms, cached image load < 50ms.")
+        ("Load Benchmark: Concurrent User Load (50-1000 VUs)", "Run load test generator with concurrent virtual users, measure system throughput.", "VU Scalability: {detail}", "System maintains stable throughput with P95 latency below SLA threshold."),
+        ("Load Benchmark: Login & Auth Token Endpoint", "Simulate 200 concurrent user login requests per second targeting auth API.", "Auth Latency: {detail}", "Auth API processes login requests with zero 5xx server errors."),
+        ("Load Benchmark: Dashboard Metrics Fetch Throughput", "Execute continuous read requests targeting aggregated dashboard summary endpoint.", "Dashboard Load: {detail}", "Dashboard endpoint returns response in < 250ms under peak load."),
+        ("Load Benchmark: REST & Supabase API Load", "Fire concurrent API GET/POST requests targeting Supabase REST endpoints.", "API RPS: {detail}", "Supabase API handles requests without connection pool exhaustion."),
+        ("Load Benchmark: Database Query Execution & Connection Sizing", "Run heavy relational query suite targeting Supabase PostgreSQL instance under load.", "DB Query Load: {detail}", "Query execution time remains under 100ms with connection pool active."),
+        ("Load Benchmark: Supabase Realtime Subscription Load", "Open 300 active WebSocket connections for live order tracking updates.", "WebSocket Concurrency: {detail}", "Realtime channel broadcasts updates reliably to all connected clients."),
+        ("Load Benchmark: Product Catalog Search & Pagination", "Execute search and paginated requests on shop catalog database containing 10,000 items.", "Catalog Search Load: {detail}", "Catalog search returns paginated results in < 200ms."),
+        ("Load Benchmark: Cart Concurrent Addition & Optimistic Lock", "Simulate 150 users simultaneously adding low-stock items to cart.", "Cart Concurrency: {detail}", "Inventory locks prevent over-selling and maintain stock count integrity."),
+        ("Load Benchmark: Checkout Payment Endpoint Throughput", "Submit concurrent checkout transactions to simulated payment gateway.", "Checkout RPS: {detail}", "Checkout service processes payments smoothly with 0.0% failure rate."),
+        ("Load Benchmark: Order Creation Batch & Lock Contention", "Insert 500 order records simultaneously into database table.", "Batch Insert: {detail}", "Batch insertion completes without deadlocks or primary key collision errors."),
+        ("Load Benchmark: Stress Testing Saturation Limits", "Increase VU count gradually until system resources reach 90% CPU/RAM saturation.", "Stress Saturation: {detail}", "System gracefully degrades latency without sudden service crash."),
+        ("Load Benchmark: Spike Testing (10x Surge in 10s)", "Inject sudden burst of 500 VUs over a 5-second interval.", "Traffic Spike: {detail}", "System absorbs traffic spike without dropping incoming HTTP connections."),
+        ("Load Benchmark: Endurance Testing (Sustained Load)", "Maintain 80% maximum capacity load over continuous extended test duration.", "Endurance Duration: {detail}", "Memory usage remains steady without progressive memory leaks.")
     ],
     "SEC": [
-        ("Verify environment variable isolation & absence of hardcoded secrets", "Audit repository codebase and build scripts for exposed plain-text credentials.", "Static Code Audit: {detail}", "Zero sensitive keys or credentials found hardcoded in source code."),
-        ("Verify Supabase Row Level Security (RLS) enforcement", "Attempt SELECT/UPDATE on private user data using secondary user JWT token.", "RLS Policy Check: {detail}", "Database rejects unauthorized query with HTTP 403 / permission error."),
-        ("Verify HTTPS/TLS 1.3 enforcement on all remote connection endpoints", "Inspect outbound network traffic using passive proxy audit tool.", "Passive OWASP Proxy: {detail}", "All HTTP connections upgrade to TLS 1.3/1.2; insecure calls blocked."),
-        ("Verify SQL Injection sanitization on user input fields", "Submit payload `' OR '1'='1` in search and text input fields.", "Safe SQLi Payload: {detail}", "Input sanitized cleanly; no SQL syntax error or data leakage occurs."),
-        ("Verify XSS (Cross-Site Scripting) escaping in rendered DOM content", "Submit payload `<script>alert('xss')</script>` into user text fields.", "Safe XSS Payload: {detail}", "Input escaped as literal text string; script tag not executed in DOM.")
+        ("Security Validation: Authentication & Password Policy", "Test login endpoint against brute-force attacks and password complexity rules.", "Auth Defense: {detail}", "Account locks after 5 failed attempts; weak passwords rejected."),
+        ("Security Validation: Role-Based Authorization & IDOR Checks", "Attempt accessing secondary user's private data using non-owner JWT token.", "IDOR Check: {detail}", "Server rejects unauthorized data access with HTTP 403 Forbidden."),
+        ("Security Validation: Session Token Management & Revocation", "Verify JWT expiry time, HTTP-only cookie flags, and token revocation on logout.", "Session Security: {detail}", "Expired or revoked JWT tokens are immediately rejected by API gateway."),
+        ("Security Validation: Input Sanitization & SQL Injection Defense", "Submit safe SQLi payloads `' OR '1'='1` in search and login text fields.", "Safe SQLi Payload: {detail}", "Input is parameterized/escaped cleanly; no raw SQL execution occurs."),
+        ("Security Validation: Cross-Site Scripting (XSS) DOM Escaping", "Submit safe script payload `<script>alert(1)</script>` into profile name input.", "Safe XSS Payload: {detail}", "Input is sanitized and rendered as plain text string; script does not execute."),
+        ("Security Validation: Data Encryption at Rest & In-Transit (TLS 1.3)", "Audit transport security protocols and database storage encryption settings.", "Encryption Audit: {detail}", "All outbound connections enforce TLS 1.3; database columns use AES-256."),
+        ("Security Validation: API Rate Limiting & Abuse Prevention", "Send 100 rapid requests within 5 seconds to public API endpoints.", "Rate Limit Check: {detail}", "API gateway returns HTTP 429 Too Many Requests after threshold."),
+        ("Security Validation: Supabase Row Level Security (RLS) Audit", "Query Supabase tables without valid JWT authorization headers.", "RLS Enforcement: {detail}", "Supabase RLS policies block unauthorized row queries for all tables."),
+        ("Security Validation: Access Control & Privileged Route Guard", "Attempt navigating directly to admin routes as standard user role.", "Route Guard: {detail}", "Router blocks navigation and redirects user to permission denied view."),
+        ("Security Validation: Error Handling & Stack Trace Suppression", "Trigger runtime exception and inspect HTTP 500 error response payload.", "Error Payload: {detail}", "Error response contains clean message without internal stack traces."),
+        ("Security Validation: Sensitive Data Exposure & PII Masking", "Audit log files and API response bodies for raw password or credit card data.", "PII Audit: {detail}", "Sensitive user fields are masked or omitted entirely from logs."),
+        ("Security Validation: HTTP Security Headers Configuration", "Inspect HTTP response headers for security hardening directives.", "Security Headers: {detail}", "Headers include CSP, HSTS, X-Frame-Options, and X-Content-Type-Options."),
+        ("Security Validation: Dependency Vulnerability Audit", "Scan project dependencies and configuration files for known CVE vulnerabilities.", "Dependency Audit: {detail}", "Zero high or critical severity vulnerabilities detected in dependencies.")
     ]
 }
 
-def generate_350_cases_for_prefix(prefix, cat_title, default_script_path):
+def generate_400_cases_for_prefix(prefix, cat_title, default_script_path):
     cases = []
     scenarios = TEMPLATES[prefix]
 
-    for i in range(1, 351):
-        tc_id = f"{prefix}-{i:03d}"
+    for i in range(1, 401):
+        tc_id = f"TC-{i:03d}"
         mod = MODULES[(i - 1) % len(MODULES)]
         scen_tpl = scenarios[(i - 1) % len(scenarios)]
 
@@ -121,12 +150,11 @@ def generate_350_cases_for_prefix(prefix, cat_title, default_script_path):
             "Severity": sev,
             "Status": "Not Executed",
             "Automation Script Path": default_script_path,
-            "Evidence Path": f"testing-reports/evidence/{tc_id.lower()}_proof.png",
+            "Evidence Path": f"testing-reports/evidence/{prefix.lower()}_tc_{i:03d}.png",
             "Remarks": f"Automated baseline case for {cat_title}"
         })
 
     return cases
-
 
 def build_workbook(filename, cat_title, cases):
     wb = openpyxl.Workbook()
@@ -170,7 +198,7 @@ def build_workbook(filename, cat_title, cases):
 
     ws_sum["A1"] = f"NutriFit QA Report - {cat_title}"
     ws_sum["A1"].font = title_font
-    ws_sum["A2"] = f"Report File: {filename} | Total Test Cases: 350 | Status: 100% Not Executed Baseline"
+    ws_sum["A2"] = f"Report File: {filename} | Total Test Cases: 400 | Status: 100% Not Executed Baseline"
     ws_sum["A2"].font = subtitle_font
 
     ws_sum.row_dimensions[1].height = 24
@@ -320,7 +348,7 @@ def build_workbook(filename, cat_title, cases):
         cell.fill = header_fill
         cell.alignment = Alignment(horizontal='center', vertical='center')
 
-    for idx, tc in enumerate(cases[:15], start=2):
+    for idx, tc in enumerate(cases[:20], start=2):
         ws_ev.append([
             tc["Test Case ID"],
             tc["Module"],
@@ -337,7 +365,7 @@ def build_workbook(filename, cat_title, cases):
             cell.border = thin_border
             cell.alignment = Alignment(vertical='top', wrap_text=True)
 
-    ws_ev.auto_filter.ref = f"A1:{get_column_letter(len(ev_cols))}16"
+    ws_ev.auto_filter.ref = f"A1:{get_column_letter(len(ev_cols))}21"
     for c_idx in range(1, len(ev_cols) + 1):
         ws_ev.column_dimensions[get_column_letter(c_idx)].width = 25
 
@@ -345,14 +373,13 @@ def build_workbook(filename, cat_title, cases):
     rep_path = os.path.join("testing-reports", filename)
     wb.save(rep_path)
     shutil.copy(rep_path, filename)
-    print(f"SUCCESS: Saved '{rep_path}' and '{filename}' with 350 test cases.")
-
+    print(f"SUCCESS: Saved '{rep_path}' and '{filename}' with 400 test cases.")
 
 def main():
     total_cases_all = 0
     for filename, cat_title, prefix, script_path in WORKBOOK_CONFIGS:
-        cases = generate_350_cases_for_prefix(prefix, cat_title, script_path)
-        assert len(cases) == 350, f"Error generating 350 cases for {filename}"
+        cases = generate_400_cases_for_prefix(prefix, cat_title, script_path)
+        assert len(cases) == 400, f"Error generating 400 cases for {filename}"
         build_workbook(filename, cat_title, cases)
         total_cases_all += len(cases)
 

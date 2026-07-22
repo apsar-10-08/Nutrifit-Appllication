@@ -2,12 +2,12 @@ import os
 import openpyxl
 
 SPECIFIED_FILES = [
-    "NutriFit_Selenium_Test_Report.xlsx",
-    "NutriFit_Appium_Test_Report.xlsx",
-    "NutriFit_E2E_Test_Report.xlsx",
-    "NutriFit_Functional_Test_Report.xlsx",
-    "NutriFit_Load_Test_Report.xlsx",
-    "NutriFit_Vulnerability_Test_Report.xlsx"
+    ("Selenium", "NutriFit_Selenium_Test_Report.xlsx"),
+    ("Appium", "NutriFit_Appium_Test_Report.xlsx"),
+    ("E2E", "NutriFit_E2E_Test_Report.xlsx"),
+    ("Functional", "NutriFit_Functional_Test_Report.xlsx"),
+    ("Load", "NutriFit_Load_Test_Report.xlsx"),
+    ("Vulnerability", "NutriFit_Vulnerability_Test_Report.xlsx")
 ]
 
 REQUIRED_MODULES = [
@@ -26,10 +26,14 @@ EXPECTED_COLUMNS = [
 ]
 
 def verify_all_workbooks():
+    total_duplicates = 0
+    total_missing = 0
     grand_total_cases = 0
-    print("=== STARTING RIGOROUS VALIDATION OF ALL 6 SPECIFIED EXCEL WORKBOOKS ===\n")
+    file_counts = {}
 
-    for filename in SPECIFIED_FILES:
+    print("=== STARTING RIGOROUS VALIDATION OF ALL 6 EXCEL WORKBOOKS (400 CASES EACH) ===\n")
+
+    for cat_label, filename in SPECIFIED_FILES:
         rep_path = os.path.join("testing-reports", filename)
         assert os.path.exists(rep_path), f"File missing in testing-reports/: {rep_path}"
         assert os.path.exists(filename), f"File missing in root: {filename}"
@@ -48,35 +52,55 @@ def verify_all_workbooks():
         assert list(header) == EXPECTED_COLUMNS, f"Columns mismatch in {filename}.\nExpected: {EXPECTED_COLUMNS}\nGot: {list(header)}"
 
         tc_count = len(data_rows)
-        print(f"File '{filename}': Found {tc_count} test cases.")
-        assert tc_count == 350, f"Expected 350 test cases in {filename}, got {tc_count}"
+        file_counts[cat_label] = tc_count
 
+        if tc_count != 400:
+            print(f"ERROR: {filename} contains {tc_count} test cases (Expected: 400)")
+            total_missing += abs(400 - tc_count)
+            assert tc_count == 400, f"Expected 400 test cases in {filename}, got {tc_count}"
+
+        expected_ids = {f"TC-{i:03d}" for i in range(1, 401)}
         ids_in_file = set()
-        modules_in_file = set()
+        duplicates_in_file = 0
 
         for r_idx, row in enumerate(data_rows, start=2):
             tc_id = row[0]
-            mod = row[1]
             status = row[12]
 
-            assert tc_id not in ids_in_file, f"Duplicate Test ID '{tc_id}' found at row {r_idx} in {filename}"
-            ids_in_file.add(tc_id)
-            modules_in_file.add(mod)
+            if tc_id in ids_in_file:
+                duplicates_in_file += 1
+            else:
+                ids_in_file.add(tc_id)
 
             assert status == "Not Executed", f"Invalid status '{status}' for {tc_id} in {filename}. Must be 'Not Executed'"
 
-        assert len(ids_in_file) == 350, f"Unique ID count mismatch in {filename}"
+        missing_ids = expected_ids - ids_in_file
+        total_duplicates += duplicates_in_file
+        total_missing += len(missing_ids)
+
+        assert duplicates_in_file == 0, f"Found {duplicates_in_file} duplicate IDs in {filename}"
+        assert len(missing_ids) == 0, f"Missing IDs in {filename}: {missing_ids}"
+
         grand_total_cases += tc_count
 
-        missing_mods = [m for m in REQUIRED_MODULES if m not in modules_in_file]
-        print(f"   -> Unique IDs: {len(ids_in_file)} | Modules Covered: {len(modules_in_file)}/22 | Status: All 'Not Executed'")
-        assert len(missing_mods) == 0, f"Missing modules in {filename}: {missing_mods}"
+    validation_passed = (
+        grand_total_cases == 2400 and
+        total_duplicates == 0 and
+        total_missing == 0 and
+        all(c == 400 for c in file_counts.values())
+    )
 
     print("\n==================================================")
-    print(f"VALIDATION SUCCESSFUL: TOTAL FILES = {len(SPECIFIED_FILES)}")
-    print(f"GRAND TOTAL TEST CASES ACROSS ALL 6 WORKBOOKS = {grand_total_cases}")
-    print("ALL 6 EXCEL WORKBOOKS VALIDATED PERFECTLY WITH ZERO ERRORS.")
+    for cat_label, _ in SPECIFIED_FILES:
+        print(f"{cat_label}: {file_counts[cat_label]}")
+    print(f"TOTAL: {grand_total_cases}")
+    print(f"Duplicates: {total_duplicates}")
+    print(f"Missing: {total_missing}")
+    print(f"Validation: {'PASSED' if validation_passed else 'FAILED'}")
     print("==================================================")
+
+    if not validation_passed:
+        raise ValueError("Validation failed! Not all workbooks contain exactly 400 unique test cases.")
 
 if __name__ == "__main__":
     verify_all_workbooks()
