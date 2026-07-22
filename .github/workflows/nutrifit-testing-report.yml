@@ -55,8 +55,34 @@ jobs:
       - name: Generate All 6 Specified Excel Test Workbooks (2,100 Total Cases)
         run: python generate_specified_6_reports.py
 
-      - name: Strict Verification of All 6 Excel Workbooks (Must contain 350 test cases each)
+      - name: Verify Each Excel Workbook Opens & Contains Exactly 350 Test Cases
         run: python verify_specified_6_reports.py
+
+      - name: Print & Validate List of All 6 Excel Report Files Before Upload
+        run: |
+          echo "=== VALIDATING ALL 6 EXCEL REPORT FILES IN testing-reports/ ==="
+          FILES=(
+            "testing-reports/NutriFit_Selenium_Test_Report.xlsx"
+            "testing-reports/NutriFit_Appium_Test_Report.xlsx"
+            "testing-reports/NutriFit_E2E_Test_Report.xlsx"
+            "testing-reports/NutriFit_Functional_Test_Report.xlsx"
+            "testing-reports/NutriFit_Load_Test_Report.xlsx"
+            "testing-reports/NutriFit_Vulnerability_Test_Report.xlsx"
+          )
+          MISSING=0
+          for file in "${FILES[@]}"; do
+            if [ -f "$file" ]; then
+              echo "  ✅ FOUND: $file"
+            else
+              echo "  ❌ MISSING REQUIRED FILE: $file"
+              MISSING=$((MISSING + 1))
+            fi
+          done
+          if [ $MISSING -gt 0 ]; then
+            echo "::error::$MISSING required Excel report file(s) missing from testing-reports/!"
+            exit 1
+          fi
+          echo "All 6 required Excel report files verified and ready for artifact upload."
 
       - name: Publish 2,100 Test Cases Breakdown to GitHub Actions Step Summary
         run: |
@@ -74,30 +100,50 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "📁 **All 6 Excel files generated in**: \`testing-reports/\` and project root" >> $GITHUB_STEP_SUMMARY
 
-      - name: Upload 6 Specified Excel Report Artifacts
+      - name: Upload NutriFit_Selenium_Test_Report Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: NutriFit_Specified_6_Excel_Reports
-          path: |
-            testing-reports/NutriFit_Selenium_Test_Report.xlsx
-            testing-reports/NutriFit_Appium_Test_Report.xlsx
-            testing-reports/NutriFit_E2E_Test_Report.xlsx
-            testing-reports/NutriFit_Functional_Test_Report.xlsx
-            testing-reports/NutriFit_Load_Test_Report.xlsx
-            testing-reports/NutriFit_Vulnerability_Test_Report.xlsx
-            NutriFit_Selenium_Test_Report.xlsx
-            NutriFit_Appium_Test_Report.xlsx
-            NutriFit_E2E_Test_Report.xlsx
-            NutriFit_Functional_Test_Report.xlsx
-            NutriFit_Load_Test_Report.xlsx
-            NutriFit_Vulnerability_Test_Report.xlsx
+          name: NutriFit_Selenium_Test_Report
+          path: testing-reports/NutriFit_Selenium_Test_Report.xlsx
           retention-days: 90
           if-no-files-found: error
 
-      - name: Upload Complete Testing Reports Directory Artifact
+      - name: Upload NutriFit_Appium_Test_Report Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: NutriFit_Testing_Reports_Directory
-          path: testing-reports/
+          name: NutriFit_Appium_Test_Report
+          path: testing-reports/NutriFit_Appium_Test_Report.xlsx
+          retention-days: 90
+          if-no-files-found: error
+
+      - name: Upload NutriFit_E2E_Test_Report Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NutriFit_E2E_Test_Report
+          path: testing-reports/NutriFit_E2E_Test_Report.xlsx
+          retention-days: 90
+          if-no-files-found: error
+
+      - name: Upload NutriFit_Functional_Test_Report Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NutriFit_Functional_Test_Report
+          path: testing-reports/NutriFit_Functional_Test_Report.xlsx
+          retention-days: 90
+          if-no-files-found: error
+
+      - name: Upload NutriFit_Load_Test_Report Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NutriFit_Load_Test_Report
+          path: testing-reports/NutriFit_Load_Test_Report.xlsx
+          retention-days: 90
+          if-no-files-found: error
+
+      - name: Upload NutriFit_Vulnerability_Test_Report Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NutriFit_Vulnerability_Test_Report
+          path: testing-reports/NutriFit_Vulnerability_Test_Report.xlsx
           retention-days: 90
           if-no-files-found: error

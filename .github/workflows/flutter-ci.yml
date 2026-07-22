@@ -50,17 +50,75 @@ jobs:
       - name: Install dependencies
         run: pip install openpyxl
 
-      - name: Generate Excel Reports
-        run: |
-          python test/e2e/generate_mock_excel.py
-          python test/e2e/generate_selenium_report.py
-          python test/e2e/generate_vulnerability_report.py
+      - name: Generate All 6 Specified Excel Test Workbooks (2,100 Total Cases)
+        run: python generate_specified_6_reports.py
 
-      - name: Upload Test Reports
+      - name: Verify Each Excel Workbook Opens & Contains Exactly 350 Test Cases
+        run: python verify_specified_6_reports.py
+
+      - name: Validate All 6 Excel Report Files Exist Before Upload
+        run: |
+          echo "=== VALIDATING ALL 6 EXCEL REPORT FILES IN testing-reports/ ==="
+          FILES=(
+            "testing-reports/NutriFit_Selenium_Test_Report.xlsx"
+            "testing-reports/NutriFit_Appium_Test_Report.xlsx"
+            "testing-reports/NutriFit_E2E_Test_Report.xlsx"
+            "testing-reports/NutriFit_Functional_Test_Report.xlsx"
+            "testing-reports/NutriFit_Load_Test_Report.xlsx"
+            "testing-reports/NutriFit_Vulnerability_Test_Report.xlsx"
+          )
+          MISSING=0
+          for file in "${FILES[@]}"; do
+            if [ -f "$file" ]; then
+              echo "  ✅ FOUND: $file"
+            else
+              echo "  ❌ MISSING REQUIRED FILE: $file"
+              MISSING=$((MISSING + 1))
+            fi
+          done
+          if [ $MISSING -gt 0 ]; then
+            echo "::error::$MISSING required Excel report file(s) missing from testing-reports/!"
+            exit 1
+          fi
+
+      - name: Upload NutriFit_Selenium_Test_Report Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: NutriFit-QA-Reports
-          path: |
-            test/e2e/NutriFit_E2E_Test_Report.xlsx
-            test/e2e/NutriFit_Selenium_E2E_Report.xlsx
-            test/e2e/NutriFit_Vulnerability_Report.xlsx
+          name: NutriFit_Selenium_Test_Report
+          path: testing-reports/NutriFit_Selenium_Test_Report.xlsx
+          retention-days: 14
+
+      - name: Upload NutriFit_Appium_Test_Report Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NutriFit_Appium_Test_Report
+          path: testing-reports/NutriFit_Appium_Test_Report.xlsx
+          retention-days: 14
+
+      - name: Upload NutriFit_E2E_Test_Report Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NutriFit_E2E_Test_Report
+          path: testing-reports/NutriFit_E2E_Test_Report.xlsx
+          retention-days: 14
+
+      - name: Upload NutriFit_Functional_Test_Report Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NutriFit_Functional_Test_Report
+          path: testing-reports/NutriFit_Functional_Test_Report.xlsx
+          retention-days: 14
+
+      - name: Upload NutriFit_Load_Test_Report Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NutriFit_Load_Test_Report
+          path: testing-reports/NutriFit_Load_Test_Report.xlsx
+          retention-days: 14
+
+      - name: Upload NutriFit_Vulnerability_Test_Report Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NutriFit_Vulnerability_Test_Report
+          path: testing-reports/NutriFit_Vulnerability_Test_Report.xlsx
+          retention-days: 14
